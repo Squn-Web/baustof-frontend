@@ -1,0 +1,19 @@
+---
+import NavigationBar from "../components/NavigationBar.astro";
+import FooterBar from "../components/FooterBar.astro";
+import "../styles/global.css";
+---
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tytul</title>
+  </head>
+  <body>
+    <NavigationBar />
+    <slot />
+    <FooterBar />
+  </body>
+</html>
