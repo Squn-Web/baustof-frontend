@@ -1,9 +1,28 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchHomeSections } from "../api/fetchHomeSections/query";
+import { mapHomeSectionToComponent } from "../page-mappers/home/home.mapper.ts";
+
+const { sections } = await fetchHomeSections();
 ---
 
-<BaseLayout>
-  <h2>Strona glowna</h2>
-</BaseLayout>
+<html>
+  <body>
+    {
+      sections.map((section) => {
+        const Component = mapHomeSectionToComponent(section._type);
 
-<style></style>
+        return Component ? <Component {...section} key={section._key} /> : null;
+      })
+    }
+  </body>
+</html>
+
+<style>
+  img {
+    width: 100%;
+    height: 100%;
+  }
+  body {
+    min-width: 100vh;
+  }
+</style>
