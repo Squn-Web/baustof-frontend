@@ -1,20 +1,22 @@
-<!-- ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+---
+import { fetchHomeSections } from "../api/fetchHomeSections/query"
+import { mapHomeSectionToComponent } from "../page-mappers/home/home.mapper.ts"
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const {sections} = await fetchHomeSections();
 ---
 
-<Layout>
-	<Welcome />
-</Layout> -->
 
 <html>
 	<body>
-		<marquee>
-			<img src="/strona.png" />
-		</marquee>
+		{sections.map((section) => {
+  
+      const Component = mapHomeSectionToComponent(section._type);
+
+    
+      return Component
+        ? <Component {...section} key={section._key} />
+        : null;
+    })}
 	</body>
 </html>
 

@@ -1,0 +1,12 @@
+---
+import { Image } from "astro:assets";
+import { urlForImage } from "../../lib/urlForImage";
+
+
+const {text, logo, actionButtons, image} = Astro.props;
+---
+
+<h1>{text}</h1>
+
+<Image src={urlForImage(logo.asset).url()} width={400} height={400} alt={logo.alt} />
+<Image src={urlForImage(image.asset).url()} width={400} height={400} alt={image.alt} />
