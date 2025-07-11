@@ -1,0 +1,25 @@
+---
+const { text } = Astro.props;
+---
+
+<section>
+  <div>
+    <h2>{text}</h2>
+  </div>
+</section>
+
+<style>
+  div {
+    position: absolute;
+    z-index: 2;
+    left: auto;
+    max-width: fit-content;
+    border-radius: 1rem;
+    padding: 4rem;
+    background-color: var(--primary-color);
+  }
+  h2 {
+    color: var(--text-color-invert);
+    font-weight: bold;
+  }
+</style>
