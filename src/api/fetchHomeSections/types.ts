@@ -1,4 +1,4 @@
-import type { HomeSections } from '../../page-mappers/home/home.enum';
+import type { HomeSections } from "../../page-mappers/home/home.enum";
 
 export interface FetchHomeSectionsResponse {
   sections: Section[];
@@ -11,7 +11,7 @@ export interface Section {
   image?: Image;
   logo?: Logo;
   text: any;
-  actionButton?: ActionButton2;
+  // actionButton?: ActionButton2;
   title?: string;
   cards?: Card[];
   subTitle?: string;
@@ -46,11 +46,11 @@ export interface Asset2 {
   _type: string;
 }
 
-export interface ActionButton2 {
-  _type: string;
-  href: string;
-  text: string;
-}
+// export interface ActionButton2 {
+//   _type: string;
+//   href: string;
+//   text: string;
+// }
 
 export interface Card {
   _key: string;

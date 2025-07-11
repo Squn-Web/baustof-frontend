@@ -1,5 +1,5 @@
-import Hero from '../../components/home/Hero.astro';
-import { HomeSections } from './home.enum';
+import Hero from "../../components/home/Hero.astro";
+import { HomeSections } from "./home.enum";
 
 //@ts-ignore
 export const homeSections: Record<HomeSections, any> = {
