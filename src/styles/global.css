@@ -145,6 +145,7 @@ table {
   --primary-color-a: rgba(36, 43, 119, 1);
   --primary-color-light: rgba(36, 43, 119, 0.85);
   --background-color: rgb(242, 242, 242);
+  --nav-background-color: rgba(255, 255, 255, 0.85);
   --text-color: rgb(16, 16, 16);
   --text-color-invert: rgb(255, 255, 255);
   --card-background-color: rgb(222, 222, 222);
