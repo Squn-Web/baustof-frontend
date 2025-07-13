@@ -1,0 +1,291 @@
+@font-face {
+  font-family: "Inter";
+  src: url(/Inter_18pt-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* CSS RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* PARAMETERS */
+
+:root {
+  --primary-color: #242b77;
+  --primary-color-a: rgba(36, 43, 119, 1);
+  --primary-color-light: rgba(36, 43, 119, 0.85);
+  --background-color: rgb(242, 242, 242);
+  --nav-background-color: rgba(255, 255, 255, 0.85);
+  --text-color: rgb(16, 16, 16);
+  --text-color-invert: rgb(255, 255, 255);
+  --card-background-color: rgb(222, 222, 222);
+  --card-background-color-light: rgb(245, 245, 245);
+  --font-size-h2: 3.5rem;
+  --font-size-h3: 3rem;
+  --font-size-h4: 1.5rem;
+  --font-size-h5: 1.3rem;
+  --font-size-text: 1.2rem;
+  --nav-height: 70px;
+  --nav-items-gap: 5rem;
+  --section-max-width: 1600px;
+  --section-image-width: 800px;
+  --section-padding: 5rem;
+  --section-paragraph-interline: 150%;
+  --section-img-border-radius: 1.25rem;
+  --button-padding: 1.25rem 3rem;
+  --button-border-radius: 1rem;
+  --button-font-size: 1.2rem;
+  --hero-height: 75vh;
+  --hero-width: 550px;
+  --hero-font-size: 1.2rem;
+  --hero-font-interline: 120%;
+  --paragraph-gap: 2rem;
+  --card-gap: 10rem;
+  --card-width: 280px;
+  --card-interline: 120%;
+  --footer-height: 48vh;
+  /* --breakpoint-medium-scale: 0.7; */
+}
+
+/* GLOBAL STYLES */
+
+body {
+  min-height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+a,
+p,
+h2,
+h3,
+h4,
+h5,
+h6,
+span {
+  color: var(--text-color);
+  font-family: "Inter";
+}
+
+a {
+  text-decoration: none;
+}
+
+section {
+  padding: var(--section-padding) 0;
+}
+
+/* section:last-child {
+  padding-bottom: 0;
+} */
+
+p {
+  font-size: var(--font-size-text);
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  user-select: none;
+  z-index: -1;
+}
+h2 {
+  font-size: var(--font-size-h2);
+}
+h3 {
+  font-size: var(--font-size-h3);
+}
+h4 {
+  font-size: var(--font-size-h4);
+}
+h5 {
+  font-size: var(--font-size-h5);
+}
+h3,
+h4,
+h5 {
+  font-weight: bold;
+}
+
+.action-buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paragraph-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--paragraph-gap);
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: var(--section-max-width);
+}
+
+.button-elevated {
+  font-weight: 500;
+  color: var(--text-color-invert);
+  background-color: var(--primary-color);
+  padding: var(--button-padding);
+  border-radius: var(--button-border-radius);
+  font-size: var(--button-font-size);
+  -webkit-box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* @media only screen and (max-width: 1200px) {
+  h2 {
+    font-size: calc(var(--breakpoint-medium-scale) * var(--font-size-h2));
+  }
+} */

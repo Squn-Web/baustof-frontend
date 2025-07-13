@@ -26,5 +26,9 @@
     "react-player": "^3.1.0",
     "sanity": "^3.97.1",
     "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1"
   }
 }

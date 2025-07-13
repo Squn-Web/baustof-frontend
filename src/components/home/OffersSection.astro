@@ -1,0 +1,32 @@
+---
+import Cards from "../Cards.astro";
+
+const { cards } = Astro.props;
+---
+
+<section>
+  <Cards cards={cards} />
+</section>
+
+<style>
+  section {
+    padding: calc(2 * var(--section-padding)) 0;
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+</style>

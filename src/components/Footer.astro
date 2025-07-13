@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+import { urlForImage } from "../lib/urlForImage";
+import { fetchFooter } from "../api/fetchFooter/query";
+
+const footer = await fetchFooter();
+---
+
+<footer>
+  <div class="content-wrapper">
+    <Image
+      src={urlForImage(footer.logo.asset).url()}
+      width={480}
+      height={480}
+      alt={footer.logo.alt}
+    />
+
+    <div class="navigation-wrapper">
+      <p><a href="#">Strona główna</a></p>
+      <p><a href="#">Projekty</a></p>
+      <p><a href="#">Oferta</a></p>
+      <p><a href="#">O nas</a></p>
+      <p><a href="#">Kariera</a></p>
+      <p><a href="#">Kontakt</a></p>
+    </div>
+
+    <div class="information-wrapper">
+      <h5>Kontakt:</h5>
+      <p>{footer.contactPhone}</p>
+      <p>{footer.contactEmail}</p>
+      <br />
+      <h5>Nip:</h5>
+      <p>{footer.nip}</p>
+      <p>{footer.name}</p>
+      <p>{footer.company}</p>
+      <br />
+      <h5>Adres:</h5>
+      <p>{footer.addressFirstLine}</p>
+      <p>{footer.addressSecondLine}</p>
+      <br />
+    </div>
+  </div>
+</footer>
+
+<style>
+  img {
+    /* height: auto;
+    width: 100%; */
+    max-height: calc(var(--footer-height) - 4rem);
+    width: auto;
+  }
+  footer {
+    background-color: var(--primary-color);
+  }
+  p,
+  a,
+  h5 {
+    color: var(--text-color-invert);
+  }
+  a {
+    text-decoration: underline;
+  }
+  h5 {
+    font-weight: bold;
+  }
+  .content-wrapper {
+    max-height: var(--footer-height);
+    display: flex;
+    justify-content: space-between;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    padding: 2rem 4rem;
+  }
+  .navigation-wrapper,
+  .information-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+</style>

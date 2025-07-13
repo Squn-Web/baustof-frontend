@@ -1,0 +1,17 @@
+---
+const { paragraphs } = Astro.props;
+---
+
+<div class="paragraph-wrapper">
+  {
+    paragraphs.map((paragraph: string) => {
+      return <p>{paragraph}</p>;
+    })
+  }
+</div>
+
+<style>
+  p {
+    line-height: var(--section-paragraph-interline);
+  }
+</style>
