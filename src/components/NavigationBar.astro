@@ -1,18 +1,49 @@
-<nav>
-  <a href="/">Strona glowna</a>
-  <a href="/about">O nas</a>
+<nav id="nav">
+  <a href="#">Projekty</a>
+  <a href="#">Oferta</a>
+  <a href="#">Kontakt</a>
+  <a href="#">O nas</a>
+  <a href="#">Karriera</a>
 </nav>
 
 <style>
   nav {
     width: 100%;
-    height: 5rem;
-    background-color: rgb(6, 6, 126);
+    padding: 0 var(--nav-items-gap);
+    height: var(--nav-height);
+    background-color: transparent;
     position: sticky;
+    z-index: 100;
     top: 0;
     left: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: var(--nav-items-gap);
+    transition: background-color 0.4s ease;
   }
   a {
+    transition: color 0.4s ease;
     font-size: var(--font-size-text);
+    color: var(--text-color-invert);
+  }
+
+  nav.scrolled {
+    background-color: var(--nav-background-color);
+    backdrop-filter: blur(6px);
+  }
+  nav.scrolled a {
+    color: var(--text-color);
   }
 </style>
+
+<script is:inline>
+  window.addEventListener("scroll", () => {
+    const nav = document.getElementById("nav");
+    if (window.scrollY > 2) {
+      nav?.classList.add("scrolled");
+    } else {
+      nav?.classList.remove("scrolled");
+    }
+  });
+</script>

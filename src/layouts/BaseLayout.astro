@@ -1,6 +1,6 @@
 ---
 import NavigationBar from "../components/NavigationBar.astro";
-import FooterBar from "../components/FooterBar.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -12,8 +12,11 @@ import "../styles/global.css";
     <title>Tytul</title>
   </head>
   <body>
+    <h1>BAUSTOF</h1>
     <NavigationBar />
-    <slot />
-    <FooterBar />
+    <main>
+      <slot />
+      <Footer />
+    </main>
   </body>
 </html>

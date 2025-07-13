@@ -1,28 +1,17 @@
 ---
 import { fetchHomeSections } from "../api/fetchHomeSections/query";
+import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapHomeSectionToComponent } from "../page-mappers/home/home.mapper.ts";
 
 const { sections } = await fetchHomeSections();
 ---
 
-<html>
-  <body>
-    {
-      sections.map((section) => {
-        const Component = mapHomeSectionToComponent(section._type);
+<BaseLayout>
+  {
+    sections.map((section) => {
+      const Component = mapHomeSectionToComponent(section._type);
 
-        return Component ? <Component {...section} key={section._key} /> : null;
-      })
-    }
-  </body>
-</html>
-
-<style>
-  img {
-    width: 100%;
-    height: 100%;
+      return Component ? <Component {...section} key={section._key} /> : null;
+    })
   }
-  body {
-    min-width: 100vh;
-  }
-</style>
+</BaseLayout>

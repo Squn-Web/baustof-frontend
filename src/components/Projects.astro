@@ -1,0 +1,75 @@
+---
+import { Image } from "astro:assets";
+import { urlForImage } from "../lib/urlForImage";
+import TextButton from "./TextButton.astro";
+import { formatDate } from "../lib/convertDate";
+import IconText from "./IconText.astro";
+
+const { projects } = Astro.props;
+---
+
+<div class="projects-wrapper">
+  {
+    projects.map((project: any) => {
+      return (
+        <div class="project-card">
+          <Image
+            class="hero-img"
+            src={urlForImage(project.image.asset).url()}
+            width={400}
+            height={400}
+            alt={project.image.alt}
+          />
+
+          <div class="project-card-content">
+            <h4>{project.title}</h4>
+            <IconText path="/icons/calendar.svg">
+              <p>{formatDate(project.startDate)}</p>
+            </IconText>
+            <IconText path="/icons/location.svg">
+              <p>{project.city}</p>
+            </IconText>
+            <p style="margin-bottom: 1rem;">{project.text}</p>
+            <TextButton
+              href={project.actionButton.href}
+              text={project.actionButton.text}
+              path="/icons/arrow_right.svg"
+            />
+          </div>
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .hero-img {
+    width: 100%;
+    border-radius: var(--section-img-border-radius);
+  }
+
+  .project-card:nth-of-type(2) .hero-img {
+    order: 1;
+  }
+
+  .projects-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--card-background-color-light);
+    padding: 1.5rem;
+    border-radius: var(--section-img-border-radius);
+    gap: 1rem;
+  }
+  .project-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 0 1rem;
+  }
+</style>
