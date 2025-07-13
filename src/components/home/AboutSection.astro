@@ -1,8 +1,11 @@
 ---
+type Props = HomeAboutSection;
+
 import { Image } from "astro:assets";
 import { urlForImage } from "../../lib/urlForImage";
 import ActionButtons from "../ActionButtons.astro";
 import Paragraphs from "../Paragraphs.astro";
+import type { HomeAboutSection } from "../../../sanity.types";
 
 const { text, actionButtons, image, title } = Astro.props;
 ---

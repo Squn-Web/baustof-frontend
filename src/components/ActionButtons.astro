@@ -1,12 +1,16 @@
 ---
-import type { ActionButton } from "../types/globaltypes";
+import type { ActionButton } from '../../sanity.types';
+
+interface Props {
+  actionButtons: ActionButton[];
+}
 
 const { actionButtons } = Astro.props;
 ---
 
 <div class="action-buttons-wrapper">
   {
-    actionButtons.map((button: ActionButton) => {
+    actionButtons.map((button) => {
       const btn = button;
       return (
         <a class="button-elevated" href={btn.href}>

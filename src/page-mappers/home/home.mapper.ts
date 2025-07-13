@@ -6,7 +6,7 @@ import OffersSection from "../../components/home/OffersSection.astro";
 import ProjectsSection from "../../components/home/ProjectsSection.astro";
 import ContactSection from "../../components/home/ContactSection.astro";
 
-export const homeSections: Record<HomeSections, any> = {
+export const homeSections: Record<string, any> = {
   [HomeSections.HERO_SECTION]: HeroSection,
   [HomeSections.PRAISE_SECTION]: PraiseSection,
   [HomeSections.ABOUT_SECTION]: AboutSection,
@@ -15,7 +15,7 @@ export const homeSections: Record<HomeSections, any> = {
   [HomeSections.CONTACT_SECTION]: ContactSection,
 };
 
-export function mapHomeSectionToComponent(homeSection: HomeSections) {
+export function mapHomeSectionToComponent(homeSection: string) {
   const componentToDisplay = homeSections[homeSection];
 
   return componentToDisplay;

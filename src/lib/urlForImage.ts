@@ -4,6 +4,10 @@ import { sanityClient } from 'sanity:client';
 
 export const imageBuilder = imageUrlBuilder(sanityClient);
 
-export function urlForImage(source: SanityImageSource) {
+export function urlForImage(source?: SanityImageSource) {
+  if (!source) {
+    throw new Error('Missing image.asset!');
+  }
+
   return imageBuilder.image(source);
 }
