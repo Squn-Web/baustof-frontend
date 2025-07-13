@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import { urlForImage } from "../lib/urlForImage";
-import type { Card } from "../api/fetchHomeSections/types";
+
 
 const { cards } = Astro.props;
 ---
 
 <div class="cards-wrapper">
   {
-    cards.map((card: Card) => {
+    cards.map((card: any) => {
       return (
         <div class="card">
           <Image
