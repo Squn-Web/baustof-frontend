@@ -1,0 +1,12 @@
+---
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+---
+
+<div class="icon-wrapper">
+  <img class="icon" src={path} alt="Icon" />
+  <slot />
+</div>

@@ -1,0 +1,18 @@
+---
+import type { ActionButton } from "../types/globaltypes";
+
+const { actionButtons } = Astro.props;
+---
+
+<div class="action-buttons-wrapper">
+  {
+    actionButtons.map((button: ActionButton) => {
+      const btn = button;
+      return (
+        <a class="button-elevated" href={btn.href}>
+          {btn.text}
+        </a>
+      );
+    })
+  }
+</div>

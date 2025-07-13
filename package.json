@@ -9,6 +9,25 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.10.2"
+    "@astrojs/react": "^4.3.0",
+    "@portabletext/react": "^3.2.1",
+    "@sanity/astro": "^3.2.6",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/preview-kit": "^6.1.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "astro": "^5.10.2",
+    "groq": "^3.97.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-is": "^19.1.0",
+    "react-player": "^3.1.0",
+    "sanity": "^3.97.1",
+    "styled-components": "^6.1.19"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1"
   }
 }
