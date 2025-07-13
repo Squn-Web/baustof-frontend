@@ -39,28 +39,28 @@
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "city": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "text": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "startDate": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "image": {
         "type": "objectAttribute",
@@ -136,7 +136,7 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "actionButton": {
         "type": "objectAttribute",
@@ -144,7 +144,7 @@
           "type": "inline",
           "name": "actionButton"
         },
-        "optional": true
+        "optional": false
       }
     }
   },
@@ -287,56 +287,56 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "contactPhone": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "contactEmail": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "nip": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "name": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "company": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "addressFirstLine": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "addressSecondLine": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       }
     }
   },
