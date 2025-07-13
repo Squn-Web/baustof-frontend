@@ -1,0 +1,31 @@
+---
+import { fetchLatestThreeProjects } from "../../api/fetchLatestThreeProjects/query";
+import ActionButtons from "../ActionButtons.astro";
+import Projects from "../Projects.astro";
+
+const projects = await fetchLatestThreeProjects();
+
+const { title, actionButtons } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <h3>{title}</h3>
+    <Projects projects={projects} />
+    <ActionButtons actionButtons={actionButtons} />
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  h3 {
+    text-align: center;
+  }
+</style>

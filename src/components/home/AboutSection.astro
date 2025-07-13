@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import { urlForImage } from "../../lib/urlForImage";
+import ActionButtons from "../ActionButtons.astro";
+import Paragraphs from "../Paragraphs.astro";
+
+const { text, actionButtons, image, title } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <Image
+      src={urlForImage(image.asset).url()}
+      width={1350}
+      height={760}
+      alt={image.alt}
+    />
+    <div class="text-wrapper">
+      <h3>{title}</h3>
+      <Paragraphs paragraphs={text} />
+      <ActionButtons actionButtons={actionButtons} />
+    </div>
+  </div>
+</section>
+
+<style>
+  img {
+    width: var(--section-image-width);
+    height: 100%;
+    border-radius: var(--section-img-border-radius);
+  }
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+</style>

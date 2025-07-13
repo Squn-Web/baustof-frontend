@@ -142,22 +142,35 @@ table {
 
 :root {
   --primary-color: #242b77;
+  --primary-color-a: rgba(36, 43, 119, 1);
+  --primary-color-light: rgba(36, 43, 119, 0.85);
   --background-color: rgb(242, 242, 242);
   --text-color: rgb(16, 16, 16);
   --text-color-invert: rgb(255, 255, 255);
+  --card-background-color: rgb(222, 222, 222);
+  --card-background-color-light: rgb(245, 245, 245);
   --font-size-h2: 3.5rem;
   --font-size-h3: 3rem;
-  --font-size-h4: 2rem;
+  --font-size-h4: 1.5rem;
   --font-size-text: 1.2rem;
   --nav-height: 70px;
   --nav-items-gap: 5rem;
+  --section-max-width: 1600px;
+  --section-image-width: 800px;
+  --section-padding: 5rem;
+  --section-paragraph-interline: 150%;
+  --section-img-border-radius: 1.25rem;
+  --button-padding: 1.25rem 3rem;
+  --button-border-radius: 1rem;
+  --button-font-size: 1.2rem;
   --hero-height: 75vh;
   --hero-width: 550px;
   --hero-font-size: 1.2rem;
   --hero-font-interline: 120%;
-  --button-padding: 1.25rem 3rem;
-  --button-border-radius: 1rem;
-  --button-font-size: 1.2rem;
+  --paragraph-gap: 2rem;
+  --card-gap: 10rem;
+  --card-width: 280px;
+  --card-interline: 120%;
 }
 
 /* GLOBAL STYLES */
@@ -187,6 +200,18 @@ a {
   text-decoration: none;
 }
 
+section {
+  padding: var(--section-padding) 0;
+}
+
+/* section:last-child {
+  padding-bottom: 0;
+} */
+
+p {
+  font-size: var(--font-size-text);
+}
+
 h1 {
   position: absolute;
   top: 0;
@@ -201,7 +226,32 @@ h2 {
 }
 
 h3 {
+  font-weight: bold;
   font-size: var(--font-size-h3);
+}
+
+h4 {
+  font-weight: bold;
+  font-size: var(--font-size-h4);
+}
+
+.action-buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.paragraph-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--paragraph-gap);
+}
+
+.cards-wrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  max-width: var(--section-max-width);
 }
 
 .button-elevated {
@@ -215,3 +265,21 @@ h3 {
   -moz-box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
   box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
 }
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* .content-wrapper {
+  display: flex;
+  max-width: var(--section-max-width);
+  margin: 0 auto;
+  gap: 5rem;
+} */

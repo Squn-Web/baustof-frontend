@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { urlForImage } from "../../lib/urlForImage";
-import type { ActionButton } from "../../types/globaltypes";
+import ActionButtons from "../ActionButtons.astro";
 
 const { text, logo, actionButtons, image } = Astro.props;
 ---
@@ -14,35 +14,24 @@ const { text, logo, actionButtons, image } = Astro.props;
     height={2400}
     alt={image.alt}
   />
-
-  <div class="content-wrapper">
-    <Image
-      class="logo"
-      src={urlForImage(logo.asset).url()}
-      width={480}
-      height={480}
-      alt={logo.alt}
-    />
-
-    <p>{text}</p>
-
-    <div class="action-buttons-wrapper">
-      {
-        actionButtons.map((button: ActionButton) => {
-          const btn = button;
-          return (
-            <a class="button-elevated" href={btn.href}>
-              {btn.text}
-            </a>
-          );
-        })
-      }
+  <div class="content-align">
+    <div class="content-wrapper">
+      <Image
+        class="logo"
+        src={urlForImage(logo.asset).url()}
+        width={480}
+        height={480}
+        alt={logo.alt}
+      />
+      <p>{text}</p>
+      <ActionButtons actionButtons={actionButtons} />
     </div>
   </div>
 </section>
 
 <style>
   section {
+    padding-top: 0;
     position: relative;
     height: var(--hero-height);
     margin-top: calc(-1 * var(--nav-height));
@@ -51,6 +40,7 @@ const { text, logo, actionButtons, image } = Astro.props;
     color: var(--text-color-invert);
     font-size: var(--hero-font-size);
     line-height: var(--hero-font-interline);
+    margin-bottom: 3rem;
   }
   .hero-image {
     position: absolute;
@@ -61,29 +51,19 @@ const { text, logo, actionButtons, image } = Astro.props;
     width: 100%;
     height: 100%;
     object-position: 100% 60%;
-  }
-  section::after {
-    position: absolute;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    content: "";
-    background-color: rgba(0, 0, 0, 0.2);
+    filter: brightness(70%);
   }
   .logo {
-    margin: -83px 0 -100px -83px;
+    margin: -70px 0 -100px -83px;
   }
   .content-wrapper {
-    position: absolute;
+    /* position: absolute; */
     z-index: 2;
     max-width: var(--hero-width);
     left: calc(var(--hero-width) / 4);
   }
-  .action-buttons-wrapper {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 3rem;
+  .content-align {
+    max-width: var(--section-max-width);
+    margin: 0 auto;
   }
 </style>
