@@ -1,8 +1,7 @@
 import Hero from '../../components/home/Hero.astro';
 import { HomeSections } from './home.enum';
 
-//@ts-ignore
-export const homeSections: Record<HomeSections, any> = {
+export const homeSections: Record<string, any> = {
   [HomeSections.HERO_SECTION]: Hero,
   //   [HomeSections.ABOUT_SECTION]: null,
   //   [HomeSections.CONTACT_SECTION]: null,
@@ -11,7 +10,7 @@ export const homeSections: Record<HomeSections, any> = {
   //   [HomeSections.PRAISE_SECTION]: null,
 };
 
-export function mapHomeSectionToComponent(homeSection: HomeSections) {
+export function mapHomeSectionToComponent(homeSection: string) {
   const componentToDisplay = homeSections[homeSection];
 
   return componentToDisplay;
