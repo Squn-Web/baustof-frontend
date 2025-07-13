@@ -1,6 +1,11 @@
 ---
+interface Props {
+  cards: HomeOfferCard[];
+}
+
 import { Image } from "astro:assets";
 import { urlForImage } from "../lib/urlForImage";
+import type { HomeOfferCard } from "../../sanity.types";
 
 
 const { cards } = Astro.props;
@@ -8,7 +13,7 @@ const { cards } = Astro.props;
 
 <div class="cards-wrapper">
   {
-    cards.map((card: any) => {
+    cards.map((card) => {
       return (
         <div class="card">
           <Image
