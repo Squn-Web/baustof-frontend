@@ -452,7 +452,7 @@
             ]
           }
         },
-        "optional": true
+        "optional": false
       }
     }
   },
