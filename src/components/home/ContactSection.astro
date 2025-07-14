@@ -2,7 +2,7 @@
 type Props = HomeContactSection;
 
 import { Image } from "astro:assets";
-import { urlForImage } from "../../lib/urlForImage";
+import { getImageProps, urlForImage } from "../../lib/urlForImage";
 import ActionButtons from "../ActionButtons.astro";
 import type { HomeContactSection } from "../../../sanity.types";
 
@@ -10,12 +10,20 @@ const { title, subTitle, image, actionButtons } = Astro.props;
 ---
 
 <section>
-  <Image
+  <!-- <Image
     src={urlForImage(image.asset).url()}
     width={1000}
     height={1000}
     alt={image.alt}
+  /> -->
+<Image
+    {...getImageProps({
+      image,
+    })}
+    alt={image.alt}
   />
+
+  
   <div class="content-wrapper">
     <h3>{title}</h3>
     <p>{subTitle}</p>

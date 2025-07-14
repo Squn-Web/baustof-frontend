@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { urlForImage } from "../lib/urlForImage";
+import { getImageProps, urlForImage } from "../lib/urlForImage";
 import { fetchFooter } from "../api/fetchFooter/query";
 
 const footer = await fetchFooter();
@@ -8,10 +8,18 @@ const footer = await fetchFooter();
 
 <footer>
   <div class="content-wrapper">
-    <Image
+    <!-- <Image
       src={urlForImage(footer.logo.asset).url()}
       width={480}
       height={480}
+      alt={footer.logo.alt}
+    /> -->
+
+    <Image
+      {...getImageProps({
+      image: footer.logo,
+    })}
+    
       alt={footer.logo.alt}
     />
 

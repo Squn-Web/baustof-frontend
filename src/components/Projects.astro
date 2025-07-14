@@ -4,7 +4,7 @@ interface Props {
 }
 
 import { Image } from "astro:assets";
-import { urlForImage } from "../lib/urlForImage";
+import { getImageProps, urlForImage } from "../lib/urlForImage";
 import TextButton from "./TextButton.astro";
 import { formatDate } from "../lib/convertDate";
 import IconText from "./IconText.astro";
@@ -18,11 +18,18 @@ const { projects } = Astro.props;
     projects.map((project) => {
       return (
         <div class="project-card">
-          <Image
+          {/* <Image
             class="hero-img"
             src={urlForImage(project.image.asset).url()}
             width={400}
             height={400}
+            alt={project.image.alt}
+          /> */}
+          <Image
+            class="hero-img"
+            {...getImageProps({
+      image: project.image,
+    })}
             alt={project.image.alt}
           />
 

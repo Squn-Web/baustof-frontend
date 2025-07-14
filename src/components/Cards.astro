@@ -4,7 +4,7 @@ interface Props {
 }
 
 import { Image } from "astro:assets";
-import { urlForImage } from "../lib/urlForImage";
+import { getImageProps, urlForImage } from "../lib/urlForImage";
 import type { HomeOfferCard } from "../../sanity.types";
 
 
@@ -16,12 +16,22 @@ const { cards } = Astro.props;
     cards.map((card) => {
       return (
         <div class="card">
-          <Image
+          {/* <Image
             src={urlForImage(card.icon.asset).url()}
             width={64}
             height={64}
             alt={card.icon.alt}
+          /> */}
+
+          <Image
+            {...getImageProps({
+            image: card.icon,
+              maxWidth: 64
+            })}
+            alt={card.icon.alt}
           />
+
+          
           <h4>{card.title}</h4>
           <p>{card.subTitle}</p>
         </div>

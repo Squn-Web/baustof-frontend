@@ -2,9 +2,10 @@
 type Props = HomeHeroSection;
 
 import { Image } from "astro:assets";
-import { urlForImage } from "../../lib/urlForImage";
+import {  getImageProps, urlForImage } from "../../lib/urlForImage";
 import ActionButtons from "../ActionButtons.astro";
 import type { HomeHeroSection } from "../../../sanity.types";
+
 
 const { text, logo, actionButtons, image } = Astro.props;
 ---
@@ -12,20 +13,40 @@ const { text, logo, actionButtons, image } = Astro.props;
 <section>
   <Image
     class="hero-image"
+    alt={image.alt}
+    {...getImageProps({
+      image,
+    })}
+    fetchpriority="high"
+    loading="eager"
+  />
+  <!-- <Image
+    class="hero-image"
     src={urlForImage(image.asset).url()}
     width={2400}
     height={2400}
     alt={image.alt}
-  />
+  /> -->
   <div class="content-align">
     <div class="content-wrapper">
       <Image
+        class="logo"
+        {...getImageProps({
+      image: logo,
+      customWidthSteps: [360],
+      minimumWidthStep: 0.2,
+      sizes: '100vw',
+    })}
+    
+        alt={logo.alt}
+      />
+      <!-- <Image
         class="logo"
         src={urlForImage(logo.asset).url()}
         width={480}
         height={480}
         alt={logo.alt}
-      />
+      /> -->
       <p>{text}</p>
       <ActionButtons actionButtons={actionButtons} />
     </div>
