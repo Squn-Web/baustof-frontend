@@ -751,6 +751,13 @@
             "value": "aboutHistorySection"
           }
         },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "timelines": {
           "type": "objectAttribute",
           "value": {
@@ -788,6 +795,13 @@
             "type": "string",
             "value": "aboutValuesSection"
           }
+        },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
         },
         "cards": {
           "type": "objectAttribute",
