@@ -1,5 +1,6 @@
 ---
 import { fetchHomeSections } from "../api/fetchHomeSections/query";
+import BaseHead from "../layouts/BaseHead.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapHomeSectionToComponent } from "../page-mappers/home/home.mapper.ts";
 
@@ -7,6 +8,9 @@ const { sections } = await fetchHomeSections();
 ---
 
 <BaseLayout>
+
+  <BaseHead title="Home" />
+
   {
     sections.map((section) => {
       const Component = mapHomeSectionToComponent(section._type);

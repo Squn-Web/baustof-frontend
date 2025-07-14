@@ -6,6 +6,11 @@
   font-display: swap;
 }
 
+
+@view-transition {
+  navigation: auto;
+}
+
 /* CSS RESET */
 * {
   margin: 0;
