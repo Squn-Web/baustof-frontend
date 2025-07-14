@@ -8,7 +8,6 @@ const { sections } = await fetchAboutSections();
 ---
 
 <BaseLayout>
-  <h2>O nas</h2>
   {
     sections.map((section) => {
       const Component = mapAboutSectionToComponent(section._type);
