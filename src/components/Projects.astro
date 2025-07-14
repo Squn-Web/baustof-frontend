@@ -8,7 +8,11 @@ import { urlForImage } from "../lib/urlForImage";
 import TextButton from "./TextButton.astro";
 import { formatDate } from "../lib/convertDate";
 import IconText from "./IconText.astro";
-import type { GetLatestThreeProjectsQueryResult, Project } from "../../sanity.types";
+import type {
+  GetLatestThreeProjectsQueryResult,
+  Project,
+} from "../../sanity.types";
+import DynamicImage from "./DynamicImage.astro";
 
 const { projects } = Astro.props;
 ---
@@ -18,13 +22,7 @@ const { projects } = Astro.props;
     projects.map((project) => {
       return (
         <div class="project-card">
-          <Image
-            class="hero-img"
-            src={urlForImage(project.image.asset).url()}
-            width={400}
-            height={400}
-            alt={project.image.alt}
-          />
+          <DynamicImage className="project-img" image={project.image} />
 
           <div class="project-card-content">
             <h4>{project.title}</h4>
@@ -48,15 +46,6 @@ const { projects } = Astro.props;
 </div>
 
 <style>
-  .hero-img {
-    width: 100%;
-    border-radius: var(--section-img-border-radius);
-  }
-
-  .project-card:nth-of-type(2) .hero-img {
-    order: 1;
-  }
-
   .projects-wrapper {
     display: flex;
     width: 100%;
