@@ -5,7 +5,13 @@
   font-style: normal;
   font-display: swap;
 }
-
+@font-face {
+  font-family: "Poppins";
+  src: url(/Poppins-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 /* CSS RESET */
 * {
   margin: 0;
@@ -202,7 +208,7 @@ h5,
 h6,
 span {
   color: var(--text-color);
-  font-family: "Inter";
+  font-family: "Poppins";
 }
 
 a {
