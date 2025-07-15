@@ -1,0 +1,81 @@
+---
+type Props = AboutValuesSection;
+
+import { Image } from "astro:assets";
+import type { AboutValuesSection } from "../../../sanity.types";
+import { urlForImage } from "../../lib/urlForImage";
+
+const { cards } = Astro.props;
+---
+
+<section>
+  <h3>Wartości, którymi się kierujemy</h3>
+  <div class="cards-wrapper">
+    {
+      cards.map((card) => {
+        return (
+          <div class="card">
+            <Image
+              src={urlForImage(card.icon.asset).url()}
+              width={64}
+              height={64}
+              alt={card.icon.alt}
+            />
+            <h4>{card.title}</h4>
+            <p>{card.subTitle}</p>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  section {
+    padding: calc(2 * var(--section-padding)) 0;
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+  h3 {
+    text-align: center;
+    color: var(--text-color-invert);
+    padding-bottom: 5rem;
+  }
+  .cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 0fr);
+    grid-row-gap: 5rem;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(1.2 * var(--card-width));
+    text-align: center;
+    gap: 2rem;
+    background-color: var(--card-background-color);
+    padding: 5rem 2rem;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+  }
+  p {
+    line-height: var(--card-interline);
+  }
+</style>

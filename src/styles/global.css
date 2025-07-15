@@ -174,6 +174,11 @@ table {
   --card-width: 280px;
   --card-interline: 120%;
   --footer-height: 48vh;
+  --history-curve-width: 100%; /* NON EDITABLE */
+  --history-timelines-gap: 10rem;
+  --history-cards-lenght: 40%;
+  --history-curve-thicknes: 14px;
+  --history-card-radius: 1.25rem;
   /* --breakpoint-medium-scale: 0.7; */
 }
 
@@ -206,11 +211,12 @@ a {
 
 section {
   padding: var(--section-padding) 0;
+  margin-top: calc(-1 * var(--nav-height));
 }
 
-/* section:last-child {
-  padding-bottom: 0;
-} */
+section:first-child {
+  padding-top: 0;
+}
 
 p {
   font-size: var(--font-size-text);
@@ -254,6 +260,18 @@ h5 {
   filter: brightness(70%);
 }
 
+.section-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(40%);
+  object-position: 100% 50%;
+}
+
 .logo {
   width: 480px;
   height: 480px;
@@ -275,6 +293,13 @@ h5 {
   width: 100%;
   height: 100%;
   filter: brightness(40%);
+}
+
+.section-img {
+  width: var(--section-image-width);
+  height: 100%;
+  max-width: 50%;
+  border-radius: var(--section-img-border-radius);
 }
 
 .project-card:nth-of-type(2) .project-img {

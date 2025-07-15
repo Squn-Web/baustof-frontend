@@ -1,13 +1,12 @@
 ---
 type Props = AboutHeroSection;
 
-import { Image } from "astro:assets";
-import { urlForImage } from "../../lib/urlForImage";
 import type { AboutHeroSection } from "../../../sanity.types";
+import Hero from "../Hero.astro";
 
 const { text, image } = Astro.props;
 ---
 
 <section>
-  <h2>{text}</h2>
+  <Hero text={text} image={image} />
 </section>

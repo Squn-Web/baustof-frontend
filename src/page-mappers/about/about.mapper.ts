@@ -1,18 +1,14 @@
 import { AboutSections } from "./about.enum";
 import HeroSection from "../../components/about/HeroSection.astro";
-// import PraiseSection from "../../components/home/PraiseSection.astro";
-// import AboutSection from "../../components/home/AboutSection.astro";
-// import OffersSection from "../../components/home/OffersSection.astro";
-// import ProjectsSection from "../../components/home/ProjectsSection.astro";
-// import ContactSection from "../../components/home/ContactSection.astro";
+import MissionSection from "../../components/about/MissionSection.astro";
+import ValuesSection from "../../components/about/ValuesSection.astro";
+import HistorySection from "../../components/about/HistorySection.astro";
 
 export const aboutSections: Record<string, any> = {
   [AboutSections.HERO_SECTION]: HeroSection,
-  // [HomeSections.PRAISE_SECTION]: PraiseSection,
-  // [HomeSections.ABOUT_SECTION]: AboutSection,
-  // [HomeSections.OFFERS_SECTION]: OffersSection,
-  // [HomeSections.PROJECTS_SECTION]: ProjectsSection,
-  // [HomeSections.CONTACT_SECTION]: ContactSection,
+  [AboutSections.MISSION_SECTION]: MissionSection,
+  [AboutSections.VALUES_SECTION]: ValuesSection,
+  [AboutSections.HISTORY_SECTION]: HistorySection,
 };
 
 export function mapAboutSectionToComponent(aboutSection: string) {

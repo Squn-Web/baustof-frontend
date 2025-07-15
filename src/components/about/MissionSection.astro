@@ -1,0 +1,33 @@
+---
+type Props = AboutMissionSection;
+
+import type { AboutMissionSection } from "../../../sanity.types";
+import Paragraphs from "../Paragraphs.astro";
+import DynamicImage from "../DynamicImage.astro";
+
+const { text, image, title } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="text-wrapper">
+      <h3>{title}</h3>
+      <Paragraphs paragraphs={text} />
+    </div>
+    <DynamicImage className="section-img" image={image} />
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  .text-wrapper {
+    gap: var(--paragraph-gap);
+    display: flex;
+    flex-direction: column;
+  }
+</style>
