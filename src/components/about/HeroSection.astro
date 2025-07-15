@@ -1,0 +1,18 @@
+---
+type Props = AboutHeroSection;
+
+import type { AboutHeroSection } from "../../../sanity.types";
+import Hero from "../Hero.astro";
+
+const { text, image } = Astro.props;
+---
+
+<section>
+  <Hero text={text} image={image} />
+</section>
+
+<style>
+  section {
+    padding-bottom: calc(0.25 * var(--section-padding));
+  }
+</style>

@@ -1,6 +1,6 @@
 import { defineQuery } from "groq";
-import { fetchSanity } from "../../lib/api";
-import type { GetLatestThreeProjectsQueryResult } from "../../../sanity.types";
+import { fetchSanity } from "../../../lib/api";
+import type { GetLatestThreeProjectsQueryResult } from "../../../../sanity.types";
 
 const getLatestThreeProjectsQuery = defineQuery(`
 *[_type == "project"]
@@ -18,5 +18,7 @@ actionButton
 `);
 
 export async function fetchLatestThreeProjects(): Promise<GetLatestThreeProjectsQueryResult> {
-  return fetchSanity<GetLatestThreeProjectsQueryResult>(getLatestThreeProjectsQuery);
+  return fetchSanity<GetLatestThreeProjectsQueryResult>(
+    getLatestThreeProjectsQuery,
+  );
 }

@@ -1,0 +1,95 @@
+---
+type Props = AboutHistorySection;
+
+import type { AboutHistorySection } from "../../../sanity.types";
+import { formatDate } from "../../lib/convertDate";
+import IconText from "../IconText.astro";
+
+const { timelines, title } = Astro.props;
+---
+
+<section>
+  <h3>{title}</h3>
+  <div class="content-wrapper">
+    {
+      timelines.map((timeline, index) => {
+        const isLast = index === timelines.length - 1;
+        const isReversed = index % 2 !== 1;
+        return (
+          <div class="timeline">
+            {!isLast && <div class="curve" />}
+            <p class="timeline-header">{timeline.title}</p>
+            <IconText reversed={isReversed} path="/icons/calendar.svg">
+              <p>{formatDate(timeline.date)}</p>
+            </IconText>
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  h3 {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  .timeline-header {
+    font-weight: bold;
+    font-size: calc(1.2 * var(--font-size-text));
+    letter-spacing: 1px;
+  }
+  .content-wrapper {
+    /* max-width: var(--section-max-width); */
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    gap: var(--history-timelines-gap);
+  }
+  .timeline {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: var(--history-cards-lenght);
+    padding: 2rem;
+    gap: 1rem;
+    background-color: var(--card-background-color);
+    border-top-right-radius: var(--history-card-radius);
+    border-bottom-right-radius: var(--history-card-radius);
+    -webkit-box-shadow: 0px 6px 7px -2px rgba(8, 8, 8, 0.35);
+    -moz-box-shadow: 0px 6px 7px -2px rgba(8, 8, 8, 0.35);
+    box-shadow: 0px 6px 7px -2px rgba(8, 8, 8, 0.35);
+  }
+
+  .timeline:nth-of-type(2n) {
+    align-items: flex-start;
+    border-top-right-radius: unset;
+    border-bottom-right-radius: unset;
+    border-top-left-radius: var(--history-card-radius);
+    border-bottom-left-radius: var(--history-card-radius);
+    margin-left: auto;
+  }
+  .curve {
+    position: absolute;
+    top: 50%;
+    right: calc(-1 * var(--history-curve-width));
+    width: var(--history-curve-width);
+    height: calc(var(--history-timelines-gap) + 100%);
+    border-top: var(--history-curve-thicknes) dotted
+      var(--card-background-color);
+    border-right: var(--history-curve-thicknes) dotted
+      var(--card-background-color);
+    border-top-right-radius: 100%;
+  }
+
+  .timeline:nth-of-type(2n) .curve {
+    right: unset;
+    left: calc(-1 * var(--history-curve-width) + 10px);
+    border-right: none;
+    border-left: var(--history-curve-thicknes) dotted
+      var(--card-background-color);
+    border-top-right-radius: unset;
+    border-top-left-radius: 100%;
+  }
+</style>

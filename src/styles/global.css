@@ -5,7 +5,13 @@
   font-style: normal;
   font-display: swap;
 }
-
+@font-face {
+  font-family: "Poppins";
+  src: url(/Poppins-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 /* CSS RESET */
 * {
   margin: 0;
@@ -159,7 +165,7 @@ table {
   --nav-items-gap: 5rem;
   --section-max-width: 1600px;
   --section-image-width: 800px;
-  --section-padding: 5rem;
+  --section-padding: 10rem;
   --section-paragraph-interline: 150%;
   --section-img-border-radius: 1.25rem;
   --button-padding: 1.25rem 3rem;
@@ -174,6 +180,11 @@ table {
   --card-width: 280px;
   --card-interline: 120%;
   --footer-height: 48vh;
+  --history-curve-width: 100%; /* NON EDITABLE */
+  --history-timelines-gap: 10rem;
+  --history-cards-lenght: 40%;
+  --history-curve-thicknes: 14px;
+  --history-card-radius: 1.25rem;
   /* --breakpoint-medium-scale: 0.7; */
 }
 
@@ -197,7 +208,7 @@ h5,
 h6,
 span {
   color: var(--text-color);
-  font-family: "Inter";
+  font-family: "Poppins";
 }
 
 a {
@@ -206,11 +217,12 @@ a {
 
 section {
   padding: var(--section-padding) 0;
+  margin-top: calc(-1 * var(--nav-height));
 }
 
-/* section:last-child {
-  padding-bottom: 0;
-} */
+section:first-child {
+  padding-top: 0;
+}
 
 p {
   font-size: var(--font-size-text);
@@ -240,6 +252,64 @@ h3,
 h4,
 h5 {
   font-weight: bold;
+}
+
+.hero-image {
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-position: 100% 60%;
+  filter: brightness(70%);
+}
+
+.section-hero-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(40%);
+  object-position: 100% 50%;
+}
+
+.logo {
+  width: 480px;
+  height: 480px;
+  margin: -70px 0 -100px -83px;
+}
+
+.project-img {
+  width: 100%;
+  height: 400px;
+  border-radius: var(--section-img-border-radius);
+}
+
+.contact-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -2;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  filter: brightness(40%);
+}
+
+.section-img {
+  width: var(--section-image-width);
+  height: 100%;
+  max-width: 50%;
+  border-radius: var(--section-img-border-radius);
+}
+
+.project-card:nth-of-type(2) .project-img {
+  order: 1;
 }
 
 .action-buttons-wrapper {
