@@ -1,7 +1,18 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { fetchAboutSections } from "../api/aboutPage/fetchAboutSections/query.ts";
+import { mapAboutSectionToComponent } from "../page-mappers/about/about.mapper.ts";
+
+const { sections } = await fetchAboutSections();
 ---
 
 <BaseLayout>
-  <h2>O nas</h2>
+  {
+    sections.map((section) => {
+      const Component = mapAboutSectionToComponent(section._type);
+
+      return Component ? <Component {...section} key={section._key} /> : null;
+    })
+  }
 </BaseLayout>

@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import { urlForImage } from "../lib/urlForImage";
-import { fetchFooter } from "../api/fetchFooter/query";
+import { urlForImage } from "../../lib/urlForImage";
+import { fetchFooter } from "../../api/fetchFooter/query";
 
 const footer = await fetchFooter();
 ---

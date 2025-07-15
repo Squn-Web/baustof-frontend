@@ -1,12 +1,15 @@
 ---
 interface Props {
   path: string;
+  reversed: boolean;
 }
 
-const { path } = Astro.props;
+const { path, reversed = false } = Astro.props;
+
+const style = reversed ? "flex-direction: row-reverse;" : "";
 ---
 
-<div class="icon-wrapper">
+<div class="icon-wrapper" style={style}>
   <img class="icon" src={path} alt="Icon" />
   <slot />
 </div>

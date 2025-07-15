@@ -1,0 +1,21 @@
+---
+interface Props {
+  image: CustomImage;
+  className?: string;
+}
+
+import { Image } from "astro:assets";
+import { urlForImage } from "../lib/urlForImage";
+import { getImageDimensions } from "../lib/getImageDimensions";
+import type { CustomImage } from "../../sanity.types";
+
+const { image, className = "" } = Astro.props;
+---
+
+<Image
+  class={className}
+  src={urlForImage(image.asset).url()}
+  width={getImageDimensions(image).width}
+  height={getImageDimensions(image).height}
+  alt={image.alt}
+/>
