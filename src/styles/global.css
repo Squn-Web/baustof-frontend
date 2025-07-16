@@ -165,6 +165,7 @@ table {
   --nav-items-gap: 5rem;
   --section-max-width: 1600px;
   --section-image-width: 800px;
+  --section-spacing: 5.25rem;
   --section-padding: 10rem;
   --section-paragraph-interline: 150%;
   --section-img-border-radius: 1.25rem;
@@ -216,7 +217,7 @@ a {
 }
 
 section {
-  padding: var(--section-padding) 0;
+  padding: var(--section-padding) var(--section-spacing);
   margin-top: calc(-1 * var(--nav-height));
 }
 
