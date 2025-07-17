@@ -1,0 +1,61 @@
+---
+type Props = ContactMapSection;
+
+import type { ContactMapSection } from "../../../sanity.types";
+import Paragraphs from "../Paragraphs.astro";
+
+const { text, title } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="map-wrapper">Tu będzie mapa</div>
+    <div style="flex:1">
+      <h3>{title}</h3>
+      <Paragraphs className="mapText" paragraphs={text} />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
+    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+  h3 {
+    color: var(--text-color-invert);
+    padding-bottom: var(--paragraph-gap);
+  }
+  .content-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5rem;
+  }
+  .map-wrapper {
+    font-size: 5rem; /* TYMCZASOWE */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--section-img-border-radius);
+    flex: 1;
+    height: auto;
+    background-color: rgb(226, 226, 226);
+    min-height: 500px;
+  }
+</style>

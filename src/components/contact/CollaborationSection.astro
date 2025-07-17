@@ -1,0 +1,58 @@
+---
+type Props = ContactCollaborationSection;
+
+import type { ContactCollaborationSection } from "../../../sanity.types";
+import Paragraphs from "../Paragraphs.astro";
+
+const {
+  formButtonText,
+  formInputs,
+  formSubTitle,
+  formTitle,
+  text,
+  title,
+  subTitle,
+} = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="info-wrapper">
+      <h3>{title}</h3>
+      <h4>{subTitle}</h4>
+      <Paragraphs paragraphs={text} />
+    </div>
+    <div class="form-wrapper">
+      <p>{formTitle}</p>
+      <p>{formSubTitle}</p>
+      <p>{formButtonText}</p>
+      <div class="form-placeholder">
+        {
+          formInputs.map((formInput) => {
+            return (
+              <div>
+                <p>INPUT TYPE: {formInput.type}</p>
+                <p>PLACEHOLDER: {formInput.placeholder}</p>
+                <p>{formInput.name}</p>
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .content-wrapper {
+      display: flex;
+      max-width: var(--section-max-width);
+      margin: 0 auto;
+      gap: 5rem;
+    }
+    .form-placeholder {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+  </style>
+</section>

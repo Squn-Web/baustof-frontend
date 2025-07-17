@@ -1,16 +1,16 @@
 ---
 interface Props {
-  paragraphs: string[]
+  paragraphs: string[];
+  className?: string;
 }
 
-
-const { paragraphs } = Astro.props;
+const { paragraphs, className = "" } = Astro.props;
 ---
 
 <div class="paragraph-wrapper">
   {
     paragraphs.map((paragraph: string) => {
-      return <p>{paragraph}</p>;
+      return <p class={className}>{paragraph}</p>;
     })
   }
 </div>
@@ -18,5 +18,13 @@ const { paragraphs } = Astro.props;
 <style>
   p {
     line-height: var(--section-paragraph-interline);
+  }
+  .scaleFont {
+    font-size: calc(2 * var(--font-size-text));
+    text-align: center;
+  }
+  .mapText {
+    color: var(--text-color-invert);
+    line-height: 200%;
   }
 </style>

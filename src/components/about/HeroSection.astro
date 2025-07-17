@@ -8,7 +8,9 @@ const { text, image } = Astro.props;
 ---
 
 <section>
-  <Hero text={text} image={image} />
+  <Hero image={image}>
+    <h2>{text}</h2>
+  </Hero>
 </section>
 
 <style>
@@ -16,5 +18,10 @@ const { text, image } = Astro.props;
     padding-right: 0;
     padding-left: 0;
     padding-bottom: calc(0.25 * var(--section-padding));
+  }
+  h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--text-color-invert);
   }
 </style>

@@ -1,0 +1,53 @@
+---
+type Props = ContactDetailsSection;
+
+import type { ContactDetailsSection } from "../../../sanity.types";
+import { Image } from "astro:assets";
+import { urlForImage } from "../../lib/urlForImage";
+import Paragraphs from "../Paragraphs.astro";
+
+const { cards, title } = Astro.props;
+---
+
+<section>
+  <h3>{title}</h3>
+  <div class="details-wrapper">
+    {
+      cards.map((card) => {
+        return (
+          <div class="card">
+            <Image
+              src={urlForImage(card.icon.asset).url()}
+              width={128}
+              height={128}
+              alt={card.icon.alt}
+            />
+            <h4>{card.title}</h4>
+            <Paragraphs className="scaleFont" paragraphs={card.text} />
+          </div>
+        );
+      })
+    }
+  </div>
+</section>
+
+<style>
+  h3 {
+    text-align: center;
+    margin-bottom: 5rem;
+  }
+  h4 {
+    font-size: calc(2 * var(--font-size-h4));
+  }
+  .details-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
+  }
+</style>
