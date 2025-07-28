@@ -1,0 +1,26 @@
+---
+type Props = ContactFormInput;
+
+import type { ContactFormInput } from "../../../../sanity.types";
+
+const { name, placeholder } = Astro.props;
+---
+
+<div>
+  <textarea
+    required
+    rows="6"
+    class="form-input"
+    name={name}
+    id={name}
+    placeholder={placeholder}></textarea>
+</div>
+
+<style>
+  div {
+    width: 100%;
+  }
+  textarea {
+    resize: none;
+  }
+</style>

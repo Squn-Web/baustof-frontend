@@ -1,0 +1,18 @@
+---
+type Props = ContactFormInput;
+
+import type { ContactFormInput } from "../../../../sanity.types";
+
+const { name, placeholder } = Astro.props;
+---
+
+<div>
+  <!-- <label for={name}>{name}</label> -->
+  <input required class="form-input" type="text" placeholder={placeholder} />
+</div>
+
+<style>
+  div {
+    width: 100%;
+  }
+</style>
