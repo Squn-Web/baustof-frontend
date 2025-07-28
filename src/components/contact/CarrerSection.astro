@@ -1,0 +1,48 @@
+---
+type Props = ContactCarrerSection;
+
+import type { ContactCarrerSection } from "../../../sanity.types";
+import Hero from "../Hero.astro";
+
+const { text, image, email } = Astro.props;
+---
+
+<section>
+  <Hero image={image}>
+    <div class="content-wrapper">
+      <h3>Karriera</h3>
+      <p>{text} <span>{email}</span></p>
+    </div>
+  </Hero>
+</section>
+
+<style>
+  section {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+  h3 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--text-color-invert);
+  }
+  p {
+    color: var(--text-color-invert);
+    font-size: calc(2 * var(--font-size-text));
+    line-height: 170%;
+    text-align: center;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  span {
+    color: var(--primary-color-accent);
+    font-weight: bold;
+  }
+</style>

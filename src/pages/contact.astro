@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { fetchContactSections } from "../api/contactPage/fetchContactSections/query.ts";
+import { mapContactSectionToComponent } from "../page-mappers/contact/contact.mapper.ts";
+
+const { sections } = await fetchContactSections();
+---
+
+<BaseLayout>
+  {
+    sections.map((section) => {
+      const Component = mapContactSectionToComponent(section._type);
+
+      return Component ? <Component {...section} key={section._key} /> : null;
+    })
+  }
+</BaseLayout>
