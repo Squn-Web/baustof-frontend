@@ -147,8 +147,9 @@ table {
 /* PARAMETERS */
 
 :root {
-  --primary-color: #242b77;
-  --primary-color-accent: #525ee2;
+  --primary-color: rgb(36, 43, 119);
+  --primary-color-accent: rgb(82, 99, 226);
+  --primary-color-transparent: rgba(36, 43, 119, 0.5);
   --primary-color-a: rgba(36, 43, 119, 1);
   --primary-color-light: rgba(36, 43, 119, 0.85);
   --background-color: rgb(242, 242, 242);
@@ -354,6 +355,27 @@ h5 {
 .icon {
   width: 30px;
   height: 30px;
+}
+
+.form-input {
+  font-family: "Poppins";
+  font-size: var(--font-size-text);
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  width: 100%;
+  outline: var(--primary-color);
+  border: 3px solid rgba(0, 0, 0, 0.25);
+  transition: border-color 0.4s ease;
+}
+
+.form-input:focus {
+  border: 3px solid var(--primary-color);
+}
+
+.form-input::placeholder {
+  font-family: "Poppins";
+  font-size: var(--font-size-text);
+  color: var(--text-color);
 }
 
 /* @media only screen and (max-width: 1200px) {
