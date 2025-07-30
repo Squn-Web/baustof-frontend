@@ -1,0 +1,127 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+// TODO: Create API queries and mappers for projects
+// import { fetchProjectsSections } from "../api/projectsPage/fetchProjectsSections/query.ts";
+// import { mapProjectsSectionToComponent } from "../page-mappers/projects/projects.mapper.ts";
+
+// const { sections } = await fetchProjectsSections();
+---
+
+<BaseLayout>
+  <main class="projects-main">
+    <div class="projects-container">
+      <h1 class="projects-title">Our Projects</h1>
+      <p class="projects-subtitle">Discover our latest work and achievements</p>
+
+      <!-- TODO: Replace with dynamic sections when API is implemented -->
+      <div class="projects-grid">
+        <div class="project-card">
+          <h3 class="project-card-title">Project 1</h3>
+          <p class="project-card-description">
+            Description of the first project goes here.
+          </p>
+          <button class="project-card-button"> View Details </button>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-card-title">Project 2</h3>
+          <p class="project-card-description">
+            Description of the second project goes here.
+          </p>
+          <button class="project-card-button"> View Details </button>
+        </div>
+
+        <div class="project-card">
+          <h3 class="project-card-title">Project 3</h3>
+          <p class="project-card-description">
+            Description of the third project goes here.
+          </p>
+          <button class="project-card-button"> View Details </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .projects-main {
+    min-height: 100vh;
+  }
+
+  .projects-container {
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    padding: 2rem var(--section-spacing);
+  }
+
+  .projects-title {
+    font-size: var(--font-size-h2);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+  }
+
+  .projects-subtitle {
+    text-align: center;
+    color: var(--text-color);
+    margin-bottom: 3rem;
+    font-size: var(--font-size-text);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .project-card {
+    background-color: var(--text-color-invert);
+    border-radius: var(--button-border-radius);
+    padding: 1.5rem;
+    box-shadow: 8px 11px 6px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .project-card-title {
+    font-size: var(--font-size-h4);
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .project-card-description {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: var(--font-size-text);
+  }
+
+  .project-card-button {
+    background-color: var(--primary-color);
+    color: var(--text-color-invert);
+    padding: 0.5rem 1rem;
+    border-radius: var(--button-border-radius);
+    border: none;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-size: var(--font-size-text);
+    transition: background-color 0.3s ease;
+  }
+
+  .project-card-button:hover {
+    background-color: var(--primary-color-accent);
+  }
+
+  /* Responsive Design */
+  @media only screen and (min-width: 768px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

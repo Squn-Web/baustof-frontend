@@ -383,3 +383,127 @@ h5 {
     font-size: calc(var(--breakpoint-medium-scale) * var(--font-size-h2));
   }
 } */
+
+/* RESPONSIVE DESIGN */
+
+/* Large screens (1200px and below) */
+@media only screen and (max-width: 1200px) {
+  h2 {
+    font-size: calc(0.7 * var(--font-size-h2));
+  }
+
+  h3 {
+    font-size: calc(0.7 * var(--font-size-h3));
+  }
+
+  section {
+    padding: calc(0.7 * var(--section-padding))
+      calc(0.7 * var(--section-spacing));
+  }
+
+  .section-img {
+    max-width: 60%;
+  }
+
+  .form-input {
+    font-size: calc(0.9 * var(--font-size-text));
+    padding: calc(0.9 * 1rem) calc(0.9 * 2rem);
+  }
+}
+
+/* Medium screens (768px and below) */
+@media only screen and (max-width: 768px) {
+  h2 {
+    font-size: calc(0.5 * var(--font-size-h2));
+  }
+
+  h3 {
+    font-size: calc(0.5 * var(--font-size-h3));
+  }
+
+  h4 {
+    font-size: calc(0.8 * var(--font-size-h4));
+  }
+
+  section {
+    padding: calc(0.5 * var(--section-padding))
+      calc(0.5 * var(--section-spacing));
+  }
+
+  .section-img {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .cards-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: calc(0.5 * var(--card-gap));
+  }
+
+  .action-buttons-wrapper {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .button-elevated {
+    padding: calc(0.8 * 1.25rem) calc(0.8 * 3rem);
+    font-size: calc(0.8 * var(--button-font-size));
+  }
+
+  .form-input {
+    font-size: calc(0.8 * var(--font-size-text));
+    padding: calc(0.8 * 1rem) calc(0.8 * 2rem);
+  }
+
+  .icon-wrapper {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .icon {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Small screens (480px and below) */
+@media only screen and (max-width: 480px) {
+  h2 {
+    font-size: calc(0.4 * var(--font-size-h2));
+  }
+
+  h3 {
+    font-size: calc(0.4 * var(--font-size-h3));
+  }
+
+  section {
+    padding: calc(0.3 * var(--section-padding))
+      calc(0.3 * var(--section-spacing));
+  }
+
+  .button-elevated {
+    padding: calc(0.6 * 1.25rem) calc(0.6 * 3rem);
+    font-size: calc(0.6 * var(--button-font-size));
+  }
+
+  .form-input {
+    font-size: calc(0.7 * var(--font-size-text));
+    padding: calc(0.7 * 1rem) calc(0.7 * 2rem);
+  }
+
+  .logo {
+    width: 300px;
+    height: 300px;
+    margin: -50px 0 -70px -50px;
+  }
+
+  .hero-image {
+    object-position: 100% 70%;
+  }
+
+  .section-hero-image {
+    object-position: 100% 60%;
+  }
+}
