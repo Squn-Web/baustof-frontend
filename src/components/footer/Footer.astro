@@ -77,4 +77,121 @@ const footer = await fetchFooter();
     flex-direction: column;
     justify-content: space-evenly;
   }
+
+  img {
+    /* height: auto;
+    width: 100%; */
+    max-height: calc(var(--footer-height) - 4rem);
+    width: auto;
+  }
+  footer {
+    background-color: var(--primary-color);
+  }
+  p,
+  a,
+  h5 {
+    color: var(--text-color-invert);
+  }
+  a {
+    text-decoration: underline;
+  }
+  h5 {
+    font-weight: bold;
+  }
+  .content-wrapper {
+    max-height: var(--footer-height);
+    display: flex;
+    justify-content: space-between;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    padding: 2rem 4rem;
+  }
+  .navigation-wrapper,
+  .information-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  /* Responsive scaling */
+
+  /* Tablet - 768px and below */
+  @media (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    img {
+      max-height: 200px;
+      width: auto;
+    }
+
+    .navigation-wrapper,
+    .information-wrapper {
+      gap: 1rem;
+    }
+
+    .navigation-wrapper {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .navigation-wrapper p {
+      margin: 0;
+    }
+    .content-wrapper {
+      max-height: none;
+    }
+  }
+
+  /* Mobile - 480px and below */
+  @media (max-width: 480px) {
+    .content-wrapper {
+      padding: 1.5rem 1rem;
+      gap: 1.5rem;
+    }
+
+    img {
+      max-height: 150px;
+    }
+
+    .navigation-wrapper {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .information-wrapper {
+      gap: 0.5rem;
+    }
+
+    .information-wrapper h5 {
+      margin: 0.5rem 0 0.25rem 0;
+    }
+
+    .information-wrapper p {
+      margin: 0.25rem 0;
+    }
+  }
+
+  /* Small mobile - 320px and below */
+  @media (max-width: 320px) {
+    .content-wrapper {
+      padding: 1rem 0.5rem;
+    }
+
+    img {
+      max-height: 120px;
+    }
+
+    .navigation-wrapper,
+    .information-wrapper {
+      font-size: 0.9rem;
+    }
+  }
 </style>

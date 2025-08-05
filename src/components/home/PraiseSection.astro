@@ -7,7 +7,7 @@ const { text } = Astro.props;
 ---
 
 <section>
-  <div>
+  <div class="praise-wrapper">
     <h2>{text}</h2>
   </div>
 </section>
@@ -17,7 +17,7 @@ const { text } = Astro.props;
     position: relative;
     padding-bottom: 0;
   }
-  div {
+  .praise-wrapper {
     position: absolute;
     z-index: 2;
     top: -35px;
@@ -35,5 +35,33 @@ const { text } = Astro.props;
     color: var(--text-color-invert);
     font-weight: bold;
     white-space: nowrap;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .praise-wrapper {
+      display: block;
+      position: static;
+      top: 0;
+      left: 0;
+      transform: none;
+      max-width: none;
+      width: 96%;
+      margin: 0 auto;
+      padding: 3rem;
+    }
+    .praise-wrapper h2 {
+      text-align: center;
+      white-space: wrap;
+      line-height: 120%;
+    }
+    section {
+      padding: 0%;
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    .praise-wrapper {
+      margin: 1rem auto;
+      padding: 2rem;
+    }
   }
 </style>
