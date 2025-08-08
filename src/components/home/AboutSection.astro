@@ -6,18 +6,16 @@ import { urlForImage } from "../../lib/urlForImage";
 import ActionButtons from "../ActionButtons.astro";
 import Paragraphs from "../Paragraphs.astro";
 import type { HomeAboutSection } from "../../../sanity.types";
+import DynamicImage from "../DynamicImage.astro";
 
 const { text, actionButtons, image, title } = Astro.props;
 ---
 
 <section>
   <div class="content-wrapper">
-    <Image
-      src={urlForImage(image.asset).url()}
-      width={1350}
-      height={760}
-      alt={image.alt}
-    />
+    <div class="image-wrapper">
+      <DynamicImage image={image} className="about-img" />
+    </div>
     <div class="text-wrapper">
       <h3>{title}</h3>
       <Paragraphs paragraphs={text} />
@@ -27,11 +25,6 @@ const { text, actionButtons, image, title } = Astro.props;
 </section>
 
 <style>
-  img {
-    width: var(--section-image-width);
-    height: 100%;
-    border-radius: var(--section-img-border-radius);
-  }
   .content-wrapper {
     display: flex;
     max-width: var(--section-max-width);
@@ -42,5 +35,10 @@ const { text, actionButtons, image, title } = Astro.props;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    width: 50%;
+    gap: 2rem;
+  }
+  .image-wrapper {
+    width: 50%;
   }
 </style>

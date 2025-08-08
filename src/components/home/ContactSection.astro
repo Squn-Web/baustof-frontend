@@ -42,4 +42,10 @@ const { title, subTitle, image, actionButtons } = Astro.props;
     font-size: calc(1.3 * var(--font-size-text));
     margin-bottom: 3rem;
   }
+  /* Medium screens (768px and below) */
+  @media only screen and (max-width: 768px) {
+    section {
+      padding: calc(1 * var(--section-padding)) 0;
+    }
+  }
 </style>

@@ -32,4 +32,20 @@ const { cards } = Astro.props;
       var(--primary-color-light) 100%
     );
   }
+  @media only screen and (max-width: 768px) {
+    section {
+      padding: calc(1 * var(--section-padding))
+        calc(0.5 * var(--section-spacing));
+      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    section {
+      padding: calc(0.75 * var(--section-padding))
+        calc(0.25 * var(--section-spacing));
+      clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%);
+      margin-top: 1px;
+      margin-bottom: 2rem;
+    }
+  }
 </style>

@@ -37,7 +37,7 @@ const { cards, title } = Astro.props;
     margin-bottom: 5rem;
   }
   h4 {
-    font-size: calc(2 * var(--font-size-h4));
+    font-size: calc(1.8 * var(--font-size-h4));
   }
   .details-wrapper {
     display: flex;
@@ -49,5 +49,20 @@ const { cards, title } = Astro.props;
     align-items: center;
     flex-direction: column;
     gap: 2rem;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    h4 {
+      font-size: calc(1.1 * var(--font-size-h4));
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .details-wrapper {
+      flex-direction: column;
+      gap: 4rem;
+    }
+    h4 {
+      font-size: calc(1 * var(--font-size-h4));
+    }
   }
 </style>

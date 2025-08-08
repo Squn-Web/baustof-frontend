@@ -19,3 +19,19 @@ const { image, className = "" } = Astro.props;
   height={getImageDimensions(image).height}
   alt={image.alt}
 />
+
+<style>
+  @media only screen and (max-width: 1200px) {
+    img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+    }
+
+    .section-img {
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      max-width: unset !important;
+      width: 100% !important;
+    }
+  }
+</style>

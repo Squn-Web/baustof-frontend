@@ -78,4 +78,32 @@ const { cards, title } = Astro.props;
   p {
     line-height: var(--card-interline);
   }
+  @media only screen and (max-width: 1200px) {
+    section {
+      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%) !important;
+    }
+    .cards-wrapper {
+      grid-template-columns: repeat(2, 0fr);
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    section {
+      padding: calc(1 * var(--section-padding))
+        calc(0.5 * var(--section-spacing));
+
+      clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%) !important;
+    }
+    .cards-wrapper {
+      grid-template-columns: repeat(1, 0fr);
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    section {
+      padding: calc(0.75 * var(--section-padding))
+        calc(0.25 * var(--section-spacing));
+
+      margin-top: 1px;
+      margin-bottom: 2rem;
+    }
+  }
 </style>

@@ -45,4 +45,15 @@ const { text, logo, actionButtons, image } = Astro.props;
     max-width: var(--section-max-width);
     margin: 0 auto;
   }
+
+  @media only screen and (max-width: 1200px) {
+    section {
+      height: unset !important;
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    p {
+      font-size: calc(0.7 * var(--hero-font-size));
+    }
+  }
 </style>

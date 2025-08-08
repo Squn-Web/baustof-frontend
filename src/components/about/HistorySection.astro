@@ -96,4 +96,27 @@ const { timelines, title } = Astro.props;
     border-top-right-radius: unset;
     border-top-left-radius: 100%;
   }
+
+  @media only screen and (max-width: 768px) {
+    .timeline-header {
+      font-size: calc(1 * var(--font-size-text));
+    }
+    .curve {
+      height: calc(var(--history-timelines-gap) + 20%);
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    .content-wrapper {
+      gap: 5rem !important;
+    }
+    .timeline {
+      --history-cards-lenght: 60%;
+      --history-curve-width: 40%;
+      padding: 1.5rem;
+    }
+    .timeline-header {
+      letter-spacing: 0px;
+      font-size: calc(0.9 * var(--font-size-text));
+    }
+  }
 </style>
