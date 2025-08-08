@@ -76,8 +76,8 @@
     height: 100%;
   }
   nav ul li a:hover {
-    background-color: var(--primary-color);
-    color: var(--text-color-invert) !important;
+    color: var(--text-color-invert);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
   }
 
   nav.scrolled {
@@ -87,6 +87,9 @@
   }
   nav.scrolled ul li a {
     color: var(--text-color);
+  }
+  nav.scrolled ul li a:hover {
+    color: var(--primary-color);
   }
   .active-link {
     transition: border 0.2s ease;
@@ -181,6 +184,9 @@
     }
     nav ul li a {
       color: var(--text-color);
+    }
+    nav ul li a:hover {
+      color: var(--primary-color);
     }
 
     nav.showed {
