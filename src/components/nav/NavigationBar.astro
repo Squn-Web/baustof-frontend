@@ -1,9 +1,37 @@
-<nav id="nav">
-  <a href="#">Projekty</a>
-  <a href="#">Oferta</a>
-  <a href="/contact">Kontakt</a>
-  <a href="/about">O nas</a>
+<a href="#main-content" class="skip-link">Pomiń i przejdź do treści głównej</a>
+
+<button
+  id="open-sidebar-btn"
+  onclick="openSidebar()"
+  aria-label="open sidebar"
+  aria-expanded="false"
+  aria-controls="navbar"
+>
+  <img src="/icons/hamburger_menu.svg" alt="Menu" />
+</button>
+
+<nav id="navbar">
+  <ul>
+    <li>
+      <button
+        id="close-sidebar-btn"
+        onclick="closeSidebar()"
+        aria-label="close sidebar"
+      >
+        <img src="/icons/close.svg" alt="Close" />
+      </button>
+    </li>
+    <li id="nav-logo">
+      <a class="active-link" aria-curret="page" href="/">Home</a>
+    </li>
+    <li><a href="/about">O nas</a></li>
+    <li><a href="/contact">Kontakt</a></li>
+    <li><a href="#">Oferta</a></li>
+    <li><a href="#">Projekty</a></li>
+  </ul>
 </nav>
+
+<div id="overlay" onclick="closeSidebar()" aria-hidden="true"></div>
 
 <style>
   nav {
@@ -18,32 +46,241 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: var(--nav-items-gap);
-    transition: background-color 0.4s ease;
     white-space: nowrap;
+    transition:
+      background-color 0.4s ease,
+      border 0.3s ease;
+    border-bottom: 2px solid transparent;
   }
-  a {
-    transition: color 0.4s ease;
+
+  nav ul {
+    display: flex;
+    width: 100%;
+    list-style: none;
+    gap: var(--nav-items-gap);
+  }
+  nav ul li {
+    display: flex;
+  }
+  #nav-logo {
+    margin-right: auto;
+  }
+
+  nav ul li a {
+    transition:
+      color 0.4s ease,
+      background-color 0.2s ease;
     font-size: var(--font-size-text);
     color: var(--text-color-invert);
+    padding: 2rem 2rem;
+    height: 100%;
+  }
+  nav ul li a:hover {
+    background-color: var(--primary-color);
+    color: var(--text-color-invert) !important;
   }
 
   nav.scrolled {
     background-color: var(--nav-background-color);
     backdrop-filter: blur(6px);
+    border-bottom: 2px solid rgb(210, 210, 210);
   }
-  nav.scrolled a {
+  nav.scrolled ul li a {
     color: var(--text-color);
+  }
+  .active-link {
+    transition: border 0.2s ease;
+    border-bottom: 2px solid transparent;
+  }
+  nav.scrolled .active-link {
+    border-bottom: 2px solid var(--primary-color);
+  }
+  button {
+    display: none;
+    background: none;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+  }
+  #close-sidebar-btn img {
+    filter: brightness(0) saturate(100%) invert(6%) sepia(0%) saturate(0%)
+      hue-rotate(0deg) brightness(100%) contrast(100%);
+  }
+  #open-sidebar-btn img {
+    filter: brightness(0) saturate(100%) invert(86%) sepia(11%) saturate(100%)
+      hue-rotate(359deg) brightness(103%) contrast(87%);
+  }
+
+  #open-sidebar-btn img,
+  #close-sidebar-btn img {
+    cursor: pointer;
+    width: 48px;
+    height: 48px;
+  }
+  #open-sidebar-btn {
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 100;
+    background: transparent;
+    transition: 0.2s background-color ease-in;
+    border-radius: 10rem;
+    padding: 0.5rem;
+  }
+
+  #overlay {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    display: none;
+  }
+  .skip-link {
+    opacity: 0;
+    pointer-events: none;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1000;
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  .skip-link:focus {
+    opacity: 1;
+    pointer-events: auto;
+    outline: 2px solid #ffffff;
+  }
+  .scrolled-mobile {
+    background: rgba(0, 0, 0, 0.5) !important;
+  }
+
+  /* Medium screens (768px and below) */
+  @media only screen and (max-width: 768px) {
+    button {
+      display: block;
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: unset;
+      height: 100dvh;
+      height: 100vh;
+      width: min(15em, 100%);
+      z-index: 101;
+      border-left: 2px solid rgb(210, 210, 210);
+      right: -100%;
+      align-items: flex-start;
+      padding: 0;
+      transition: right 0.3s ease-out;
+    }
+    nav ul li a {
+      color: var(--text-color);
+    }
+
+    nav.showed {
+      right: 0;
+      background-color: var(--nav-background-color);
+      backdrop-filter: blur(6px);
+      border-bottom: 2px solid rgb(210, 210, 210);
+    }
+    nav.showed ~ #overlay {
+      display: block;
+    }
+    nav ul {
+      flex-direction: column;
+      width: 100%;
+    }
+    nav ul li a {
+      width: 100%;
+    }
+    #nav-logo {
+      margin-right: 0;
+    }
+    nav.scrolled {
+      border-bottom: none;
+    }
+    .active-link {
+      border-bottom: none !important;
+    }
   }
 </style>
 
 <script is:inline>
+  const navbar = document.getElementById("navbar");
+  const media = window.matchMedia("(width < 768px)");
+  const openBtn = document.getElementById("open-sidebar-btn");
+
+  let isMobile = false;
+
   window.addEventListener("scroll", () => {
-    const nav = document.getElementById("nav");
     if (window.scrollY > 2) {
-      nav?.classList.add("scrolled");
+      if (isMobile) {
+        openBtn?.classList.add("scrolled-mobile");
+      } else {
+        navbar?.classList.add("scrolled");
+      }
     } else {
-      nav?.classList.remove("scrolled");
+      if (isMobile) {
+        openBtn?.classList.remove("scrolled-mobile");
+      } else {
+        navbar?.classList.remove("scrolled");
+      }
     }
   });
+
+  media.addEventListener("change", (e) => updateNavbar(e));
+
+  function updateNavbar(e) {
+    isMobile = e.matches;
+    console.log(isMobile);
+    if (isMobile) {
+      navbar.setAttribute("inert", "");
+      openBtn.style.display = "block";
+    } else {
+      if (window.scrollY > 2) {
+        navbar?.classList.add("scrolled");
+      } else {
+        navbar?.classList.remove("scrolled");
+      }
+      navbar.removeAttribute("inert", "");
+      openBtn.style.display = "none";
+    }
+  }
+
+  function openSidebar() {
+    navbar.classList.add("showed");
+    openBtn.style.display = "none";
+    openBtn.setAttribute("aria-expanded", "true");
+    navbar.removeAttribute("inert", "");
+  }
+
+  function closeSidebar() {
+    navbar.classList.remove("showed");
+    openBtn.style.display = "block";
+    openBtn.setAttribute("aria-expanded", "false");
+    navbar.setAttribute("inert", "");
+  }
+
+  function setActiveLink() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll("#navbar a");
+
+    navLinks.forEach((link) => {
+      link.classList.remove("active-link");
+      if (link.getAttribute("href") === currentPath) {
+        link.classList.add("active-link");
+      }
+    });
+  }
+
+  // Set active link on page load
+  setActiveLink();
+
+  updateNavbar(media);
 </script>

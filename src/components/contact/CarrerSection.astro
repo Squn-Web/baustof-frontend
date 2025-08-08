@@ -29,7 +29,7 @@ const { text, image, email } = Astro.props;
   }
   p {
     color: var(--text-color-invert);
-    font-size: calc(2 * var(--font-size-text));
+    font-size: calc(1.3 * var(--font-size-text));
     line-height: 170%;
     text-align: center;
   }
@@ -44,5 +44,25 @@ const { text, image, email } = Astro.props;
   span {
     color: var(--primary-color-accent);
     font-weight: bold;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      padding: 0 2rem;
+    }
+    p {
+      font-size: calc(1.2 * var(--font-size-text));
+      line-height: 150%;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    p {
+      font-size: calc(1 * var(--font-size-text));
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    p {
+      font-size: calc(0.9 * var(--font-size-text));
+    }
   }
 </style>

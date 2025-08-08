@@ -131,5 +131,41 @@ const {
       font-weight: bold;
       min-width: 2rem;
     }
+
+    @media only screen and (max-width: 1200px) {
+      .form-header {
+        padding: 2rem 1rem;
+      }
+      h4 {
+        margin-bottom: 4rem;
+      }
+    }
+    @media only screen and (max-width: 768px) {
+      h3 {
+        margin: 1rem 0;
+        text-align: center;
+      }
+      h4 {
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+      .form-header p:first-child {
+        font-size: calc(1.25 * var(--font-size-text));
+      }
+      .form-header p:last-child {
+        font-size: calc(1 * var(--font-size-text));
+      }
+    }
+    @media only screen and (max-width: 485px) {
+      h4 {
+        margin-bottom: 2rem;
+      }
+      .form-header p:first-child {
+        font-size: calc(1 * var(--font-size-text));
+      }
+      .form-header p:last-child {
+        font-size: calc(0.9 * var(--font-size-text));
+      }
+    }
   </style>
 </section>

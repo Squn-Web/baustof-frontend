@@ -31,4 +31,11 @@ const { text, image, title } = Astro.props;
     display: flex;
     flex-direction: column;
   }
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      flex-direction: column-reverse;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+  }
 </style>
