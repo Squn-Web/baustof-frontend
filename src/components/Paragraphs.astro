@@ -20,11 +20,21 @@ const { paragraphs, className = "" } = Astro.props;
     line-height: var(--section-paragraph-interline);
   }
   .scaleFont {
-    font-size: calc(2 * var(--font-size-text));
+    font-size: calc(1.8 * var(--font-size-text));
     text-align: center;
   }
   .mapText {
     color: var(--text-color-invert);
     line-height: 200%;
+  }
+  @media only screen and (max-width: 1200px) {
+    .scaleFont {
+      font-size: calc(1.1 * var(--font-size-h4));
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .scaleFont {
+      font-size: calc(1 * var(--font-size-h4));
+    }
   }
 </style>

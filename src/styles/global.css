@@ -387,14 +387,7 @@ h5 {
   color: var(--text-color);
 }
 
-/* @media only screen and (max-width: 1200px) {
-  h2 {
-    font-size: calc(var(--breakpoint-medium-scale) * var(--font-size-h2));
-  }
-} */
-/* Large screens (1200px and below) */
-
-/* Medium screens (1024px and below) */
+/* Large screens (1006px and below) */
 @media only screen and (max-width: 1600px) {
   .cards-wrapper {
     display: grid;
@@ -407,6 +400,7 @@ h5 {
   }
 }
 
+/* Large screens (1200px and below) */
 @media only screen and (max-width: 1200px) {
   h2 {
     font-size: calc(0.6 * var(--font-size-h2));
@@ -439,15 +433,18 @@ h5 {
   }
   .project-img {
     width: 50% !important;
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1 !important;
   }
   .cards-wrapper .card {
     width: calc(1 * var(--card-width)) !important;
   }
-  /* .form-input {
-    font-size: calc(0.9 * var(--font-size-text));
+  .form-input {
+    font-size: calc(1 * var(--font-size-text));
     padding: calc(0.9 * 1rem) calc(0.9 * 2rem);
-  } */
+  }
+  .form-input::placeholder {
+    font-size: calc(0.9 * var(--font-size-text));
+  }
 }
 
 /* Medium screens (768px and below) */
@@ -501,8 +498,11 @@ h5 {
   }
 
   .form-input {
-    font-size: calc(0.8 * var(--font-size-text));
-    padding: calc(0.8 * 1rem) calc(0.8 * 2rem);
+    font-size: calc(1 * var(--font-size-text)) !important;
+    padding: calc(0.9 * 1rem) calc(0.9 * 2rem);
+  }
+  .form-input::placeholder {
+    font-size: calc(0.9 * var(--font-size-text));
   }
 
   .icon {
