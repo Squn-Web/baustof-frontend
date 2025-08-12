@@ -39,7 +39,13 @@ const {
         <p>{formTitle}</p>
         <p>{formSubTitle}</p>
       </div>
-      <form>
+      <form netlify netlify-honeypot="bot-field" name="collaboration" method="POST" action="/success">
+        <!-- Honeypot field for spam protection - hidden from users -->
+        <p style="display: none;">
+          <label>
+            Don't fill this out if you're human: <input name="bot-field" />
+          </label>
+        </p>
         {
           formInputs.map((formInput) => {
             const Component = mapInputTypeToInputComponent(formInput.type);
@@ -49,7 +55,7 @@ const {
             ) : null;
           })
         }
-        <button type="submit">{formButtonText}</button>
+        <button type="submit" id="submit-btn">{formButtonText}</button>
       </form>
     </div>
   </div>
@@ -169,3 +175,28 @@ const {
     }
   </style>
 </section>
+
+<script>
+  // Add form submission feedback
+  const form = document.querySelector('form[name="collaboration"]');
+  const submitBtn = document.getElementById('submit-btn');
+  
+  if (form && submitBtn) {
+    form.addEventListener('submit', function() {
+      // Disable button and show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+      
+      // Re-enable button after a delay in case of errors
+      setTimeout(() => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = submitBtn.dataset.originalText || 'Send Message';
+        }
+      }, 10000);
+    });
+    
+    // Store original button text
+    submitBtn.dataset.originalText = submitBtn.textContent;
+  }
+</script>
