@@ -1,0 +1,30 @@
+---
+type Props = ProjectsSection;
+
+import type { ProjectsSection } from "../../../sanity.types";
+import { fetchProjects } from "../../api/projectsPage/fetchProjects/query.ts";
+import Projects from "./Projects.tsx";
+
+const { filterTitle, sectionTitle } = Astro.props;
+
+const projects = await fetchProjects();
+---
+
+<section>
+  <div class="content-wrapper">
+    <Projects
+      filterTitle={filterTitle}
+      sectionTitle={sectionTitle}
+      projects={projects}
+    />
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    max-width: var(--section-max-width);
+    display: flex;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+</style>
