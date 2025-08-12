@@ -3,12 +3,19 @@ type Props = ContactFormInput;
 
 import type { ContactFormInput } from "../../../../sanity.types";
 
-const { name, placeholder } = Astro.props;
+const { name, placeholder, label } = Astro.props;
 ---
 
 <div>
-  <!-- <label for={name}>{name}</label> -->
-  <input required class="form-input" type="text" placeholder={placeholder} />
+  <label for={name}>{label}</label>
+  <input
+    required
+    class="form-input"
+    type="text"
+    name={name}
+    id={name}
+    placeholder={placeholder}
+  />
 </div>
 
 <style>
