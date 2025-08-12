@@ -3,10 +3,11 @@ type Props = ContactFormInput;
 
 import type { ContactFormInput } from "../../../../sanity.types";
 
-const { name, placeholder } = Astro.props;
+const { name, placeholder, label } = Astro.props;
 ---
 
 <div>
+  <label for={name}>{label}</label>
   <textarea
     required
     rows="6"
