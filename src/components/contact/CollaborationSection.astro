@@ -39,7 +39,20 @@ const {
         <p>{formTitle}</p>
         <p>{formSubTitle}</p>
       </div>
-      <form>
+      <!-- @ts-expect-error - Netlify form attributes -->
+      <form
+        netlify
+        netlify-honeypot="bot-field"
+        name="collaboration"
+        method="POST"
+        action="/success"
+      >
+        <!-- Honeypot field for spam protection - hidden from users -->
+        <p style="display: none;">
+          <label>
+            Don't fill this out if you're human: <input name="bot-field" />
+          </label>
+        </p>
         {
           formInputs.map((formInput) => {
             const Component = mapInputTypeToInputComponent(formInput.type);
@@ -49,7 +62,7 @@ const {
             ) : null;
           })
         }
-        <button type="submit">{formButtonText}</button>
+        <button type="submit" id="submit-btn">{formButtonText}</button>
       </form>
     </div>
   </div>
