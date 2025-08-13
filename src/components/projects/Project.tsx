@@ -6,7 +6,9 @@ import type {
 } from "../../../sanity.types";
 import "./Project.css";
 import { formatDate } from "../../lib/convertDate";
-import IconText from "../IconText.astro";
+import { Image } from "astro:assets";
+import { urlForImage } from "../../lib/urlForImage";
+import { getImageDimensions } from "../../lib/getImageDimensions";
 
 interface ProjectProps {
   project: GetProjectsQueryResult[number];
@@ -22,6 +24,13 @@ const ProjectComponent = ({ project }: ProjectProps) => {
         src="https://unique-residence.com/wp-content/uploads/2024/03/COTTAGE_HOUSE_www_3.jpg"
         alt="haus"
       />
+      {/* <Image
+        class="project-image"
+        src={urlForImage(project.image.asset).url()}
+        width={getImageDimensions(project.image).width}
+        height={getImageDimensions(project.image).height}
+        alt={project.image.alt}
+      /> */}
 
       <div className="project-content">
         <p className="project-title">{project.title}</p>
