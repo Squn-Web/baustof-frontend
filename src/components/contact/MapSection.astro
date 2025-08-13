@@ -9,13 +9,20 @@ const { text, title } = Astro.props;
 
 <section>
   <div class="content-wrapper">
-    <div class="map-wrapper">Tu będzie mapa</div>
-    <div style="flex:1">
-      <h3>{title}</h3>
-      <Paragraphs className="mapText" paragraphs={text} />
-    </div>
+    <iframe
+      src="https://storage.googleapis.com/maps-solutions-q8r604mr5s/locator-plus/y0tn/locator-plus.html"
+      width="100%"
+      height="100%"
+      style="border:0;"
+      loading="lazy"
+    >
+    </iframe>
   </div>
 </section>
+<div style="flex:1">
+  <h3>{title}</h3>
+  <Paragraphs className="mapText" paragraphs={text} />
+</div>
 
 <style>
   section {
