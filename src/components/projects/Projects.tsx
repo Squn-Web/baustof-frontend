@@ -1,17 +1,28 @@
-import type { GetProjectsQueryResult } from "../../../sanity.types";
+import type {
+  GetProjectCategoryQueryResult,
+  GetProjectsQueryResult,
+  GetProjectTypeQueryResult,
+} from "../../../sanity.types";
 import ProjectComponent from "./Project.tsx";
 import "./Projects.css";
-// Pagination
 import { Pagination } from "./Pagination";
 import { useState, useMemo, useEffect } from "react";
 
 interface Props {
   filterTitle: string;
   sectionTitle: string;
+  categories: GetProjectCategoryQueryResult;
+  projectTypes: GetProjectTypeQueryResult;
   projects: GetProjectsQueryResult;
 }
 
-const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
+const Projects = ({
+  filterTitle,
+  projects,
+  sectionTitle,
+  categories,
+  projectTypes,
+}: Props) => {
   return (
     <>
       <div className="filters-wrapper">
@@ -32,14 +43,16 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
           {/* selectbox house type */}
 
           <div className="filter-group">
-            <label htmlFor="houseType">Rodzaj domu</label>
-            <select id="houseType" className="filter-select">
+            <label htmlFor="categories">Rodzaj domu</label>
+            <select id="categories" className="filter-select">
               <option value="" disabled selected>
                 Wybierz rodzaj domu
               </option>
-              <option value="dom-jednorodzinny">Dom jednorodzinny</option>
-              <option value="dom-wielorodzinny">Dom wielorodzinny</option>
-              <option value="apartament">Apartament</option>
+              {categories.map((category) => {
+                return (
+                  <option value={category.slug.current}>{category.name}</option>
+                );
+              })}
             </select>
           </div>
 
@@ -51,9 +64,13 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
               <option value="" disabled selected>
                 Wybierz rodzaj projektu
               </option>
-              <option value="nowy-budunek">Nowy budynek</option>
-              <option value="remont">Remont</option>
-              <option value="rozbudowa">Rozbudowa</option>
+              {projectTypes.map((projectType) => {
+                return (
+                  <option value={projectType.slug.current}>
+                    {projectType.name}
+                  </option>
+                );
+              })}
             </select>
           </div>
 
