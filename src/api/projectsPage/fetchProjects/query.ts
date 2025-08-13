@@ -3,7 +3,11 @@ import { defineQuery } from "groq";
 import type { GetProjectsQueryResult } from "../../../../sanity.types";
 
 const getProjectsQuery = defineQuery(`
-*[_type == "project"]
+*[_type == "project"] {
+  ...,
+  projectType->,
+  categories[]->
+}
 `);
 
 export async function fetchProjects(): Promise<GetProjectsQueryResult> {

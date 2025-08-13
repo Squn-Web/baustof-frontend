@@ -1,11 +1,14 @@
-import type { Project } from "../../../sanity.types";
+import type { GetProjectsQueryResult } from "../../../sanity.types";
 import ProjectComponent from "./Project.tsx";
 import "./Projects.css";
+// Pagination
+import { Pagination } from "./Pagination";
+import { useState, useMemo, useEffect } from "react";
 
 interface Props {
   filterTitle: string;
   sectionTitle: string;
-  projects: Project[];
+  projects: GetProjectsQueryResult;
 }
 
 const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
@@ -14,6 +17,8 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
       <div className="filters-wrapper">
         <h3>{filterTitle}</h3>
         <div className="filters">
+          {/* input searchbox */}
+
           <div className="filter-group">
             <label htmlFor="search">Szukaj</label>
             <input
@@ -23,6 +28,8 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
               className="filter-input"
             />
           </div>
+
+          {/* selectbox house type */}
 
           <div className="filter-group">
             <label htmlFor="houseType">Rodzaj domu</label>
@@ -36,6 +43,8 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
             </select>
           </div>
 
+          {/* selectbox projects type */}
+
           <div className="filter-group">
             <label htmlFor="projectType">Rodzaj projektu</label>
             <select id="projectType" className="filter-select">
@@ -47,6 +56,8 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
               <option value="rozbudowa">Rozbudowa</option>
             </select>
           </div>
+
+          {/* input for date selection */}
 
           <div className="filter-group">
             <div className="date-inputs">
@@ -70,11 +81,15 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
             </div>
           </div>
 
+          {/* reset button */}
+
           <button type="button" className="reset-button">
             Resetuj Filtry
           </button>
         </div>
       </div>
+
+      {/* Rendering projects */}
 
       <div className="projects-wrapper">
         <h3>{sectionTitle}</h3>
@@ -82,6 +97,18 @@ const Projects = ({ filterTitle, projects, sectionTitle }: Props) => {
         {projects.map((project) => {
           return <ProjectComponent project={project} />;
         })}
+
+        {/* Pagination */}
+
+        {/* {totalPages > 1 && (
+          <div className="pagination-container">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )} */}
       </div>
     </>
   );

@@ -14,6 +14,11 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  gap: 2rem;
+}
+
+.pagination-container {
+  display: flex;
 }
 
 /* filters  */
@@ -98,8 +103,4 @@ select::placeholder {
 .reset-button:active {
   background-color: var(--primary-color);
   color: var(--text-color-invert);
-}
-
-.projects-wrapper {
-  background-color: green;
 }
