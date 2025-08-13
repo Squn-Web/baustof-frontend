@@ -4,10 +4,14 @@ type Props = ProjectsSection;
 import type { ProjectsSection } from "../../../sanity.types";
 import { fetchProjects } from "../../api/projectsPage/fetchProjects/query.ts";
 import Projects from "./Projects.tsx";
+import { fetchProjectsCategory } from "../../api/projectsPage/fetchProjectCategory/query.ts";
+import { fetchProjectType } from "../../api/projectsPage/fetchProjectType/query.ts";
 
 const { filterTitle, sectionTitle } = Astro.props;
 
 const projects = await fetchProjects();
+const categories = await fetchProjectsCategory();
+const projectTypes = await fetchProjectType();
 ---
 
 <section>
@@ -15,6 +19,8 @@ const projects = await fetchProjects();
     <Projects
       filterTitle={filterTitle}
       sectionTitle={sectionTitle}
+      categories={categories}
+      projectTypes={projectTypes}
       projects={projects}
     />
   </div>
