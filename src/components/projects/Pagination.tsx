@@ -1,3 +1,5 @@
+import "./Pagination.css";
+
 type PaginationProps = {
   currentPage: number;
   totalPages: number;
@@ -40,31 +42,55 @@ export function Pagination({
   };
 
   const visiblePages = getVisiblePages();
+  const isFirstDisabled = currentPage === 1;
+  const isPrevDisabled = currentPage === 1;
+  const isNextDisabled = currentPage === totalPages;
+  const isLastDisabled = currentPage === totalPages;
+
+  const iconStyle = (disabled: boolean) => ({
+    filter: disabled
+      ? "grayscale(100%) opacity(0.5)"
+      : "brightness(0) saturate(100%)",
+  });
 
   return (
     <nav className="pagination-nav" aria-label="Pagination">
       <ul className="pagination">
         {/* First */}
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+        <li className={`page-item ${isFirstDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
             onClick={() => onPageChange(1)}
-            disabled={currentPage === 1}
+            disabled={isFirstDisabled}
             aria-label="First"
           >
-            First
+            <img
+              src="/icons/chevron_double_left.svg"
+              width="32"
+              height="32"
+              alt=""
+              style={iconStyle(isFirstDisabled)}
+              aria-hidden="true"
+            />
           </button>
         </li>
 
         {/* Previous */}
-        <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+        <li className={`page-item ${isPrevDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
             onClick={() => onPageChange(currentPage - 1)}
-            disabled={currentPage === 1}
+            disabled={isPrevDisabled}
             aria-label="Previous"
           >
-            Previous
+            <img
+              src="/icons/chevron_left.svg"
+              width="32"
+              height="32"
+              alt=""
+              style={iconStyle(isPrevDisabled)}
+              aria-hidden="true"
+            />
           </button>
         </li>
 
@@ -72,10 +98,17 @@ export function Pagination({
         {visiblePages.map((page, index) => (
           <li key={index} className="page-item">
             {page === "..." ? (
-              <span className="page-link disabled">...</span>
+              <button
+                type="button"
+                className="page-link"
+                disabled
+                aria-hidden="true"
+              >
+                ...
+              </button>
             ) : (
               <button
-                className={`page-link ${page === currentPage ? "active" : ""}`}
+                className={`page-link ${page === currentPage ? "active selected-index" : ""}`}
                 onClick={() => onPageChange(page as number)}
               >
                 {page}
@@ -85,30 +118,40 @@ export function Pagination({
         ))}
 
         {/* Next */}
-        <li
-          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
-        >
+        <li className={`page-item ${isNextDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
             onClick={() => onPageChange(currentPage + 1)}
-            disabled={currentPage === totalPages}
+            disabled={isNextDisabled}
             aria-label="Next"
           >
-            Next
+            <img
+              src="/icons/chevron_right.svg"
+              width="32"
+              height="32"
+              alt=""
+              style={iconStyle(isNextDisabled)}
+              aria-hidden="true"
+            />
           </button>
         </li>
 
         {/* Last */}
-        <li
-          className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
-        >
+        <li className={`page-item ${isLastDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
             onClick={() => onPageChange(totalPages)}
-            disabled={currentPage === totalPages}
+            disabled={isLastDisabled}
             aria-label="Last"
           >
-            Last
+            <img
+              src="/icons/chevron_double_right.svg"
+              width="32"
+              height="32"
+              alt=""
+              style={iconStyle(isLastDisabled)}
+              aria-hidden="true"
+            />
           </button>
         </li>
       </ul>

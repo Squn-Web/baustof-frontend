@@ -8,13 +8,15 @@
 .project-content {
   display: flex;
   flex-direction: column;
-  padding: 2rem 0;
+  padding: 1rem 0;
 }
 
 .project-image {
   border-radius: var(--section-img-border-radius);
   max-height: 350px;
   max-width: 350px;
+  min-height: 350px;
+  min-width: 350px;
   aspect-ratio: 16/9;
   object-fit: cover;
 }
@@ -32,15 +34,15 @@
 .categories-wrapper {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   padding-bottom: 1rem;
 }
 
 .category-item {
   border: 2px solid var(--card-background-color);
-  padding: 0.5rem;
+  padding: 0.75rem;
   border-radius: 10rem;
-  font-size: calc(0.8 * var(--font-size-text));
+  font-size: calc(0.7 * var(--font-size-text));
 }
 
 .project-meta {
@@ -64,6 +66,10 @@
   font-size: calc(0.8 * var(--font-size-text));
 }
 
+.project-description {
+  font-size: calc(0.8 * var(--font-size-text));
+}
+
 .project-link {
   margin-top: auto;
   display: flex;
@@ -78,4 +84,46 @@
 .project-link .icon {
   width: 30px;
   height: 30px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .project-image {
+    max-height: 300px;
+    max-width: 300px;
+    min-height: 300px;
+    min-width: 300px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .project-description {
+    padding-bottom: 1rem;
+  }
+  .category-item {
+    padding: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  .project-card {
+    gap: 1rem;
+  }
+  .project-content {
+    padding: 1rem 2rem;
+  }
+  .project-image {
+    max-width: none;
+    max-height: none;
+    min-height: none;
+    min-width: none;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+  }
+  .project-link p {
+    font-size: 0.9rem;
+  }
+  .project-title {
+    font-size: 1.1rem;
+  }
 }

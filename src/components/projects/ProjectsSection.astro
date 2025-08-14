@@ -17,6 +17,7 @@ const projectTypes = await fetchProjectType();
 <section>
   <div class="content-wrapper">
     <Projects
+      client:only
       filterTitle={filterTitle}
       sectionTitle={sectionTitle}
       categories={categories}
@@ -32,5 +33,11 @@ const projectTypes = await fetchProjectType();
     display: flex;
     margin: 0 auto;
     gap: 2rem;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
   }
 </style>

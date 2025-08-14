@@ -19,18 +19,11 @@ const ProjectComponent = ({ project }: ProjectProps) => {
     <div className="project-card">
       <img
         className="project-image"
-        width={500}
-        height={500}
-        src="https://unique-residence.com/wp-content/uploads/2024/03/COTTAGE_HOUSE_www_3.jpg"
-        alt="haus"
-      />
-      {/* <Image
-        class="project-image"
-        src={urlForImage(project.image.asset).url()}
         width={getImageDimensions(project.image).width}
         height={getImageDimensions(project.image).height}
+        src={urlForImage(project.image.asset).url()}
         alt={project.image.alt}
-      /> */}
+      />
 
       <div className="project-content">
         <p className="project-title">{project.title}</p>
