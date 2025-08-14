@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import { fetchProjectsSections } from "../api/projectsPage/fetchProjectsSections/query.ts";
+import { mapProjectsSectionToComponent } from "../page-mappers/projects/projects.mapper.ts";
+
+const { sections } = await fetchProjectsSections();
+---
+
+<BaseLayout>
+  {
+    sections.map((section) => {
+      const Component = mapProjectsSectionToComponent(section._type);
+
+      return Component ? <Component {...section} key={section._key} /> : null;
+    })
+  }
+</BaseLayout>
