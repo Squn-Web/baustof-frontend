@@ -1,7 +1,6 @@
 ---
-type Props = ProjectsSection;
-
 import type { ProjectsSection } from "../../../sanity.types";
+export type Props = ProjectsSection;
 import { fetchProjects } from "../../api/projectsPage/fetchProjects/query.ts";
 import Projects from "./Projects.tsx";
 import { fetchProjectsCategory } from "../../api/projectsPage/fetchProjectCategory/query.ts";
@@ -9,15 +8,17 @@ import { fetchProjectType } from "../../api/projectsPage/fetchProjectType/query.
 
 const { filterTitle, sectionTitle } = Astro.props;
 
-const projects = await fetchProjects();
-const categories = await fetchProjectsCategory();
-const projectTypes = await fetchProjectType();
+const [projects, categories, projectTypes] = await Promise.all([
+  fetchProjects(),
+  fetchProjectsCategory(),
+  fetchProjectType(),
+]);
 ---
 
 <section>
   <div class="content-wrapper">
     <Projects
-      client:only
+      client:only="react"
       filterTitle={filterTitle}
       sectionTitle={sectionTitle}
       categories={categories}

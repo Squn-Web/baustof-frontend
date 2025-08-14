@@ -3,7 +3,7 @@ import { defineQuery } from "groq";
 import type { GetProjectsQueryResult } from "../../../../sanity.types";
 
 const getProjectsQuery = defineQuery(`
-*[_type == "project"] {
+*[_type == "project"] | order(coalesce(date, _createdAt) desc) {
   ...,
   projectType->,
   categories[]->

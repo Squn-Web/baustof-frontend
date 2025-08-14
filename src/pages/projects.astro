@@ -12,7 +12,11 @@ const { sections } = await fetchProjectsSections();
     sections.map((section) => {
       const Component = mapProjectsSectionToComponent(section._type);
 
-      return Component ? <Component {...section} key={section._key} /> : null;
+      if (!Component) {
+        console.warn("Unknown projects section type:", section._type);
+        return null;
+      }
+      return <Component {...section} />;
     })
   }
 </BaseLayout>

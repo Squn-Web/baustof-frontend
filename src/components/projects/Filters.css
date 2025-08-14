@@ -25,17 +25,16 @@
 
 input,
 select {
-  font-family: "poppins";
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
-input::placeholder,
-select::placeholder {
+input::placeholder {
   color: rgb(133, 133, 133);
 }
 
 .filter-group label {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
-  font-family: "poppins";
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: calc(0.7 * var(--font-size-text));
 }
 
@@ -73,7 +72,7 @@ select::placeholder {
 
 /* Reset Button */
 .reset-button {
-  font-family: "Poppins";
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   font-size: calc(0.7 * var(--font-size-text));
   color: var(--text-color);
   margin-top: 2rem;
@@ -85,7 +84,6 @@ select::placeholder {
   transition:
     background-color 0.3s ease,
     color 0.2s ease;
-  align-self: center;
   width: 100%;
 }
 
@@ -122,6 +120,12 @@ select::placeholder {
   justify-content: center;
   color: #666;
   transition: all 0.2s ease;
+  outline: none;
+}
+
+.clear-search-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .clear-search-btn:hover {

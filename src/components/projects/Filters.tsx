@@ -47,12 +47,13 @@ const Filters = ({
           <label htmlFor="search">Szukaj</label>
           <div className="search-input-wrapper">
             <input
-              type="text"
+              type="search"
               id="search"
               placeholder="Szukaj projektów..."
               className="filter-input"
               value={searchValue}
               onChange={(e) => onSearchChange(e.target.value)}
+              enterKeyHint="search"
             />
             {searchValue && (
               <button
@@ -128,6 +129,7 @@ const Filters = ({
                 className="filter-input date-input"
                 value={dateFrom}
                 onChange={(e) => onDateFromChange(e.target.value)}
+                max={dateTo || undefined}
               />
             </div>
             <div className="date-input-group">
@@ -138,6 +140,7 @@ const Filters = ({
                 className="filter-input date-input"
                 value={dateTo}
                 onChange={(e) => onDateToChange(e.target.value)}
+                min={dateFrom || undefined}
               />
             </div>
           </div>

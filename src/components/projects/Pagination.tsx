@@ -11,6 +11,9 @@ export function Pagination({
   totalPages,
   onPageChange,
 }: PaginationProps) {
+  if (totalPages <= 1) {
+    return null;
+  }
   const getVisiblePages = () => {
     const delta = 2;
     const range = [];
@@ -34,7 +37,7 @@ export function Pagination({
 
     if (currentPage + delta < totalPages - 1) {
       rangeWithDots.push("...", totalPages);
-    } else {
+    } else if (totalPages > 1) {
       rangeWithDots.push(totalPages);
     }
 
@@ -60,6 +63,7 @@ export function Pagination({
         <li className={`page-item ${isFirstDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
+            type="button"
             onClick={() => onPageChange(1)}
             disabled={isFirstDisabled}
             aria-label="First"
@@ -79,6 +83,7 @@ export function Pagination({
         <li className={`page-item ${isPrevDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
+            type="button"
             onClick={() => onPageChange(currentPage - 1)}
             disabled={isPrevDisabled}
             aria-label="Previous"
@@ -96,7 +101,10 @@ export function Pagination({
 
         {/* Page Numbers */}
         {visiblePages.map((page, index) => (
-          <li key={index} className="page-item">
+          <li
+            key={typeof page === "number" ? `page-${page}` : `ellipsis-${index}` }
+            className="page-item"
+          >
             {page === "..." ? (
               <button
                 type="button"
@@ -109,7 +117,11 @@ export function Pagination({
             ) : (
               <button
                 className={`page-link ${page === currentPage ? "active selected-index" : ""}`}
+                type="button"
                 onClick={() => onPageChange(page as number)}
+                aria-current={page === currentPage ? "page" : undefined}
+                aria-label={`Page ${page}${page === currentPage ? ", current page" : ""}`}
+                disabled={page === currentPage}
               >
                 {page}
               </button>
@@ -121,6 +133,7 @@ export function Pagination({
         <li className={`page-item ${isNextDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
+            type="button"
             onClick={() => onPageChange(currentPage + 1)}
             disabled={isNextDisabled}
             aria-label="Next"
@@ -140,6 +153,7 @@ export function Pagination({
         <li className={`page-item ${isLastDisabled ? "disabled" : ""}`}>
           <button
             className="page-link"
+            type="button"
             onClick={() => onPageChange(totalPages)}
             disabled={isLastDisabled}
             aria-label="Last"

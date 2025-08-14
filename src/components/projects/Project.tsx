@@ -17,13 +17,19 @@ interface ProjectProps {
 const ProjectComponent = ({ project }: ProjectProps) => {
   return (
     <div className="project-card">
-      <img
-        className="project-image"
-        width={getImageDimensions(project.image).width}
-        height={getImageDimensions(project.image).height}
-        src={urlForImage(project.image.asset).url()}
-        alt={project.image.alt}
-      />
+      {project.image?.asset?._ref ? (
+        <img
+          className="project-image"
+          width={getImageDimensions(project.image).width}
+          height={getImageDimensions(project.image).height}
+          src={urlForImage(project.image.asset).url()}
+          alt={project.image.alt ?? project.title}
+          loading="lazy"
+          decoding="async"
+        />
+      ) : (
+        <div className="project-image placeholder" aria-hidden="true" />
+      )}
 
       <div className="project-content">
         <p className="project-title">{project.title}</p>
@@ -31,8 +37,11 @@ const ProjectComponent = ({ project }: ProjectProps) => {
         <p className="project-type">{project.projectType?.slug.current}</p>
 
         <div className="categories-wrapper">
-          {project.categories?.map((category, index) => (
-            <p key={index} className="category-item">
+          {project.categories?.map((category) => (
+            <p
+              key={category._id ?? category.slug.current}
+              className="category-item"
+            >
               {category.slug.current}
             </p>
           ))}
@@ -40,11 +49,11 @@ const ProjectComponent = ({ project }: ProjectProps) => {
 
         <div className="project-meta">
           <div className="icon-wrapper">
-            <img className="icon" src="/icons/calendar.svg" alt="Icon" />
+            <img className="icon" src="/icons/calendar.svg" aria-hidden="true" />
             <p className="meta-item">{formatDate(project.startDate)}</p>
           </div>
           <div className="icon-wrapper">
-            <img className="icon" src="/icons/location.svg" alt="Icon" />
+            <img className="icon" src="/icons/location.svg" aria-hidden="true" />
 
             <p className="meta-item">{project.city}</p>
           </div>
@@ -52,10 +61,16 @@ const ProjectComponent = ({ project }: ProjectProps) => {
 
         <p className="project-description">{project.text}</p>
 
-        <a className="project-link" href={project.actionButton.href}>
-          <p>{project.actionButton.text}</p>
-          <img className="icon" src="/icons/arrow_right.svg" alt="Icon" />
-        </a>
+        {project.actionButton?.href && project.actionButton?.text && (
+          <a className="project-link" href={project.actionButton.href}>
+            <p>{project.actionButton.text}</p>
+            <img
+              className="icon"
+              src="/icons/arrow_right.svg"
+              aria-hidden="true"
+            />
+          </a>
+        )}
       </div>
     </div>
   );

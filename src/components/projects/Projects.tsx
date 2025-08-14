@@ -51,7 +51,7 @@ const Projects = ({
   const [dateFrom, setDateFrom] = useState(initialState.dateFrom);
   const [dateTo, setDateTo] = useState(initialState.dateTo);
   const [currentPage, setCurrentPage] = useState(initialState.currentPage);
-  const [projectsPerPage] = useState(3);
+  const projectsPerPage = 3;
 
   // Update URL when filters change
   const updateURL = (filters: any) => {
@@ -157,10 +157,7 @@ const Projects = ({
     });
   };
 
-  // Reset to first page when filters change
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchTerm, selectedProjectType, selectedCategory, dateFrom, dateTo]);
+  // (removed) We now reset the page explicitly in each handler to keep URL in sync.
 
   // Handle browser back/forward navigation
   useEffect(() => {
@@ -180,61 +177,66 @@ const Projects = ({
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
+    setCurrentPage(1);
     updateURL({
       searchTerm: value,
       selectedProjectType,
       selectedCategory,
       dateFrom,
       dateTo,
-      currentPage,
+      currentPage: 1,
     });
   };
 
   const handleProjectTypeChange = (value: string) => {
     setSelectedProjectType(value);
+    setCurrentPage(1);
     updateURL({
       searchTerm,
       selectedProjectType: value,
       selectedCategory,
       dateFrom,
       dateTo,
-      currentPage,
+      currentPage: 1,
     });
   };
 
   const handleCategoryChange = (value: string) => {
     setSelectedCategory(value);
+    setCurrentPage(1);
     updateURL({
       searchTerm,
       selectedProjectType,
       selectedCategory: value,
       dateFrom,
       dateTo,
-      currentPage,
+      currentPage: 1,
     });
   };
 
   const handleDateFromChange = (value: string) => {
     setDateFrom(value);
+    setCurrentPage(1);
     updateURL({
       searchTerm,
       selectedProjectType,
       selectedCategory,
       dateFrom: value,
       dateTo,
-      currentPage,
+      currentPage: 1,
     });
   };
 
   const handleDateToChange = (value: string) => {
     setDateTo(value);
+    setCurrentPage(1);
     updateURL({
       searchTerm,
       selectedProjectType,
       selectedCategory,
       dateFrom,
       dateTo: value,
-      currentPage,
+      currentPage: 1,
     });
   };
 
