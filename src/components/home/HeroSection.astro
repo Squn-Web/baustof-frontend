@@ -26,7 +26,7 @@ const { text, logo, actionButtons, image } = Astro.props;
   section {
     padding-top: 0;
     position: relative;
-    height: var(--hero-height);
+    min-height: var(--hero-height);
   }
   p {
     color: var(--text-color-invert);
@@ -46,11 +46,6 @@ const { text, logo, actionButtons, image } = Astro.props;
     margin: 0 auto;
   }
 
-  @media only screen and (max-width: 1200px) {
-    section {
-      height: unset !important;
-    }
-  }
   @media only screen and (max-width: 485px) {
     p {
       font-size: calc(0.7 * var(--hero-font-size));

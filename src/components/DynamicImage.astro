@@ -21,11 +21,14 @@ const { image, className = "" } = Astro.props;
 />
 
 <style>
+  .section-img {
+    width: 100%;
+  }
   @media only screen and (max-width: 1200px) {
-    img {
-      aspect-ratio: 16 / 9;
+    /* img {
+      aspect-ratio: 1 / 1;
       object-fit: cover;
-    }
+    } */
 
     .section-img {
       aspect-ratio: 16 / 9;

@@ -42,9 +42,10 @@ const { timelines, title } = Astro.props;
     font-weight: bold;
     font-size: calc(1.2 * var(--font-size-text));
     letter-spacing: 1px;
+    line-height: 150%;
   }
+
   .content-wrapper {
-    /* max-width: var(--section-max-width); */
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -58,7 +59,7 @@ const { timelines, title } = Astro.props;
     width: var(--history-cards-lenght);
     padding: 2rem;
     gap: 1rem;
-    background-color: var(--card-background-color);
+    background-color: var(--background-color);
     border-top-right-radius: var(--history-card-radius);
     border-bottom-right-radius: var(--history-card-radius);
     -webkit-box-shadow: 0px 6px 7px -2px rgba(8, 8, 8, 0.35);
@@ -85,6 +86,7 @@ const { timelines, title } = Astro.props;
     border-right: var(--history-curve-thicknes) dotted
       var(--card-background-color);
     border-top-right-radius: 100%;
+    z-index: -1;
   }
 
   .timeline:nth-of-type(2n) .curve {
@@ -97,12 +99,25 @@ const { timelines, title } = Astro.props;
     border-top-left-radius: 100%;
   }
 
+  @media only screen and (max-width: 1200px) {
+    .timeline {
+      --history-cards-lenght: 60%;
+      --history-curve-width: 30%;
+    }
+  }
   @media only screen and (max-width: 768px) {
+    .timeline {
+      --history-cards-lenght: 60%;
+      --history-curve-width: 40%;
+    }
+    .content-wrapper {
+      gap: 7rem !important;
+    }
     .timeline-header {
       font-size: calc(1 * var(--font-size-text));
     }
     .curve {
-      height: calc(var(--history-timelines-gap) + 20%);
+      height: calc(var(--history-timelines-gap) + 30%);
     }
   }
   @media only screen and (max-width: 485px) {
@@ -116,7 +131,7 @@ const { timelines, title } = Astro.props;
     }
     .timeline-header {
       letter-spacing: 0px;
-      font-size: calc(0.9 * var(--font-size-text));
+      font-size: calc(0.8 * var(--font-size-text));
     }
   }
 </style>

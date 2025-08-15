@@ -1,0 +1,27 @@
+---
+type Props = ProjectsHeroSection;
+
+import type { ProjectsHeroSection } from "../../../sanity.types";
+import Hero from "../Hero.astro";
+
+const { title, backgroundImage } = Astro.props;
+---
+
+<section>
+  <Hero image={backgroundImage}>
+    <h2>{title}</h2>
+  </Hero>
+</section>
+
+<style>
+  section {
+    padding-right: 0;
+    padding-left: 0;
+    padding-bottom: calc(0.25 * var(--section-padding));
+  }
+  h2 {
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: var(--text-color-invert);
+  }
+</style>
