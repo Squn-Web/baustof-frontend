@@ -5,15 +5,19 @@ import type { ContactMapSection } from "../../../sanity.types";
 import Paragraphs from "../Paragraphs.astro";
 
 const { text, title } = Astro.props;
+
+const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 ---
 
 <section>
   <div class="content-wrapper">
-    <div class="map-wrapper">Tu będzie mapa</div>
-    <div style="flex:1">
-      <h3>{title}</h3>
-      <Paragraphs className="mapText" paragraphs={text} />
+    <h3>{title}</h3>
+
+    <div class="map-wrapper">
+      <div id="google-map"></div>
     </div>
+
+    <Paragraphs className="mapText" paragraphs={text} />
   </div>
 </section>
 
@@ -45,6 +49,7 @@ const { text, title } = Astro.props;
   .content-wrapper {
     display: flex;
     align-items: center;
+    flex-direction: column;
     gap: 5rem;
   }
   .map-wrapper {
@@ -54,9 +59,26 @@ const { text, title } = Astro.props;
     align-items: center;
     border-radius: var(--section-img-border-radius);
     flex: 1;
-    height: auto;
     background-color: rgb(226, 226, 226);
     min-height: 500px;
+    overflow: hidden;
+    width: 100%;
+  }
+  #google-map {
+    width: 100%;
+    min-height: 500px;
+    border-radius: var(--section-img-border-radius);
+    overflow: hidden;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      gap: 2rem;
+    }
+    .map-wrapper {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
   }
   @media only screen and (max-width: 768px) {
     section {
@@ -64,9 +86,10 @@ const { text, title } = Astro.props;
         calc(0.5 * var(--section-spacing));
       clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
     }
-    .map-wrapper {
-      font-size: 2rem;
-      width: 100%;
+
+    .map-wrapper,
+    #google-map {
+      min-height: 400px;
     }
   }
   @media only screen and (max-width: 485px) {
@@ -77,5 +100,152 @@ const { text, title } = Astro.props;
       margin-top: 1px;
       margin-bottom: 2rem;
     }
+    .map-wrapper,
+    #google-map {
+      min-height: 300px;
+    }
   }
 </style>
+
+<script is:inline define:vars={{ API_KEY }}>
+  ((g) => {
+    var h,
+      a,
+      k,
+      p = "The Google Maps JavaScript API",
+      c = "google",
+      l = "importLibrary",
+      q = "__ib__",
+      m = document,
+      b = window;
+    b = b[c] || (b[c] = {});
+    var d = b.maps || (b.maps = {}),
+      r = new Set(),
+      e = new URLSearchParams(),
+      u = () =>
+        h ||
+        (h = new Promise(async (f, n) => {
+          await (a = m.createElement("script"));
+          e.set("libraries", [...r] + "");
+          for (k in g)
+            e.set(
+              k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+              g[k],
+            );
+          e.set("callback", c + ".maps." + q);
+          a.src = `https://maps.googleapis.com/maps/api/js?` + e;
+          d[q] = f;
+          a.onerror = () => (h = n(Error(p + " could not load.")));
+          a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+          m.head.append(a);
+        }));
+    d[l]
+      ? console.warn(p + " only loads once. Ignoring:", g)
+      : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+  })({ key: API_KEY, v: "weekly" });
+</script>
+
+<script is:inline>
+  // Initialize and add the map
+  let map;
+
+  async function initMap() {
+    try {
+      const mapHtml = document.getElementById("google-map");
+      let markerOpened = true;
+      // The location of Baustof - Wrzosowa 4, Żelechów
+      const position = { lat: 52.0186443051611, lng: 20.733704964418017 };
+
+      // Request needed libraries
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } =
+        await google.maps.importLibrary("marker");
+
+      // The map, centered at Baustof location
+      map = new Map(document.getElementById("google-map"), {
+        zoom: 15,
+        center: position,
+        mapId: "DEMO_MAP_ID",
+        disableDefaultUI: false,
+        zoomControl: true,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: false,
+        rotateControl: false,
+        fullscreenControl: true,
+      });
+
+      // The marker, positioned at Baustof
+      const marker = new AdvancedMarkerElement({
+        map: map,
+        position: position,
+        title: "Baustof - Wrzosowa 4, 96-321 Żelechów",
+      });
+
+      // Info window for the marker
+      const infoWindow = new google.maps.InfoWindow({
+        content: `
+        <div style="padding: 12px; font-family: inherit;">
+          <h3 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Baustof</h3>
+          <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.4;">
+            Wrzosowa 4<br>
+            96-321 Żelechów, Polska
+            </p>
+          </div>
+     
+            `,
+        headerDisabled: true,
+      });
+
+      infoWindow.open(map, marker);
+
+      // Add click listener to marker
+      marker.addListener("click", () => {
+        infoWindow.open(map, marker);
+        markerOpened = !markerOpened;
+      });
+
+      mapHtml.addEventListener("click", () => {
+        if (markerOpened) {
+          infoWindow.close(map, marker);
+        }
+      });
+
+      console.log("Google Map initialized successfully");
+    } catch (error) {
+      console.error("Error initializing Google Maps:", error);
+    }
+  }
+
+  // Initialize map when DOM is ready
+  document.addEventListener("DOMContentLoaded", () => {
+    // Check if Google Maps API is loaded
+    if (
+      typeof google !== "undefined" &&
+      google.maps &&
+      google.maps.importLibrary
+    ) {
+      initMap();
+    } else {
+      // Wait for Google Maps API to load
+      const checkGoogleMaps = setInterval(() => {
+        if (
+          typeof google !== "undefined" &&
+          google.maps &&
+          google.maps.importLibrary
+        ) {
+          clearInterval(checkGoogleMaps);
+          initMap();
+        }
+      }, 100);
+
+      // Safety timeout
+      setTimeout(() => {
+        clearInterval(checkGoogleMaps);
+        if (typeof google === "undefined") {
+          console.error("Google Maps API failed to load");
+        }
+      }, 10000);
+    }
+  });
+</script>

@@ -472,6 +472,12 @@ h5 {
   h2 {
     font-size: calc(0.5 * var(--font-size-h2));
   }
+  .desktop-only {
+    display: none !important;
+  }
+  .mobile-only {
+    display: flex !important;
+  }
 
   h3 {
     font-size: calc(0.5 * var(--font-size-h3));
