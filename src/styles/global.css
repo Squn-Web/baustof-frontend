@@ -465,6 +465,10 @@ h5 {
   .form-input::placeholder {
     font-size: calc(0.9 * var(--font-size-text));
   }
+  .contact-section-icon {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 /* Medium screens (768px and below) */
@@ -554,10 +558,10 @@ h5 {
     width: calc(1.2 * var(--card-width)) !important;
   }
   .desktop-only {
-    display: none !important;
+    display: none;
   }
   .mobile-only {
-    display: block !important;
+    display: block;
   }
 }
 
@@ -629,5 +633,9 @@ h5 {
   .form-input {
     font-size: calc(0.7 * var(--font-size-text));
     padding: calc(0.7 * 1rem) calc(0.7 * 2rem);
+  }
+  .contact-section-icon {
+    width: 48px;
+    height: 48px;
   }
 }

@@ -81,10 +81,8 @@ const { timelines, title } = Astro.props;
     right: calc(-1 * var(--history-curve-width));
     width: var(--history-curve-width);
     height: calc(var(--history-timelines-gap) + 100%);
-    border-top: var(--history-curve-thicknes) dotted
-      var(--card-background-color);
-    border-right: var(--history-curve-thicknes) dotted
-      var(--card-background-color);
+    border-top: var(--history-curve-thicknes) dotted var(--primary-color);
+    border-right: var(--history-curve-thicknes) dotted var(--primary-color);
     border-top-right-radius: 100%;
     z-index: -1;
   }
@@ -93,8 +91,7 @@ const { timelines, title } = Astro.props;
     right: unset;
     left: calc(-1 * var(--history-curve-width) + 10px);
     border-right: none;
-    border-left: var(--history-curve-thicknes) dotted
-      var(--card-background-color);
+    border-left: var(--history-curve-thicknes) dotted var(--primary-color);
     border-top-right-radius: unset;
     border-top-left-radius: 100%;
   }
