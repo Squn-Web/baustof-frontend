@@ -67,17 +67,14 @@
   }
 
   nav ul li a {
-    transition:
-      color 0.4s ease,
-      background-color 0.2s ease;
+    transition: color 0.2s ease;
     font-size: var(--font-size-text);
     color: var(--text-color-invert);
     padding: 2rem 2rem;
     height: 100%;
   }
   nav ul li a:hover {
-    background-color: var(--primary-color);
-    color: var(--text-color-invert) !important;
+    color: var(--primary-color) !important;
   }
 
   nav.scrolled {
@@ -134,6 +131,7 @@
     inset: 0;
     z-index: 99;
     display: none;
+    min-height: 100dvh;
   }
   .skip-link {
     opacity: 0;
@@ -266,6 +264,19 @@
     navbar.setAttribute("inert", "");
   }
 
+  // function setActiveLink() {
+  //   const currentPath = window.location.pathname;
+  //   const navLinks = document.querySelectorAll("#navbar a");
+
+  //   navLinks.forEach((link) => {
+  //     link.classList.remove("active-link");
+  //     link.removeAttribute("aria-current");
+  //     if (link.getAttribute("href") === currentPath) {
+  //       link.classList.add("active-link");
+  //       link.setAttribute("aria-current", "page");
+  //     }
+  //   });
+  // }
   function setActiveLink() {
     const currentPath = window.location.pathname;
     const navLinks = document.querySelectorAll("#navbar a");
@@ -273,15 +284,22 @@
     navLinks.forEach((link) => {
       link.classList.remove("active-link");
       link.removeAttribute("aria-current");
-      if (link.getAttribute("href") === currentPath) {
+
+      const linkPath = link.getAttribute("href");
+
+      // Normalize paths by removing trailing slash for comparison
+      const normalizedCurrentPath = currentPath.replace(/\/$/, "") || "/";
+      const normalizedLinkPath = linkPath.replace(/\/$/, "") || "/";
+
+      if (normalizedLinkPath === normalizedCurrentPath) {
         link.classList.add("active-link");
         link.setAttribute("aria-current", "page");
       }
     });
   }
-
   // Set active link on page load
   setActiveLink();
+  document.addEventListener("astro:page-load", setActiveLink);
 
   updateNavbar(media);
 </script>

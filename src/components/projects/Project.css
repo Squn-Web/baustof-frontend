@@ -15,7 +15,7 @@
   border-radius: var(--section-img-border-radius);
   width: 350px;
   height: auto;
-  aspect-ratio: 16/9;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
 }
 .project-title {
@@ -114,12 +114,7 @@
     padding: 1rem 2rem;
   }
   .project-image {
-    max-width: none;
-    max-height: none;
-    min-height: none;
-    min-width: none;
     width: 100%;
-    height: auto;
     aspect-ratio: 1/1;
   }
   .project-link p {

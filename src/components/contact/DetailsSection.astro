@@ -10,13 +10,14 @@ const { cards, title } = Astro.props;
 ---
 
 <section>
-  <h3>{title}</h3>
+  <!-- <h3>{title}</h3> -->
   <div class="details-wrapper">
     {
       cards.map((card) => {
         return (
           <div class="card">
             <Image
+              class="test"
               src={urlForImage(card.icon.asset).url()}
               width={128}
               height={128}
@@ -41,7 +42,6 @@ const { cards, title } = Astro.props;
   }
   .details-wrapper {
     display: flex;
-    align-items: center;
     justify-content: space-between;
   }
   .card {
@@ -53,16 +53,20 @@ const { cards, title } = Astro.props;
 
   @media only screen and (max-width: 1200px) {
     h4 {
-      font-size: calc(1.1 * var(--font-size-h4));
+      font-size: calc(0.9 * var(--font-size-h4));
     }
   }
   @media only screen and (max-width: 768px) {
+    h3 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
     .details-wrapper {
       flex-direction: column;
       gap: 4rem;
     }
     h4 {
-      font-size: calc(1 * var(--font-size-h4));
+      font-size: calc(0.8 * var(--font-size-h4));
     }
   }
 </style>

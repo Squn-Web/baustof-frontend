@@ -12,9 +12,14 @@ const { text, image, title } = Astro.props;
   <div class="content-wrapper">
     <div class="text-wrapper">
       <h3>{title}</h3>
+      <div class="mobile-only">
+        <DynamicImage className="section-img" image={image} />
+      </div>
       <Paragraphs paragraphs={text} />
     </div>
-    <DynamicImage className="section-img" image={image} />
+    <div class="desktop-only">
+      <DynamicImage className="section-img" image={image} />
+    </div>
   </div>
 </section>
 
@@ -30,12 +35,35 @@ const { text, image, title } = Astro.props;
     gap: var(--paragraph-gap);
     display: flex;
     flex-direction: column;
+    max-width: 50%;
+  }
+
+  .desktop-only {
+    display: block;
+    max-width: 50%;
+  }
+  .desktop-only img {
+    width: 100% !important;
+  }
+  .mobile-only {
+    display: none;
   }
   @media only screen and (max-width: 1200px) {
     .content-wrapper {
       flex-direction: column-reverse;
       align-items: flex-start;
       gap: 3rem;
+    }
+
+    .desktop-only {
+      display: none;
+      max-width: unset !important;
+    }
+    .mobile-only {
+      display: block;
+    }
+    .text-wrapper {
+      max-width: unset;
     }
   }
 </style>
