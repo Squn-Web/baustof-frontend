@@ -1,0 +1,155 @@
+.filters-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-color);
+  border-radius: var(--section-img-border-radius);
+  padding: 2rem;
+  height: min-content;
+}
+
+.filters-wrapper h3 {
+  font-size: var(--font-size-h4);
+}
+
+/* filters  */
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.filter-group {
+  display: contents;
+}
+
+input,
+select {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+input::placeholder {
+  color: rgb(133, 133, 133);
+}
+
+.filter-group label {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: calc(0.7 * var(--font-size-text));
+}
+
+.filter-input,
+.filter-select {
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: calc(0.8 * var(--font-size-text));
+  background-color: white;
+  transition: border-color 0.2s ease;
+}
+
+.filter-input:focus,
+.filter-select:focus {
+  outline: none;
+  border-color: var(--primary-color);
+}
+
+.filter-select {
+  cursor: pointer;
+  position: relative;
+}
+
+/* Date Range Styles */
+.date-inputs {
+  display: flex;
+  gap: 1rem;
+}
+
+.date-input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Reset Button */
+.reset-button {
+  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: calc(0.7 * var(--font-size-text));
+  color: var(--text-color);
+  margin-top: 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    color 0.2s ease;
+  width: 100%;
+}
+
+.reset-button:hover,
+.reset-button:active {
+  background-color: var(--primary-color);
+  color: var(--text-color-invert);
+}
+
+/* Search input with clear button */
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input-wrapper .filter-input {
+  padding-right: 2.5rem;
+  width: 100%;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.clear-search-btn:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.clear-search-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.clear-search-btn:active {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 1200px) {
+  .date-input-group {
+    flex: 1;
+  }
+}
+@media only screen and (max-width: 485px) {
+  .date-inputs {
+    flex-direction: column;
+  }
+  .date-input-group {
+    flex: none;
+  }
+  .filter-group .date-inputs .date-input-group:nth-child(2) label {
+    margin-top: 0;
+  }
+}

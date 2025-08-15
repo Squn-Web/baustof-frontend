@@ -1,0 +1,35 @@
+.pagination {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.pagination button {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "poppins";
+  font-size: var(--font-size-text);
+  border-radius: 0.5rem;
+  transition: 0.3s background-color ease;
+}
+
+.pagination button:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.pagination button:hover:not(:disabled):not(.selected-index) {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.selected-index {
+  background-color: var(--primary-color);
+  color: var(--text-color-invert);
+}

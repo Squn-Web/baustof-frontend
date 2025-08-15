@@ -25,7 +25,9 @@ const {
           text.map((paragraph, index) => {
             return (
               <div>
-                <span>{index + 1}</span>
+                <div class="current-step-wrapper">
+                  <span>{index + 1}</span>
+                </div>
                 <p>{paragraph}</p>
               </div>
             );
@@ -70,6 +72,7 @@ const {
   <style>
     h3 {
       margin-bottom: 1rem;
+      line-height: 120%;
     }
     h4 {
       margin-bottom: 5rem;
@@ -138,19 +141,29 @@ const {
       display: flex;
       gap: 2rem;
     }
-    .steps-wrapper > div > span {
-      color: var(--primary-color);
-      font-size: calc(3 * var(--font-size-text));
+
+    .current-step-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 64px;
+      height: 64px;
+      border-radius: 10rem;
+      background-color: var(--primary-color);
+    }
+    .steps-wrapper > div > div > span {
+      color: var(--text-color-invert);
+      font-size: calc(2 * var(--font-size-text));
       font-weight: bold;
-      min-width: 2rem;
     }
 
     @media only screen and (max-width: 1200px) {
       .form-header {
         padding: 2rem 1rem;
       }
+      h3,
       h4 {
-        margin-bottom: 4rem;
+        text-align: center;
       }
     }
     @media only screen and (max-width: 768px) {
