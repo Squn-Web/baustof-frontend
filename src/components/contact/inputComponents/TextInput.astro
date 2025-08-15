@@ -6,8 +6,8 @@ import type { ContactFormInput } from "../../../../sanity.types";
 const { name, placeholder, label } = Astro.props;
 ---
 
-<div>
-  <label for={name}>{label}</label>
+<div class="form-input-wrapper">
+  <label class="form-label" for={name}>{label}</label>
   <input
     required
     class="form-input"
@@ -17,9 +17,3 @@ const { name, placeholder, label } = Astro.props;
     placeholder={placeholder}
   />
 </div>
-
-<style>
-  div {
-    width: 100%;
-  }
-</style>

@@ -13,13 +13,16 @@ const { text, actionButtons, image, title } = Astro.props;
 
 <section>
   <div class="content-wrapper">
-    <div class="image-wrapper">
-      <DynamicImage image={image} className="about-img" />
-    </div>
     <div class="text-wrapper">
       <h3>{title}</h3>
+      <div class="image-wrapper mobile-only">
+        <DynamicImage image={image} className="about-img" />
+      </div>
       <Paragraphs paragraphs={text} />
       <ActionButtons actionButtons={actionButtons} />
+    </div>
+    <div class="image-wrapper desktop-only">
+      <DynamicImage image={image} className="about-img" />
     </div>
   </div>
 </section>
@@ -40,5 +43,8 @@ const { text, actionButtons, image, title } = Astro.props;
   }
   .image-wrapper {
     width: 50%;
+  }
+  .mobile-only {
+    display: none;
   }
 </style>

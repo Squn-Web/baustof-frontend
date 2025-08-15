@@ -6,8 +6,8 @@ import type { ContactFormInput } from "../../../../sanity.types";
 const { name, placeholder, label } = Astro.props;
 ---
 
-<div>
-  <label for={name}>{label}</label>
+<div class="form-input-wrapper">
+  <label class="form-label" for={name}>{label}</label>
   <textarea
     required
     rows="6"
@@ -18,9 +18,6 @@ const { name, placeholder, label } = Astro.props;
 </div>
 
 <style>
-  div {
-    width: 100%;
-  }
   textarea {
     resize: none;
   }

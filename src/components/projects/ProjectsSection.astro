@@ -1,0 +1,44 @@
+---
+import type { ProjectsSection } from "../../../sanity.types";
+export type Props = ProjectsSection;
+import { fetchProjects } from "../../api/projectsPage/fetchProjects/query.ts";
+import Projects from "./Projects.tsx";
+import { fetchProjectsCategory } from "../../api/projectsPage/fetchProjectCategory/query.ts";
+import { fetchProjectType } from "../../api/projectsPage/fetchProjectType/query.ts";
+
+const { filterTitle, sectionTitle } = Astro.props;
+
+const [projects, categories, projectTypes] = await Promise.all([
+  fetchProjects(),
+  fetchProjectsCategory(),
+  fetchProjectType(),
+]);
+---
+
+<section>
+  <div class="content-wrapper">
+    <Projects
+      client:only="react"
+      filterTitle={filterTitle}
+      sectionTitle={sectionTitle}
+      categories={categories}
+      projectTypes={projectTypes}
+      projects={projects}
+    />
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    max-width: var(--section-max-width);
+    display: flex;
+    margin: 0 auto;
+    gap: 2rem;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      flex-direction: column;
+    }
+  }
+</style>
