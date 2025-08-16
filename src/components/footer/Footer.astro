@@ -2,180 +2,187 @@
 import { Image } from "astro:assets";
 import { urlForImage } from "../../lib/urlForImage";
 import { fetchFooter } from "../../api/fetchFooter/query";
+import IconText from "../IconText.astro";
 
 const footer = await fetchFooter();
 ---
 
 <footer>
   <div class="content-wrapper">
-    <Image
-      src={urlForImage(footer.logo.asset).url()}
-      width={480}
-      height={480}
-      alt={footer.logo.alt}
-    />
-
-    <div class="navigation-wrapper">
-      <p><a href="#">Strona główna</a></p>
-      <p><a href="#">Projekty</a></p>
-      <p><a href="#">Oferta</a></p>
-      <p><a href="#">O nas</a></p>
-      <p><a href="#">Kariera</a></p>
-      <p><a href="#">Kontakt</a></p>
+    <div class="contact-wrapper">
+      <div class="image-temp"></div>
+      <div class="contact-content">
+        <h4>title</h4>
+        <p>desc</p>
+      </div>
+      <button>KONTAKT</button>
     </div>
+    <div class="informations-wrapper">
+      <div class="logo-wrapper">
+        <Image
+          src={urlForImage(footer.logo.asset).url()}
+          width={64}
+          height={64}
+          alt={footer.logo.alt}
+        />
+        <p>
+          Solidne wykonanie Lorem ipsum dolor, sit amet consectetur adipisicing
+          elit. Debitis maxime ab assumen
+        </p>
+      </div>
 
-    <div class="information-wrapper">
-      <h5>Kontakt:</h5>
-      <p>{footer.contactPhone}</p>
-      <p>{footer.contactEmail}</p>
-      <br />
-      <h5>Nip:</h5>
-      <p>{footer.nip}</p>
-      <p>{footer.name}</p>
-      <p>{footer.company}</p>
-      <br />
-      <h5>Adres:</h5>
-      <p>{footer.addressFirstLine}</p>
-      <p>{footer.addressSecondLine}</p>
-      <br />
+      <div class="navigation-wrapper">
+        <p><a href="#">Strona główna</a></p>
+        <p><a href="#">O nas</a></p>
+        <p><a href="#">Kontakt</a></p>
+        <p><a href="#">Oferty</a></p>
+        <p><a href="#">Projekty</a></p>
+      </div>
+
+      <div class="information-wrapper">
+        <IconText path="/icons/calendar.svg">
+          <p>{footer.addressFirstLine}, {footer.addressSecondLine}</p>
+        </IconText>
+        <IconText path="/icons/calendar.svg">
+          <p>{footer.contactPhone}</p>
+        </IconText>
+        <IconText path="/icons/calendar.svg">
+          <p>{footer.contactEmail}</p>
+        </IconText>
+        <IconText path="/icons/calendar.svg">
+          <p>Pon-Pt: 8:00-17:00</p>
+        </IconText>
+      </div>
+    </div>
+    <div class="credits-wrapper">
+      <p>Strona wykonana przez SqunWeb</p>
+      <div class="credits-content">
+        <p>NIP {footer.nip}</p>
+        <div class="dot"></div>
+        <p>KRS 123</p>
+      </div>
     </div>
   </div>
 </footer>
 
 <style>
-  img {
-    /* height: auto;
-    width: 100%; */
-    max-height: calc(var(--footer-height) - 4rem);
-    width: auto;
-  }
   footer {
     background-color: var(--primary-color);
   }
   p,
   a,
-  h5 {
+  h5,
+  h4 {
     color: var(--text-color-invert);
   }
   a {
     text-decoration: underline;
   }
-  h5 {
+  h5,
+  h4 {
     font-weight: bold;
   }
   .content-wrapper {
-    max-height: var(--footer-height);
-    display: flex;
-    justify-content: space-between;
-    max-width: var(--section-max-width);
-    margin: 0 auto;
-    padding: 2rem 4rem;
-  }
-  .navigation-wrapper,
-  .information-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
-  }
-
-  img {
-    /* height: auto;
-    width: 100%; */
-    max-height: calc(var(--footer-height) - 4rem);
-    width: auto;
-  }
-  footer {
-    background-color: var(--primary-color);
-  }
-  p,
-  a,
-  h5 {
-    color: var(--text-color-invert);
-  }
-  a {
-    text-decoration: underline;
-  }
-  h5 {
-    font-weight: bold;
-  }
-  .content-wrapper {
-    max-height: var(--footer-height);
-    display: flex;
-    justify-content: space-between;
     max-width: var(--section-max-width);
     margin: 0 auto;
-    padding: 2rem 4rem;
-  }
-  .navigation-wrapper,
-  .information-wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
+    padding: 2rem;
+    gap: 2rem;
   }
 
-  /* Responsive scaling */
+  .navigation-wrapper,
+  .information-wrapper,
+  .logo-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .logo-wrapper {
+    line-height: 150%;
+  }
+
+  .contact-wrapper {
+    display: flex;
+    background-color: #29318c;
+    padding: 1rem;
+    border-radius: var(--section-img-border-radius);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .image-temp {
+    width: 48px;
+    height: 48px;
+    background-color: red;
+  }
+  .contact-wrapper button {
+    margin-left: auto;
+    border-radius: var(--button-border-radius);
+    padding: 1rem;
+  }
+  .contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .informations-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+  .informations-wrapper > div {
+    flex: 1;
+  }
+
+  .credits-wrapper {
+    display: flex;
+    border-top: 1px solid #ffffff;
+    padding-top: 1rem;
+  }
+
+  .credits-wrapper > p {
+    font-size: calc(0.5 * var(--font-size-text));
+  }
+
+  .credits-content {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 1rem;
+  }
+  .credits-content .dot {
+    width: 8px;
+    height: 8px;
+    background-color: #ffffff;
+    border-radius: 10rem;
+  }
 
   /* Tablet - 768px and below */
   @media (max-width: 768px) {
     .content-wrapper {
+      text-align: center;
+    }
+    .informations-wrapper,
+    .logo-wrapper {
       flex-direction: column;
       align-items: center;
-      text-align: center;
-      padding: 2rem;
-      gap: 2rem;
-    }
-
-    img {
-      max-height: 200px;
-      width: auto;
-    }
-
-    .navigation-wrapper,
-    .information-wrapper {
-      gap: 1rem;
-    }
-
-    .navigation-wrapper {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-    }
-
-    .navigation-wrapper p {
-      margin: 0;
-    }
-    .content-wrapper {
-      max-height: none;
     }
   }
 
   /* Mobile - 480px and below */
   @media (max-width: 480px) {
-    .content-wrapper {
-      padding: 1.5rem 1rem;
-      gap: 1.5rem;
-    }
-
     img {
       max-height: 150px;
     }
-
-    .navigation-wrapper {
-      flex-direction: column;
+    .contact-wrapper {
       gap: 1rem;
     }
-
-    .information-wrapper {
-      gap: 0.5rem;
+    .informations-wrapper > div {
+      gap: 1rem;
     }
-
-    .information-wrapper h5 {
-      margin: 0.5rem 0 0.25rem 0;
-    }
-
-    .information-wrapper p {
-      margin: 0.25rem 0;
+    .credits-wrapper {
+      line-height: 120%;
     }
   }
 
