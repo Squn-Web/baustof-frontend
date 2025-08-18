@@ -5,7 +5,9 @@ import { defineQuery } from "groq";
 const getHomeSectionsQuery = defineQuery(`
 *[_type == "homePage"]
 {
-sections
+title,
+sections,
+seo
 }
 `);
 

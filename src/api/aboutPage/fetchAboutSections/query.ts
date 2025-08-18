@@ -5,7 +5,9 @@ import type { GetAboutSectionsQueryResult } from "../../../../sanity.types";
 const getAboutSectionsQuery = defineQuery(`
 *[_type == "aboutPage"]
 {
-sections
+title,
+sections,
+seo
 }
 `);
 
