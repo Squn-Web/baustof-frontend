@@ -1,12 +1,22 @@
 ---
 import { fetchHomeSections } from "../api/homePage/fetchHomeSections/query";
+import { fetchSiteSettings } from "../api/fetchSiteSettings/query";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mapHomeSectionToComponent } from "../page-mappers/home/home.mapper.ts";
 
-const { sections } = await fetchHomeSections();
+const homePageData = await fetchHomeSections();
+const siteSettings = await fetchSiteSettings();
+
+const { sections, seo, title } = homePageData;
+const currentPath = Astro.url.pathname;
 ---
 
-<BaseLayout>
+<BaseLayout 
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={title}
+>
   {
     sections.map((section) => {
       const Component = mapHomeSectionToComponent(section._type);

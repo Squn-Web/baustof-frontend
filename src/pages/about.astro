@@ -1,13 +1,22 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-
 import { fetchAboutSections } from "../api/aboutPage/fetchAboutSections/query.ts";
+import { fetchSiteSettings } from "../api/fetchSiteSettings/query";
 import { mapAboutSectionToComponent } from "../page-mappers/about/about.mapper.ts";
 
-const { sections } = await fetchAboutSections();
+const aboutPageData = await fetchAboutSections();
+const siteSettings = await fetchSiteSettings();
+
+const { sections, seo, title } = aboutPageData;
+const currentPath = Astro.url.pathname;
 ---
 
-<BaseLayout>
+<BaseLayout 
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={title}
+>
   {
     sections.map((section) => {
       const Component = mapAboutSectionToComponent(section._type);
