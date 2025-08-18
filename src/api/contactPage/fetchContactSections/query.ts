@@ -5,7 +5,9 @@ import type { GetContactSectionsQueryResult } from "../../../../sanity.types";
 const getContactSectionsQuery = defineQuery(`
 *[_type == "contactPage"]
 {
-sections
+title,
+sections,
+seo
 }
 `);
 

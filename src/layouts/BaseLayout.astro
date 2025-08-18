@@ -1,7 +1,33 @@
 ---
 import NavigationBar from "../components/nav/NavigationBar.astro";
 import Footer from "../components/footer/Footer.astro";
+import SEO from "../components/SEO.astro";
+import type { Seo, SiteSettings } from "../../sanity.types";
+import { mergeSEOData, generateOrganizationSchema } from "../utils/seo";
 import "../styles/global.css";
+
+interface Props {
+  seo?: Seo | null;
+  siteSettings?: SiteSettings;
+  currentPath?: string;
+  pageTitle?: string | null;
+}
+
+const { seo, siteSettings, currentPath, pageTitle } = Astro.props;
+
+let seoConfig;
+let structuredData;
+
+if (siteSettings) {
+  seoConfig = mergeSEOData({
+    seo,
+    siteSettings,
+    currentPath: currentPath || Astro.url.pathname,
+    pageTitle
+  });
+  
+  structuredData = generateOrganizationSchema(siteSettings);
+}
 ---
 
 <!doctype html>
@@ -9,7 +35,16 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tytul</title>
+    
+    {seoConfig && siteSettings ? (
+      <SEO seoConfig={seoConfig} siteName={siteSettings.title} />
+    ) : (
+      <title>Baustof</title>
+    )}
+    
+    {structuredData && (
+      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
   </head>
   <body>
     <h1>BAUSTOF</h1>

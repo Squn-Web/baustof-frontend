@@ -1,0 +1,65 @@
+---
+import type { SEOConfig } from "../utils/seo";
+
+interface Props {
+  seoConfig: SEOConfig;
+  siteName: string;
+}
+
+const { seoConfig, siteName } = Astro.props;
+const fullTitle =
+  seoConfig.title === siteName
+    ? seoConfig.title
+    : `${seoConfig.title} | ${siteName}`;
+---
+
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={seoConfig.description} />
+
+{
+  seoConfig.keywords && seoConfig.keywords.length > 0 && (
+    <meta name="keywords" content={seoConfig.keywords.join(", ")} />
+  )
+}
+
+<link rel="canonical" href={seoConfig.canonical} />
+
+{seoConfig.noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<meta property="og:type" content={seoConfig.openGraph.type} />
+<meta property="og:title" content={seoConfig.openGraph.title} />
+<meta property="og:description" content={seoConfig.openGraph.description} />
+<meta property="og:url" content={seoConfig.canonical} />
+
+{
+  seoConfig.openGraph.image && (
+    <meta property="og:image" content={seoConfig.openGraph.image} />
+  )
+}
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seoConfig.openGraph.title} />
+<meta name="twitter:description" content={seoConfig.openGraph.description} />
+
+{
+  seoConfig.openGraph.image && (
+    <meta name="twitter:image" content={seoConfig.openGraph.image} />
+  )
+}
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W4P1DPXYXC"
+></script>
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", "G-W4P1DPXYXC");
+</script>
