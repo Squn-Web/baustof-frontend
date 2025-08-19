@@ -33,3 +33,27 @@
   background-color: var(--primary-color);
   color: var(--text-color-invert);
 }
+
+/* Mobile - 480px and below */
+@media (max-width: 480px) {
+  .pagination {
+    gap: 4px;
+  }
+  .pagination button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Toggle mobile vs desktop */
+@media (max-width: 480px) {
+  .pagination-nav--desktop {
+    display: none;
+  }
+}
+
+@media (min-width: 481px) {
+  .pagination-nav--mobile {
+    display: none;
+  }
+}

@@ -2,7 +2,7 @@
 import { Image } from "astro:assets";
 import { urlForImage } from "../../lib/urlForImage";
 import { fetchFooter } from "../../api/fetchFooter/query";
-import IconText from "../IconText.astro";
+import ImageText from "../ImageText.astro";
 
 const footer = await fetchFooter();
 ---
@@ -10,13 +10,20 @@ const footer = await fetchFooter();
 <footer>
   <div class="content-wrapper">
     <div class="contact-wrapper">
-      <div class="image-temp"></div>
+      <Image
+        class="contact-icon"
+        src={urlForImage(footer.headerIcon.asset).url()}
+        width={48}
+        height={48}
+        alt={footer.headerIcon.alt}
+      />
       <div class="contact-content">
-        <h4>title</h4>
-        <p>desc</p>
+        <h4>{footer.headerTitle}</h4>
+        <p>{footer.headerSubTitle}</p>
       </div>
-      <button>KONTAKT</button>
+      <a class="button-elevated" href="/contact">{footer.headerButtonText}</a>
     </div>
+
     <div class="informations-wrapper">
       <div class="logo-wrapper">
         <Image
@@ -25,41 +32,38 @@ const footer = await fetchFooter();
           height={64}
           alt={footer.logo.alt}
         />
-        <p>
-          Solidne wykonanie Lorem ipsum dolor, sit amet consectetur adipisicing
-          elit. Debitis maxime ab assumen
-        </p>
+        <p>{footer.description}</p>
       </div>
 
       <div class="navigation-wrapper">
-        <p><a href="#">Strona główna</a></p>
-        <p><a href="#">O nas</a></p>
-        <p><a href="#">Kontakt</a></p>
-        <p><a href="#">Oferty</a></p>
-        <p><a href="#">Projekty</a></p>
+        <p><a href="/">Strona główna</a></p>
+        <p><a href="/about">O nas</a></p>
+        <p><a href="/contact">Kontakt</a></p>
+        <p><a href="/offer">Oferty</a></p>
+        <p><a href="/projects">Projekty</a></p>
       </div>
 
       <div class="information-wrapper">
-        <IconText path="/icons/calendar.svg">
-          <p>{footer.addressFirstLine}, {footer.addressSecondLine}</p>
-        </IconText>
-        <IconText path="/icons/calendar.svg">
-          <p>{footer.contactPhone}</p>
-        </IconText>
-        <IconText path="/icons/calendar.svg">
-          <p>{footer.contactEmail}</p>
-        </IconText>
-        <IconText path="/icons/calendar.svg">
-          <p>Pon-Pt: 8:00-17:00</p>
-        </IconText>
+        <ImageText image={footer.addressLine.icon}>
+          <p>{footer.addressLine.text}</p>
+        </ImageText>
+        <ImageText image={footer.contactPhone.icon}>
+          <p>{footer.contactPhone.text}</p>
+        </ImageText>
+        <ImageText image={footer.contactEmail.icon}>
+          <p>{footer.contactEmail.text}</p>
+        </ImageText>
+        <ImageText image={footer.workingHours.icon}>
+          <p>{footer.workingHours.text}</p>
+        </ImageText>
       </div>
     </div>
     <div class="credits-wrapper">
-      <p>Strona wykonana przez SqunWeb</p>
+      <p>{footer.author}</p>
       <div class="credits-content">
         <p>NIP {footer.nip}</p>
         <div class="dot"></div>
-        <p>KRS 123</p>
+        <p>KRS {footer.krs}</p>
       </div>
     </div>
   </div>
@@ -76,7 +80,7 @@ const footer = await fetchFooter();
     color: var(--text-color-invert);
   }
   a {
-    text-decoration: underline;
+    text-decoration: none;
   }
   h5,
   h4 {
@@ -105,22 +109,23 @@ const footer = await fetchFooter();
 
   .contact-wrapper {
     display: flex;
+    align-items: center;
     background-color: #29318c;
     padding: 1rem;
+    gap: 1rem;
     border-radius: var(--section-img-border-radius);
-    gap: 2rem;
-    align-items: center;
   }
 
-  .image-temp {
+  .contact-icon {
     width: 48px;
     height: 48px;
-    background-color: red;
   }
-  .contact-wrapper button {
+  .contact-wrapper a {
     margin-left: auto;
     border-radius: var(--button-border-radius);
-    padding: 1rem;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-weight: 600;
   }
   .contact-content {
     display: flex;
@@ -129,7 +134,7 @@ const footer = await fetchFooter();
   }
   .informations-wrapper {
     display: flex;
-    gap: 2rem;
+    gap: 5rem;
   }
   .informations-wrapper > div {
     flex: 1;
@@ -158,15 +163,23 @@ const footer = await fetchFooter();
     border-radius: 10rem;
   }
 
+  @media (max-width: 1200px) {
+    .informations-wrapper {
+      gap: 2rem;
+    }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
   /* Tablet - 768px and below */
   @media (max-width: 768px) {
-    .content-wrapper {
-      text-align: center;
-    }
     .informations-wrapper,
     .logo-wrapper {
       flex-direction: column;
       align-items: center;
+      text-align: center;
     }
   }
 
@@ -184,21 +197,33 @@ const footer = await fetchFooter();
     .credits-wrapper {
       line-height: 120%;
     }
+    .contact-icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* Small mobile - 320px and below */
-  @media (max-width: 320px) {
+  @media (max-width: 375px) {
     .content-wrapper {
       padding: 1rem 0.5rem;
     }
-
+    .contact-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .contact-wrapper a {
+      margin-left: unset;
+    }
+    .contact-wrapper img {
+      display: none;
+    }
+    .contact-content {
+      gap: 1rem;
+    }
     img {
       max-height: 120px;
-    }
-
-    .navigation-wrapper,
-    .information-wrapper {
-      font-size: 0.9rem;
     }
   }
 </style>
