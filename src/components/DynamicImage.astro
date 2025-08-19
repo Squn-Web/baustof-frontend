@@ -24,14 +24,13 @@ const { image, className = "" } = Astro.props;
   .section-img {
     width: 100%;
   }
+  .image-icon-text {
+    max-width: 24px;
+    max-height: 24px;
+  }
   @media only screen and (max-width: 1200px) {
-    /* img {
-      aspect-ratio: 1 / 1;
-      object-fit: cover;
-    } */
-
     .section-img {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
       max-width: unset !important;
       width: 100% !important;

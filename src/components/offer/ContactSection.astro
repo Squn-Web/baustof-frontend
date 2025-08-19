@@ -1,0 +1,26 @@
+---
+type Props = OffersContactSection;
+
+import type { OffersContactSection } from "../../../sanity.types";
+import ActionButtons from "../ActionButtons.astro";
+import ActionCard from "../ActionCard.astro";
+
+const { actionButtons, subTitle, title } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <ActionCard
+      actionButtons={actionButtons}
+      title={title}
+      description={subTitle}
+    />
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+</style>
