@@ -97,7 +97,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(1)}
               disabled={isFirstDisabled}
-              aria-label="First"
+              aria-label="Pierwsza strona"
             >
               <img
                 src="/icons/chevron_double_left.svg"
@@ -117,7 +117,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(currentPage - 1)}
               disabled={isPrevDisabled}
-              aria-label="Previous"
+              aria-label="Poprzednia strona"
             >
               <img
                 src="/icons/chevron_left.svg"
@@ -153,7 +153,7 @@ export function Pagination({
                   type="button"
                   onClick={() => onPageChange(page as number)}
                   aria-current={page === currentPage ? "page" : undefined}
-                  aria-label={`Page ${page}${page === currentPage ? ", current page" : ""}`}
+                  aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
                   disabled={page === currentPage}
                 >
                   {page}
@@ -169,7 +169,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(currentPage + 1)}
               disabled={isNextDisabled}
-              aria-label="Next"
+              aria-label="Następna strona"
             >
               <img
                 src="/icons/chevron_right.svg"
@@ -189,7 +189,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(totalPages)}
               disabled={isLastDisabled}
-              aria-label="Last"
+              aria-label="Ostatnia strona"
             >
               <img
                 src="/icons/chevron_double_right.svg"
@@ -217,7 +217,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(1)}
               disabled={isFirstDisabled}
-              aria-label="First"
+              aria-label="Pierwsza strona"
             >
               <img
                 src="/icons/chevron_double_left.svg"
@@ -237,7 +237,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(currentPage - 1)}
               disabled={isPrevDisabled}
-              aria-label="Previous"
+              aria-label="Poprzednia strona"
             >
               <img
                 src="/icons/chevron_left.svg"
@@ -258,7 +258,7 @@ export function Pagination({
                 type="button"
                 onClick={() => onPageChange(page as number)}
                 aria-current={page === currentPage ? "page" : undefined}
-                aria-label={`Page ${page}${page === currentPage ? ", current page" : ""}`}
+                aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
                 disabled={page === currentPage}
               >
                 {page}
@@ -273,7 +273,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(currentPage + 1)}
               disabled={isNextDisabled}
-              aria-label="Next"
+              aria-label="Następna strona"
             >
               <img
                 src="/icons/chevron_right.svg"
@@ -293,7 +293,7 @@ export function Pagination({
               type="button"
               onClick={() => onPageChange(totalPages)}
               disabled={isLastDisabled}
-              aria-label="Last"
+              aria-label="Ostatnia strona"
             >
               <img
                 src="/icons/chevron_double_right.svg"
