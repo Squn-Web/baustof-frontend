@@ -1041,6 +1041,13 @@
         },
         "optional": false
       },
+      "description": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": false
+      },
       "headerSubTitle": {
         "type": "objectAttribute",
         "value": {
