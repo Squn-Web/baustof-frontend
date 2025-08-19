@@ -25,7 +25,7 @@
 
 .project-type {
   font-size: calc(0.8 * var(--font-size-text));
-  color: rgb(133, 133, 133);
+  color: #515151;
   padding-bottom: 1rem;
 }
 

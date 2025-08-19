@@ -25,16 +25,32 @@
 
 input,
 select {
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
 }
 input::placeholder {
-  color: rgb(133, 133, 133);
+  color: #515151;
 }
 
 .filter-group label {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: calc(0.7 * var(--font-size-text));
 }
 
@@ -72,7 +88,15 @@ input::placeholder {
 
 /* Reset Button */
 .reset-button {
-  font-family: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    "Poppins",
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   font-size: calc(0.7 * var(--font-size-text));
   color: var(--text-color);
   margin-top: 2rem;

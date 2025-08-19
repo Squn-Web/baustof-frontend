@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { fetchOfferSections } from "../api/offerPage/fetchOfferSections/query.ts";
+import { fetchSiteSettings } from "../api/fetchSiteSettings/query";
+import { mapOfferSectionToComponent } from "../page-mappers/offer/offer.mapper.ts";
+
+const offerPageData = await fetchOfferSections();
+const siteSettings = await fetchSiteSettings();
+
+const { sections, seo, title } = offerPageData;
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={title}
+>
+  {
+    sections.map((section) => {
+      const Component = mapOfferSectionToComponent(section._type);
+
+      return Component ? <Component {...section} key={section._key} /> : null;
+    })
+  }
+</BaseLayout>

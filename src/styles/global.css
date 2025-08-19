@@ -220,11 +220,11 @@ a {
 
 section {
   padding: var(--section-padding) var(--section-spacing);
-  margin-top: calc(-1 * var(--nav-height));
 }
 
 section:first-child {
   padding-top: 0;
+  margin-top: calc(-1 * var(--nav-height));
 }
 
 p {
