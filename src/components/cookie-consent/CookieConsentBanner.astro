@@ -1,0 +1,176 @@
+---
+
+---
+
+<div
+  id="cookie-consent-banner"
+  class="cookie-consent-banner"
+  role="dialog"
+  aria-labelledby="cookie-consent-title"
+  aria-describedby="cookie-consent-description"
+  aria-hidden="true"
+>
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <h2 id="cookie-consent-title" class="cookie-consent-title">
+        Używamy plików cookie
+      </h2>
+      <p id="cookie-consent-description" class="cookie-consent-description">
+        Ta strona internetowa używa niezbędnych plików cookie w celu zapewnienia
+        prawidłowego działania oraz plików cookie analitycznych, aby zrozumieć,
+        jak z nią korzystasz. Te ostatnie będą ustawione tylko po wyrażeniu
+        zgody.
+        <a href="#privacy-policy" class="cookie-consent-link"
+          >Dowiedz się więcej</a
+        >
+      </p>
+    </div>
+
+    <div class="cookie-consent-buttons">
+      <button
+        type="button"
+        class="cookie-consent-button cookie-accept-all"
+        onclick="window.cookieConsentManager?.acceptAll()"
+        aria-describedby="cookie-consent-description"
+      >
+        Akceptuj wszystkie
+      </button>
+
+      <button
+        type="button"
+        class="cookie-consent-button cookie-reject-all"
+        onclick="window.cookieConsentManager?.rejectAll()"
+        aria-describedby="cookie-consent-description"
+      >
+        Odrzuć wszystkie
+      </button>
+    </div>
+
+    <div style="text-align: center;">
+      <button
+        type="button"
+        class="cookie-settings-button"
+        onclick="window.cookieConsentManager?.showPreferences()"
+        aria-label="Zarządzaj preferencjami plików cookie"
+      >
+        Zarządzaj preferencjami
+      </button>
+    </div>
+  </div>
+</div>
+
+<div
+  id="cookie-preferences-modal"
+  class="cookie-preferences-modal"
+  role="dialog"
+  aria-labelledby="preferences-modal-title"
+  aria-describedby="preferences-modal-description"
+  aria-hidden="true"
+>
+  <div
+    class="cookie-preferences-backdrop"
+    onclick="window.cookieConsentManager?.hidePreferences()"
+  >
+  </div>
+  <div class="cookie-preferences-content">
+    <div class="cookie-preferences-header">
+      <h2 id="preferences-modal-title" class="cookie-preferences-title">
+        Zarządzanie preferencjami plików cookie
+      </h2>
+      <button
+        type="button"
+        class="cookie-preferences-close"
+        onclick="window.cookieConsentManager?.hidePreferences()"
+        aria-label="Zamknij okno preferencji"
+      >
+        ×
+      </button>
+    </div>
+
+    <div class="cookie-preferences-body">
+      <p
+        id="preferences-modal-description"
+        class="cookie-preferences-description"
+      >
+        Wybierz kategorie plików cookie, które chcesz zaakceptować. Pliki cookie
+        niezbędne są zawsze włączone.
+      </p>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h3 class="cookie-category-title">Niezbędne</h3>
+          <div class="cookie-toggle-wrapper">
+            <input
+              type="checkbox"
+              id="necessary-toggle"
+              class="cookie-toggle"
+              checked
+              disabled
+              aria-describedby="necessary-description"
+            />
+            <label for="necessary-toggle" class="cookie-toggle-label"></label>
+          </div>
+        </div>
+        <p id="necessary-description" class="cookie-category-description">
+          Te pliki cookie są niezbędne do prawidłowego funkcjonowania strony
+          internetowej. Bez tych plików cookie strona nie będzie działać
+          prawidłowo.
+        </p>
+      </div>
+
+      <div class="cookie-category">
+        <div class="cookie-category-header">
+          <h3 class="cookie-category-title">Analityczne</h3>
+          <div class="cookie-toggle-wrapper">
+            <input
+              type="checkbox"
+              id="analytics-toggle"
+              class="cookie-toggle"
+              aria-describedby="analytics-description"
+            />
+            <label for="analytics-toggle" class="cookie-toggle-label"></label>
+          </div>
+        </div>
+        <p id="analytics-description" class="cookie-category-description">
+          Te pliki cookie pomagają nam zrozumieć, jak odwiedzający korzystają z
+          naszej strony internetowej, zbierając i raportując informacje
+          anonimowo. Używamy Google Analytics.
+        </p>
+      </div>
+    </div>
+
+    <div class="cookie-preferences-footer">
+      <button
+        type="button"
+        class="cookie-consent-button cookie-accept-all"
+        onclick="window.cookieConsentManager?.acceptAll()"
+      >
+        Akceptuj wszystkie
+      </button>
+
+      <button
+        type="button"
+        class="cookie-consent-button cookie-reject-all"
+        onclick="window.cookieConsentManager?.rejectAll()"
+      >
+        Odrzuć wszystkie
+      </button>
+
+      <button
+        type="button"
+        class="cookie-consent-button cookie-save-preferences"
+        onclick="window.cookieConsentManager?.savePreferences()"
+      >
+        Zapisz preferencje
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  import "./cookieConsent.js";
+</script>
+
+<style>
+  @import "./CookieConsentBanner.css";
+</style>

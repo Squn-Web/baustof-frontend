@@ -2,6 +2,7 @@
 import NavigationBar from "../components/nav/NavigationBar.astro";
 import Footer from "../components/footer/Footer.astro";
 import SEO from "../components/SEO.astro";
+import CookieConsentBanner from "../components/cookie-consent/CookieConsentBanner.astro";
 import type { Seo, SiteSettings } from "../../sanity.types";
 import { mergeSEOData, generateOrganizationSchema } from "../utils/seo";
 import "../styles/global.css";
@@ -53,5 +54,6 @@ if (siteSettings) {
       <slot />
       <Footer />
     </main>
+    <CookieConsentBanner />
   </body>
 </html>
