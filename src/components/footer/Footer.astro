@@ -61,9 +61,9 @@ const footer = await fetchFooter();
     <div class="credits-wrapper">
       <p>{footer.author}</p>
       <div class="credits-content">
-        <p>NIP {footer.nip}</p>
+        <p>NIP&nbsp;{footer.nip}</p>
         <div class="dot"></div>
-        <p>KRS {footer.krs}</p>
+        <p>KRS&nbsp;{footer.krs}</p>
       </div>
     </div>
   </div>
@@ -131,6 +131,7 @@ const footer = await fetchFooter();
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    line-height: 130%;
   }
   .informations-wrapper {
     display: flex;
@@ -175,6 +176,19 @@ const footer = await fetchFooter();
 
   /* Tablet - 768px and below */
   @media (max-width: 768px) {
+    .contact-wrapper {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      gap: 2rem;
+    }
+    .contact-wrapper a {
+      margin-left: unset;
+    }
+    .contact-wrapper img {
+      display: none;
+    }
     .informations-wrapper,
     .logo-wrapper {
       flex-direction: column;
@@ -195,7 +209,11 @@ const footer = await fetchFooter();
       gap: 1rem;
     }
     .credits-wrapper {
-      line-height: 120%;
+      line-height: 110%;
+    }
+    .credits-wrapper > p {
+      font-size: calc(0.4 * var(--font-size-text));
+      padding-right: 0.5rem;
     }
     .contact-icon {
       width: 24px;
@@ -208,17 +226,7 @@ const footer = await fetchFooter();
     .content-wrapper {
       padding: 1rem 0.5rem;
     }
-    .contact-wrapper {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .contact-wrapper a {
-      margin-left: unset;
-    }
-    .contact-wrapper img {
-      display: none;
-    }
+
     .contact-content {
       gap: 1rem;
     }

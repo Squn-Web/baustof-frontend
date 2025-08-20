@@ -162,7 +162,7 @@ const {
         flex-direction: column;
       }
       .form-wrapper {
-        margin-inline: auto;
+        margin: 0 auto;
       }
       .form-header {
         padding: 2rem 1rem;
@@ -180,12 +180,16 @@ const {
       h4 {
         margin-bottom: 3rem;
         text-align: center;
+        font-size: calc(0.6 * var(--font-size-h4));
       }
       .form-header p:first-child {
         font-size: calc(1.25 * var(--font-size-text));
       }
       .form-header p:last-child {
         font-size: calc(1 * var(--font-size-text));
+      }
+      .steps-wrapper {
+        gap: 2rem;
       }
     }
     @media only screen and (max-width: 485px) {

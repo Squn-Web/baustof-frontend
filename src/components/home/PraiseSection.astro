@@ -37,6 +37,12 @@ const { text } = Astro.props;
     white-space: nowrap;
   }
 
+  @media only screen and (max-width: 1200px) {
+    section {
+      padding: 0 0 2rem;
+    }
+  }
+
   @media only screen and (max-width: 768px) {
     .praise-wrapper {
       display: block;
@@ -48,6 +54,7 @@ const { text } = Astro.props;
       width: 96%;
       margin: 0 auto;
       padding: 3rem;
+      margin-top: -2rem;
     }
     .praise-wrapper h2 {
       text-align: center;
@@ -55,12 +62,17 @@ const { text } = Astro.props;
       line-height: 120%;
     }
     section {
-      padding: 0 0 2rem 0;
+      padding: 0;
+      margin-bottom: -2rem;
     }
   }
   @media only screen and (max-width: 485px) {
+    section {
+      padding: 0;
+      margin-bottom: -1rem;
+    }
     .praise-wrapper {
-      margin: 1rem auto;
+      margin: -1.5rem auto 0;
       padding: 2rem;
     }
   }
