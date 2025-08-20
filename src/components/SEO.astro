@@ -51,15 +51,17 @@ const fullTitle =
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" type="image/png" href="/favicon.png" />
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W4P1DPXYXC"
-></script>
 <script is:inline>
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     dataLayer.push(arguments);
   }
-  gtag("js", new Date());
+  window.gtag = gtag;
 
-  gtag("config", "G-W4P1DPXYXC");
+  gtag("consent", "default", {
+    analytics_storage: "denied",
+    ad_storage: "denied",
+    functionality_storage: "denied",
+    personalization_storage: "denied",
+  });
 </script>
