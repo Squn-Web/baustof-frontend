@@ -161,6 +161,12 @@ input::placeholder {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
+/* Webkit browsers (Chrome, Safari) */
+.filter-input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
+}
+
 @media only screen and (max-width: 1200px) {
   .date-input-group {
     flex: 1;

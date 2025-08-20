@@ -283,16 +283,35 @@ const Projects = ({
       />
 
       <div className="projects-wrapper">
-        {/* <h3>{sectionTitle}</h3> */}
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="pagination-container">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
 
         {/* Rendering projects */}
-
-        {currentProjects.map((project) => {
-          return <ProjectComponent project={project} key={project._id} />;
-        })}
+        {currentProjects.length === 0 ? (
+          <div className="no-results">
+            <img
+              src="/no-result.png"
+              width={380}
+              height={380}
+              alt="Brak wyników"
+            />
+            <p>Nie znaleziono podanych kryteriów wyszukiwania.</p>
+          </div>
+        ) : (
+          currentProjects.map((project) => {
+            return <ProjectComponent project={project} key={project._id} />;
+          })
+        )}
 
         {/* Pagination */}
-
         {totalPages > 1 && (
           <div className="pagination-container">
             <Pagination
