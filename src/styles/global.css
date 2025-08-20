@@ -284,7 +284,6 @@ h5 {
 .logo {
   width: 256px;
   height: 256px;
-  background-color: red;
   margin-top: var(--nav-height);
   margin-bottom: 2rem;
 }
