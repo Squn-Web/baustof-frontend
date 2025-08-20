@@ -285,6 +285,18 @@ const Projects = ({
       <div className="projects-wrapper">
         {/* <h3>{sectionTitle}</h3> */}
 
+        {/* Pagination */}
+
+        {totalPages > 1 && (
+          <div className="pagination-container">
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
+
         {/* Rendering projects */}
 
         {currentProjects.map((project) => {
