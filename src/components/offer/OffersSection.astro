@@ -1,0 +1,100 @@
+---
+type Props = OffersContactSection;
+
+import type { OffersContactSection } from "../../../sanity.types";
+import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
+import DynamicImage from "../DynamicImage.astro";
+import IconText from "../IconText.astro";
+
+// const {  } = Astro.props;
+
+const offers = await fetchOffers();
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="offer-cards-wrapper">
+      {
+        offers.map((offer) => {
+          return (
+            <a href={offer.slug.current}>
+              <div class="offer-card-wrapper">
+                <div class="offer-card-header">
+                  <DynamicImage image={offer.icon} />
+                  <img
+                    class="icon-offer"
+                    src="/icons/arrow_offer.svg"
+                    alt="Icon"
+                  />
+                </div>
+                <h4>{offer.name}</h4>
+                <p>{offer.shortDescription}</p>
+              </div>
+            </a>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
+    clip-path: polygon(0 0%, 100% 0, 100% 90%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  .offer-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    grid-column-gap: 2rem;
+    grid-row-gap: 2rem;
+    width: 100%;
+  }
+  .offer-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    border-radius: var(--section-img-border-radius);
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    padding: 2rem;
+    gap: 1rem;
+    width: 100%;
+    background-color: #ffffff;
+  }
+
+  .offer-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .icon-offer {
+    width: 40px;
+    height: 40px;
+  }
+  @media only screen and (max-width: 1200px) {
+  }
+</style>

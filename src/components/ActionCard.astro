@@ -1,0 +1,79 @@
+---
+import type { ActionButton } from "../../sanity.types";
+import ActionButtons from "./ActionButtons.astro";
+
+interface Props {
+  actionButtons: ActionButton[];
+  title: string;
+  description: string;
+}
+
+const { actionButtons, title, description } = Astro.props;
+---
+
+<div class="action-card-wrapper">
+  <h3>{title}</h3>
+  <p>{description}</p>
+  <ActionButtons actionButtons={actionButtons} />
+</div>
+
+<style>
+  .action-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    -webkit-box-shadow: 0px 5px 24px 0px var(--primary-color);
+    -moz-box-shadow: 0px 5px 24px 0px var(--primary-color);
+    box-shadow: 0px 5px 24px 0px var(--primary-color);
+    padding: 5rem 2rem;
+    border-radius: var(--section-img-border-radius);
+    margin: 0 5rem;
+  }
+  h3 {
+    padding-bottom: 2rem;
+  }
+  p {
+    font-size: calc(1.2 * var(--font-size-text));
+    line-height: 150%;
+    padding-bottom: 3rem;
+  }
+
+  /* Large screens (1200px and below) */
+  @media only screen and (max-width: 1200px) {
+    p {
+      font-size: calc(1 * var(--font-size-text));
+    }
+    .action-card-wrapper {
+      padding: 4rem 2rem;
+      margin: 0;
+    }
+  }
+  /* Medium screens (768px and below) */
+  @media only screen and (max-width: 768px) {
+    h3 {
+      padding-bottom: 1.5rem;
+      line-height: 130%;
+    }
+    p {
+      font-size: calc(0.9 * var(--font-size-text));
+      padding-bottom: 2rem;
+    }
+    .action-card-wrapper {
+      padding: 3rem 1.5rem;
+    }
+  }
+
+  /* Small screens (485px and below) */
+  @media only screen and (max-width: 485px) {
+    h3 {
+      padding-bottom: 1rem;
+    }
+    p {
+      font-size: calc(0.8 * var(--font-size-text));
+    }
+    .action-card-wrapper {
+      padding: 2rem 1rem;
+    }
+  }
+</style>
