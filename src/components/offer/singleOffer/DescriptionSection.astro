@@ -1,0 +1,101 @@
+---
+import IconText from "../../IconText.astro";
+import ImageText from "../../ImageText.astro";
+import Paragraphs from "../../Paragraphs.astro";
+import { Image } from "astro:assets";
+import { urlForImage } from "../../../lib/urlForImage";
+import { getImageDimensions } from "../../../lib/getImageDimensions";
+
+const { icon, description } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="header">
+      <div class="icon-offer">
+        <Image
+          src={urlForImage(icon.asset).url()}
+          width={getImageDimensions(icon).width}
+          height={getImageDimensions(icon).height}
+          alt={icon.alt}
+        />
+      </div>
+      <h3>Opis oferty</h3>
+    </div>
+    <Paragraphs paragraphs={description} />
+  </div>
+</section>
+
+<style>
+  section {
+    padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
+    clip-path: polygon(0 0%, 100% 0, 100% 90%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 3rem;
+    background-color: #ffffff;
+    padding: 2rem 5rem;
+    border-radius: var(--section-img-border-radius);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .icon-offer {
+    width: 80px;
+    height: 80px;
+    padding: 0.75rem;
+    background-color: var(--background-color);
+    border-radius: var(--section-img-border-radius);
+  }
+  .icon-offer img {
+    width: 100%;
+    height: 100%;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .icon-offer {
+      width: 40px;
+      height: 40px;
+      border-radius: calc(0.5 * var(--section-img-border-radius));
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    section {
+      padding: 2rem 2rem 5rem 2rem;
+      clip-path: polygon(0 0%, 100% 0, 100% 98%, 0% 100%);
+    }
+    .header {
+      gap: 1rem;
+    }
+    .content-wrapper {
+      gap: 2rem !important;
+      padding: 1rem 2rem;
+    }
+  }
+</style>

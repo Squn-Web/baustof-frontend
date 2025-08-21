@@ -3,6 +3,9 @@ import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
 import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
 import { fetchOfferBySlug } from "../../api/fetchOfferBySlug/query";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import HeroSection from "../../components/offer/singleOffer/HeroSection.astro";
+import DescriptionSection from "../../components/offer/singleOffer/DescriptionSection.astro";
+import ActionCardSection from "../../components/offer/singleOffer/ActionCardSection.astro";
 
 const { slug } = Astro.params;
 
@@ -25,5 +28,11 @@ const currentPath = Astro.url.pathname;
   currentPath={currentPath}
   pageTitle={offer.name}
 >
-  <p>{offer.name}</p>
+  <HeroSection image={offer.heroImage} text={offer.name} />
+  <DescriptionSection icon={offer.icon} description={offer.description} />
+  <ActionCardSection
+    actionButtons={offer.usageActionButtons}
+    description={offer.usageSubTitle}
+    title={offer.usageTitle}
+  />
 </BaseLayout>

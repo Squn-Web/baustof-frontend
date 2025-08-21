@@ -1,0 +1,13 @@
+---
+import ActionCard from "../../ActionCard.astro";
+
+const { actionButtons, description, title } = Astro.props;
+---
+
+<section>
+  <ActionCard
+    actionButtons={actionButtons}
+    description={description}
+    title={title}
+  />
+</section>
