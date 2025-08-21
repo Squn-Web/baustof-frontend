@@ -4,9 +4,6 @@ type Props = OffersContactSection;
 import type { OffersContactSection } from "../../../sanity.types";
 import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
 import DynamicImage from "../DynamicImage.astro";
-import IconText from "../IconText.astro";
-
-// const {  } = Astro.props;
 
 const offers = await fetchOffers();
 ---
@@ -17,7 +14,7 @@ const offers = await fetchOffers();
       {
         offers.map((offer) => {
           return (
-            <a href={offer.slug.current}>
+            <a href={`/offer/${offer.slug.current}`}>
               <div class="offer-card">
                 <div class="offer-card-header">
                   <DynamicImage image={offer.icon} />
