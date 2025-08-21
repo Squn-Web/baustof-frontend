@@ -741,6 +741,36 @@
     }
   },
   {
+    "name": "actionButton",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "actionButton"
+          }
+        },
+        "text": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
+        "href": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        }
+      }
+    }
+  },
+  {
     "name": "offer",
     "type": "document",
     "attributes": {
@@ -948,11 +978,25 @@
         },
         "optional": false
       },
-      "usageActionButton": {
+      "usageActionButtons": {
         "type": "objectAttribute",
         "value": {
-          "type": "inline",
-          "name": "actionButton"
+          "type": "array",
+          "of": {
+            "type": "object",
+            "attributes": {
+              "_key": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "string"
+                }
+              }
+            },
+            "rest": {
+              "type": "inline",
+              "name": "actionButton"
+            }
+          }
         },
         "optional": false
       },
@@ -988,36 +1032,6 @@
           "name": "seo"
         },
         "optional": true
-      }
-    }
-  },
-  {
-    "name": "actionButton",
-    "type": "type",
-    "value": {
-      "type": "object",
-      "attributes": {
-        "_type": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string",
-            "value": "actionButton"
-          }
-        },
-        "text": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        },
-        "href": {
-          "type": "objectAttribute",
-          "value": {
-            "type": "string"
-          },
-          "optional": false
-        }
       }
     }
   },
