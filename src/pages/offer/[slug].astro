@@ -1,0 +1,29 @@
+---
+import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
+import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
+import { fetchOfferBySlug } from "../../api/fetchOfferBySlug/query";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const offers = await fetchOffers();
+
+  return offers.map((offer) => ({
+    params: { slug: offer.slug.current },
+  }));
+}
+
+const { seo, ...offer } = await fetchOfferBySlug(slug);
+const siteSettings = await fetchSiteSettings();
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={offer.name}
+>
+  <p>{offer.name}</p>
+</BaseLayout>
