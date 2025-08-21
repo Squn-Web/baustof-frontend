@@ -1,0 +1,28 @@
+# Security Headers for Baustof Frontend
+# Applied to all pages
+/*
+  # Content Security Policy
+  # Allows same-origin resources, Google Analytics, Google Maps, and necessary inline scripts/styles for Astro
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'
+  
+  # Prevent page from being embedded in frames/iframes
+  X-Frame-Options: DENY
+  
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+  
+  # Control referrer information sent with requests
+  Referrer-Policy: strict-origin
+  
+  # Disable potentially dangerous browser features
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), vr=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), clipboard-write=(), speaker-selection=()
+  
+  # Legacy XSS protection (deprecated but still supported)
+  X-XSS-Protection: 1; mode=block
+  
+  # Additional security headers
+  X-Content-Type-Options: nosniff
+  X-Permitted-Cross-Domain-Policies: none
+  Cross-Origin-Embedder-Policy: require-corp
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
