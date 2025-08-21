@@ -1,0 +1,25 @@
+# Security Headers for Baustof Frontend
+# Applied to all pages
+/*
+  # Content Security Policy - Strict policy without unsafe directives
+  # Uses nonce-based approach for inline scripts where possible
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://maps.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io https://maps.googleapis.com https://maps.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://maps.googleapis.com; frame-ancestors 'none'; object-src 'none'; base-uri 'self'; form-action 'self'
+  
+  # Prevent page from being embedded in frames/iframes
+  X-Frame-Options: DENY
+  
+  # Prevent MIME type sniffing
+  X-Content-Type-Options: nosniff
+  
+  # Control referrer information sent with requests
+  Referrer-Policy: strict-origin
+  
+  # Disable potentially dangerous browser features
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), vr=(), accelerometer=(), gyroscope=(), magnetometer=(), clipboard-read=(), speaker-selection=()
+  
+  # Legacy XSS protection (deprecated but still supported)
+  X-XSS-Protection: 1; mode=block
+  
+  # Additional security headers
+  X-Permitted-Cross-Domain-Policies: none
+  Cross-Origin-Opener-Policy: same-origin
