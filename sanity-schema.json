@@ -843,14 +843,14 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "actionButtonText": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       },
       "projectType": {
         "type": "objectAttribute",
@@ -880,7 +880,7 @@
           },
           "dereferencesTo": "projectType"
         },
-        "optional": true
+        "optional": false
       },
       "categories": {
         "type": "objectAttribute",
@@ -961,7 +961,7 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "projectFeatures": {
         "type": "objectAttribute",
@@ -983,14 +983,14 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "moreProjectsText": {
         "type": "objectAttribute",
         "value": {
           "type": "string"
         },
-        "optional": true
+        "optional": false
       }
     }
   },
