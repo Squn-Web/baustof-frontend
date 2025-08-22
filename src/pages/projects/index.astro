@@ -1,8 +1,8 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import { fetchProjectsSections } from "../api/projectsPage/fetchProjectsSections/query.ts";
-import { fetchSiteSettings } from "../api/fetchSiteSettings/query";
-import { mapProjectsSectionToComponent } from "../page-mappers/projects/projects.mapper.ts";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fetchProjectsSections } from "../../api/projectsPage/fetchProjectsSections/query.ts";
+import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
+import { mapProjectsSectionToComponent } from "../../page-mappers/projects/projects.mapper.ts";
 
 const projectsPageData = await fetchProjectsSections();
 const siteSettings = await fetchSiteSettings();
@@ -17,7 +17,7 @@ const currentPath = Astro.url.pathname;
   currentPath={currentPath}
   pageTitle={title}
 >
-  {
+  <!-- {
     sections.map((section) => {
       const Component = mapProjectsSectionToComponent(section._type);
 
@@ -26,6 +26,13 @@ const currentPath = Astro.url.pathname;
         return null;
       }
       return <Component {...section} />;
+    })
+  } -->
+  {
+    sections.map((section) => {
+      const Component = mapProjectsSectionToComponent(section._type);
+
+      return Component ? <Component {...section} key={section._key} /> : null;
     })
   }
 </BaseLayout>

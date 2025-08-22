@@ -6,27 +6,32 @@ import SeeMoreSection from "../../components/projects/singleProject/SeeMoreSecti
 import StatisticsSection from "../../components/projects/singleProject/StatisticsSection.astro";
 import TitleSection from "../../components/projects/singleProject/TitleSection.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-// import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
-// import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
-// import { fetchOfferBySlug } from "../../api/fetchOfferBySlug/query";
+import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
+import { fetchProjects } from "../../api/projectsPage/fetchProjects/query";
+import { fetchProjectBySlug } from "../../api/fetchProjectBySlug/query";
 
-// const { slug } = Astro.params;
+const { slug } = Astro.params;
 
-// export async function getStaticPaths() {
-//   const offers = await fetchOffers();
+export async function getStaticPaths() {
+  const projects = await fetchProjects();
 
-//   return offers.map((offer) => ({
-//     params: { slug: offer.slug.current },
-//   }));
-// }
+  return projects.map((project) => ({
+    params: { slug: project.slug.current },
+  }));
+}
 
-// const { seo, ...offer } = await fetchOfferBySlug(slug);
-// const siteSettings = await fetchSiteSettings();
-// const currentPath = Astro.url.pathname;
+const { seo, ...project } = await fetchProjectBySlug(slug);
+const siteSettings = await fetchSiteSettings();
+const currentPath = Astro.url.pathname;
 ---
 
-<BaseLayout>
-  <TitleSection />
+<BaseLayout
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={project.title}
+>
+  <TitleSection title={project.title} />
   <CarouselSection />
   <AboutSection />
   <StatisticsSection />

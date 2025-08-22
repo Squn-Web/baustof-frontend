@@ -1,12 +1,14 @@
 ---
-// type Props = ProjectsContactSection;
+type Props = ProjectsTitleSection;
 
-// const { actionButtons, subTitle, title } = Astro.props;
+import type { ProjectsTitleSection } from "../../../../sanity.types";
+
+const { title } = Astro.props;
 ---
 
 <section>
   <div class="content-wrapper">
-    <h2>Dom jednorodzinny: Budynek z bambusa</h2>
+    <h2>{title}</h2>
     <div class="meta-info">
       <div class="info-date">
         <img src="/icons/calendar.svg" alt="Icon" />
