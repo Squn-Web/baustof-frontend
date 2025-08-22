@@ -34,8 +34,8 @@ const { projects } = Astro.props;
             </IconText>
             <p style="margin-bottom: 1rem;">{project.text}</p>
             <TextButton
-              href={project.actionButton.href}
-              text={project.actionButton.text}
+              href={`/projects/${project.slug.current}`}
+              text={project.actionButtonText}
               path="/icons/arrow_right.svg"
             />
           </div>
