@@ -1,35 +1,29 @@
 ---
+import type { GetProjectBySlugQueryResult } from "../../../../sanity.types";
 
+interface Props {
+  projectDetails: GetProjectBySlugQueryResult[number]["projectDetails"];
+}
+const { projectDetails } = Astro.props;
 ---
 
 <section>
   <div class="content-wrapper">
-    <div class="meta-wrapper">
-      <p>Cena</p>
-      <p>900 000 PLN</p>
-    </div>
-    <div class="meta-wrapper">
-      <p>Sigma</p>
-      <p>100m^2</p>
-    </div>
-    <div class="meta-wrapper">
-      <p>Skibidi</p>
-      <p>50Ha</p>
-    </div>
-    <div class="meta-wrapper">
-      <p>Rizzler</p>
-      <p>133769420</p>
-    </div>
-    <div class="meta-wrapper">
-      <p>Ohio</p>
-      <p>36 miesięcy</p>
-    </div>
+    {
+      projectDetails?.map((statistic) => (
+        <div class="meta-wrapper">
+          <p>{statistic.label}</p>
+          <p>{statistic.value}</p>
+        </div>
+      ))
+    }
   </div>
 </section>
 
 <style>
   .content-wrapper {
     display: flex;
+    justify-content: center;
     max-width: var(--section-max-width);
     margin: 0 auto;
   }

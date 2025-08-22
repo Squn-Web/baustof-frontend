@@ -17,17 +17,6 @@ const currentPath = Astro.url.pathname;
   currentPath={currentPath}
   pageTitle={title}
 >
-  <!-- {
-    sections.map((section) => {
-      const Component = mapProjectsSectionToComponent(section._type);
-
-      if (!Component) {
-        console.warn("Unknown projects section type:", section._type);
-        return null;
-      }
-      return <Component {...section} />;
-    })
-  } -->
   {
     sections.map((section) => {
       const Component = mapProjectsSectionToComponent(section._type);

@@ -24,9 +24,9 @@ if (siteSettings) {
     seo,
     siteSettings,
     currentPath: currentPath || Astro.url.pathname,
-    pageTitle
+    pageTitle,
   });
-  
+
   structuredData = generateOrganizationSchema(siteSettings);
 }
 ---
@@ -36,16 +36,23 @@ if (siteSettings) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    {seoConfig && siteSettings ? (
-      <SEO seoConfig={seoConfig} siteName={siteSettings.title} />
-    ) : (
-      <title>Baustof</title>
-    )}
-    
-    {structuredData && (
-      <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
-    )}
+
+    {
+      seoConfig && siteSettings ? (
+        <SEO seoConfig={seoConfig} siteName={siteSettings.title} />
+      ) : (
+        <title>Baustof</title>
+      )
+    }
+
+    {
+      structuredData && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify(structuredData)}
+        />
+      )
+    }
   </head>
   <body>
     <h1>BAUSTOF</h1>

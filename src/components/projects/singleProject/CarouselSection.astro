@@ -1,26 +1,32 @@
 ---
-const sliderLenght = 6;
+import { Image } from "astro:assets";
+import type { GetProjectBySlugQueryResult } from "../../../../sanity.types";
+import { urlForImage } from "../../../lib/urlForImage";
+import { getImageDimensions } from "../../../lib/getImageDimensions";
+
+interface Props {
+  gallery: GetProjectBySlugQueryResult[number]["gallery"];
+}
+const { gallery } = Astro.props;
+
+const sliderLenght = gallery?.length;
 ---
 
 <section>
   <div class="slider-wrapper">
     <div class="slider">
-      <div class="image-wrapper">
-        <img
-          src="https://pe.tedcdn.com/images/ted/f0f1e53f628aa2b15d2ada0e48432f1e1e320ecc_2880x1620.jpg"
-          alt="imgtest"
-        />
-      </div>
-      <div class="image-wrapper"></div>
-      <div class="image-wrapper">
-        <img
-          src="https://preview.redd.it/natty-or-not-giga-chad-v0-crlbyo0qmkha1.jpg?width=640&crop=smart&auto=webp&s=3a80a5404194134561994faab9ffc05bc356f17e"
-          alt="temp-img"
-        />
-      </div>
-      <div class="image-wrapper"></div>
-      <div class="image-wrapper"></div>
-      <div class="image-wrapper"></div>
+      {
+        gallery?.map((image) => (
+          <div class="image-wrapper">
+            <Image
+              src={urlForImage(image.asset).url()}
+              width={getImageDimensions(image).width}
+              height={getImageDimensions(image).height}
+              alt={image.alt}
+            />
+          </div>
+        ))
+      }
     </div>
     <button class="prev-button"
       ><img src="/icons/arrow_previous.svg" alt="Previous arrow" /></button
@@ -52,6 +58,9 @@ const sliderLenght = 6;
 <style>
   section {
     padding: 0;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
   }
   .slider-wrapper {
     position: relative;
@@ -153,6 +162,8 @@ const sliderLenght = 6;
     position: relative;
     max-width: 90%;
     height: auto;
+    max-height: 100vh;
+    max-height: 100dvh;
     display: flex;
     justify-content: center;
     align-items: center;

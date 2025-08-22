@@ -220,23 +220,30 @@
   const openBtn = document.getElementById("open-sidebar-btn");
 
   let isMobile = false;
+  const isProjectPage = window.location.pathname.startsWith("/projects/");
 
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 2) {
-      if (isMobile) {
-        openBtn?.classList.add("scrolled-mobile");
-      } else {
-        navbar?.classList.add("scrolled");
-      }
+  function handleScroll() {
+    if (isProjectPage) {
+      navbar?.classList.add("scrolled");
+      openBtn?.classList.add("scrolled-mobile");
     } else {
-      if (isMobile) {
-        openBtn?.classList.remove("scrolled-mobile");
+      if (window.scrollY > 2) {
+        if (isMobile) {
+          openBtn?.classList.add("scrolled-mobile");
+        } else {
+          navbar?.classList.add("scrolled");
+        }
       } else {
-        navbar?.classList.remove("scrolled");
+        if (isMobile) {
+          openBtn?.classList.remove("scrolled-mobile");
+        } else {
+          navbar?.classList.remove("scrolled");
+        }
       }
     }
-  });
+  }
 
+  window.addEventListener("scroll", handleScroll);
   media.addEventListener("change", (e) => updateNavbar(e));
 
   function updateNavbar(e) {
@@ -245,7 +252,9 @@
       navbar.setAttribute("inert", "");
       openBtn.style.display = "block";
     } else {
-      if (window.scrollY > 2) {
+      if (isProjectPage) {
+        navbar?.classList.add("scrolled");
+      } else if (window.scrollY > 2) {
         navbar?.classList.add("scrolled");
       } else {
         navbar?.classList.remove("scrolled");
@@ -294,4 +303,6 @@
   document.addEventListener("astro:page-load", setActiveLink);
 
   updateNavbar(media);
+  // Initial call to set navbar state correctly on page load
+  handleScroll();
 </script>

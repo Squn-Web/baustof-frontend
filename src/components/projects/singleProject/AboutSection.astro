@@ -1,28 +1,38 @@
 ---
-import Paragraphs from "../../Paragraphs.astro";
+import { Image } from "astro:assets";
+import type { CustomImage } from "../../../../sanity.types";
+import { getImageDimensions } from "../../../lib/getImageDimensions";
+import { urlForImage } from "../../../lib/urlForImage";
 
-const text = ["lorem lorem lorem", "lorem lorem lorem"];
+interface Props {
+  text: string;
+  aboutProjectTitle: string;
+  image: CustomImage;
+}
+const { text, aboutProjectTitle, image } = Astro.props;
 ---
 
 <section>
   <div class="content-wrapper">
     <div class="image-wrapper desktop-only">
-      <img
-        src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-        alt="temp img"
+      <Image
+        src={urlForImage(image.asset).url()}
+        width={getImageDimensions(image).width}
+        height={getImageDimensions(image).height}
+        alt={image.alt}
       />
-      <!-- <DynamicImage image={image} /> -->
     </div>
     <div class="text-wrapper">
-      <h3>Podstawowe informacje</h3>
+      <h3>{aboutProjectTitle}</h3>
       <div class="image-wrapper mobile-only">
-        <img
-          src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
-          alt="temp img"
+        <Image
+          src={urlForImage(image.asset).url()}
+          width={getImageDimensions(image).width}
+          height={getImageDimensions(image).height}
+          alt={image.alt}
         />
-        <!-- <DynamicImage image={image}  /> -->
       </div>
-      <Paragraphs paragraphs={text} />
+      <p>{text}</p>
     </div>
   </div>
 </section>
@@ -30,6 +40,9 @@ const text = ["lorem lorem lorem", "lorem lorem lorem"];
 <style>
   section {
     padding-bottom: 0;
+  }
+  p {
+    line-height: 150%;
   }
   .content-wrapper {
     display: flex;

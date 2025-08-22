@@ -1,9 +1,11 @@
 ---
-type Props = ProjectsTitleSection;
-
-import type { ProjectsTitleSection } from "../../../../sanity.types";
-
-const { title } = Astro.props;
+interface Props {
+  title: string;
+  projectType: string;
+  startDate: string;
+  city: string;
+}
+const { title, projectType, startDate, city } = Astro.props;
 ---
 
 <section>
@@ -12,14 +14,14 @@ const { title } = Astro.props;
     <div class="meta-info">
       <div class="info-date">
         <img src="/icons/calendar.svg" alt="Icon" />
-        <p>Styczen 1, 2020</p>
+        <p>{startDate}</p>
       </div>
       <div class="info-adress">
         <img src="/icons/location.svg" alt="Icon" />
-        <p>Styczen 1, 2020</p>
+        <p>{city}</p>
       </div>
     </div>
-    <p class="meta-type">dom jednorodzinny</p>
+    <p class="meta-type">{projectType}</p>
   </div>
 </section>
 

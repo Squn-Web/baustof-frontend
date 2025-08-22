@@ -9,6 +9,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
 import { fetchProjects } from "../../api/projectsPage/fetchProjects/query";
 import { fetchProjectBySlug } from "../../api/fetchProjectBySlug/query";
+import { formatDate } from "../../lib/convertDate";
 
 const { slug } = Astro.params;
 
@@ -31,10 +32,22 @@ const currentPath = Astro.url.pathname;
   currentPath={currentPath}
   pageTitle={project.title}
 >
-  <TitleSection title={project.title} />
-  <CarouselSection />
-  <AboutSection />
-  <StatisticsSection />
-  <FeaturedSection />
-  <SeeMoreSection />
+  <TitleSection
+    title={project.title}
+    city={project.city}
+    projectType={project.projectType.name}
+    startDate={formatDate(project.startDate)}
+  />
+  <CarouselSection gallery={project.gallery} />
+  <AboutSection
+    text={project.text}
+    image={project.image}
+    aboutProjectTitle={project.aboutProjectTitle}
+  />
+  <StatisticsSection projectDetails={project.projectDetails} />
+  <FeaturedSection projectFeatures={project.projectFeatures} />
+  <SeeMoreSection
+    currentProjectSlug={project.slug.current}
+    projectTypeRef={project.projectType._id}
+  />
 </BaseLayout>
