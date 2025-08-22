@@ -1,0 +1,49 @@
+---
+import type { GetProjectBySlugQueryResult } from "../../../../sanity.types";
+
+interface Props {
+  projectDetails: GetProjectBySlugQueryResult[number]["projectDetails"];
+}
+const { projectDetails } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    {
+      projectDetails?.map((statistic) => (
+        <div class="meta-wrapper">
+          <p>{statistic.label}</p>
+          <p>{statistic.value}</p>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+  .meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2rem;
+    padding: 2rem;
+    border-left: 1px solid var(--text-color);
+    text-align: center;
+    max-width: 300px;
+  }
+  .meta-wrapper:last-child {
+    border-right: 1px solid var(--text-color);
+  }
+  .meta-wrapper > p {
+    white-space: nowrap;
+  }
+  .meta-wrapper > p:last-child {
+    font-weight: bold;
+  }
+</style>

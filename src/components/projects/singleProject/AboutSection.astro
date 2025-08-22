@@ -1,0 +1,80 @@
+---
+import { Image } from "astro:assets";
+import type { CustomImage } from "../../../../sanity.types";
+import { getImageDimensions } from "../../../lib/getImageDimensions";
+import { urlForImage } from "../../../lib/urlForImage";
+
+interface Props {
+  text: string;
+  aboutProjectTitle: string;
+  image: CustomImage;
+}
+const { text, aboutProjectTitle, image } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="image-wrapper desktop-only">
+      <Image
+        src={urlForImage(image.asset).url()}
+        width={getImageDimensions(image).width}
+        height={getImageDimensions(image).height}
+        alt={image.alt}
+      />
+    </div>
+    <div class="text-wrapper">
+      <h3>{aboutProjectTitle}</h3>
+      <div class="image-wrapper mobile-only">
+        <Image
+          src={urlForImage(image.asset).url()}
+          width={getImageDimensions(image).width}
+          height={getImageDimensions(image).height}
+          alt={image.alt}
+        />
+      </div>
+      <p>{text}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-bottom: 0;
+  }
+  p {
+    line-height: 150%;
+  }
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 2rem;
+  }
+  .image-wrapper {
+    width: 50%;
+  }
+  .image-wrapper > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: var(--section-img-border-radius);
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media only screen and (max-width: 768px) {
+    .text-wrapper {
+      align-items: center;
+    }
+    .text-wrapper h3 {
+      text-align: center;
+    }
+  }
+</style>

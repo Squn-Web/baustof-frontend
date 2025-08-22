@@ -66,6 +66,13 @@
 
 .project-description {
   font-size: calc(0.8 * var(--font-size-text));
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 150%;
+  overflow: hidden;
+  padding-right: 1rem;
 }
 
 .project-link {

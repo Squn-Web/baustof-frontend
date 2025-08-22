@@ -1,0 +1,53 @@
+---
+import AboutSection from "../../components/projects/singleProject/AboutSection.astro";
+import CarouselSection from "../../components/projects/singleProject/CarouselSection.astro";
+import FeaturedSection from "../../components/projects/singleProject/FeaturedSection.astro";
+import SeeMoreSection from "../../components/projects/singleProject/SeeMoreSection.astro";
+import StatisticsSection from "../../components/projects/singleProject/StatisticsSection.astro";
+import TitleSection from "../../components/projects/singleProject/TitleSection.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
+import { fetchProjects } from "../../api/projectsPage/fetchProjects/query";
+import { fetchProjectBySlug } from "../../api/fetchProjectBySlug/query";
+import { formatDate } from "../../lib/convertDate";
+
+const { slug } = Astro.params;
+
+export async function getStaticPaths() {
+  const projects = await fetchProjects();
+
+  return projects.map((project) => ({
+    params: { slug: project.slug.current },
+  }));
+}
+
+const { seo, ...project } = await fetchProjectBySlug(slug);
+const siteSettings = await fetchSiteSettings();
+const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout
+  seo={seo}
+  siteSettings={siteSettings}
+  currentPath={currentPath}
+  pageTitle={project.title}
+>
+  <TitleSection
+    title={project.title}
+    city={project.city}
+    projectType={project.projectType.name}
+    startDate={formatDate(project.startDate)}
+  />
+  <CarouselSection gallery={project.gallery} />
+  <AboutSection
+    text={project.text}
+    image={project.image}
+    aboutProjectTitle={project.aboutProjectTitle}
+  />
+  <StatisticsSection projectDetails={project.projectDetails} />
+  <FeaturedSection projectFeatures={project.projectFeatures} />
+  <SeeMoreSection
+    currentProjectSlug={project.slug.current}
+    projectTypeRef={project.projectType._id}
+  />
+</BaseLayout>
