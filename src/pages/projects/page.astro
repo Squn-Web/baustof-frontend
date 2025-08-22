@@ -1,0 +1,35 @@
+---
+import AboutSection from "../../components/projects/singleProject/AboutSection.astro";
+import CarouselSection from "../../components/projects/singleProject/CarouselSection.astro";
+import FeaturedSection from "../../components/projects/singleProject/FeaturedSection.astro";
+import SeeMoreSection from "../../components/projects/singleProject/SeeMoreSection.astro";
+import StatisticsSection from "../../components/projects/singleProject/StatisticsSection.astro";
+import TitleSection from "../../components/projects/singleProject/TitleSection.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+// import { fetchOffers } from "../../api/offerPage/fetchOffers/query";
+// import { fetchSiteSettings } from "../../api/fetchSiteSettings/query";
+// import { fetchOfferBySlug } from "../../api/fetchOfferBySlug/query";
+
+// const { slug } = Astro.params;
+
+// export async function getStaticPaths() {
+//   const offers = await fetchOffers();
+
+//   return offers.map((offer) => ({
+//     params: { slug: offer.slug.current },
+//   }));
+// }
+
+// const { seo, ...offer } = await fetchOfferBySlug(slug);
+// const siteSettings = await fetchSiteSettings();
+// const currentPath = Astro.url.pathname;
+---
+
+<BaseLayout>
+  <TitleSection />
+  <CarouselSection />
+  <AboutSection />
+  <StatisticsSection />
+  <FeaturedSection />
+  <SeeMoreSection />
+</BaseLayout>

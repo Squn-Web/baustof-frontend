@@ -1,0 +1,27 @@
+---
+import Projects from "../../Projects.astro";
+
+const { projects } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <h3>Zobacz więcej naszych projektów</h3>
+    <div class="projects-wrapper">
+      <!-- <Projects projects={projects} /> -->
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+  .projects-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+</style>

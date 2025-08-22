@@ -1,0 +1,59 @@
+---
+// type Props = ProjectsContactSection;
+
+// const { actionButtons, subTitle, title } = Astro.props;
+---
+
+<section>
+  <div class="content-wrapper">
+    <h2>Dom jednorodzinny: Budynek z bambusa</h2>
+    <div class="meta-info">
+      <div class="info-date">
+        <img src="/icons/calendar.svg" alt="Icon" />
+        <p>Styczen 1, 2020</p>
+      </div>
+      <div class="info-adress">
+        <img src="/icons/location.svg" alt="Icon" />
+        <p>Styczen 1, 2020</p>
+      </div>
+    </div>
+    <p class="meta-type">dom jednorodzinny</p>
+  </div>
+</section>
+
+<style>
+  section {
+    margin-top: 0 !important;
+    padding-top: 2rem !important;
+  }
+  h2 {
+    font-weight: bold;
+    padding-bottom: 2rem;
+  }
+  .content-wrapper {
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+  .meta-info,
+  .info-date,
+  .info-adress {
+    display: flex;
+    align-items: center;
+  }
+  .meta-info {
+    gap: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .info-date,
+  .info-adress {
+    gap: 0.5rem;
+  }
+  .meta-info > div > p {
+    color: #515151;
+  }
+  .meta-info > div > img {
+    width: 36px;
+    height: 36px;
+  }
+</style>

@@ -1,0 +1,265 @@
+---
+const sliderLenght = 6;
+---
+
+<section>
+  <div class="slider-wrapper">
+    <div class="slider">
+      <div class="image-wrapper">
+        <img
+          src="https://pe.tedcdn.com/images/ted/f0f1e53f628aa2b15d2ada0e48432f1e1e320ecc_2880x1620.jpg"
+          alt="imgtest"
+        />
+      </div>
+      <div class="image-wrapper"></div>
+      <div class="image-wrapper">
+        <img
+          src="https://preview.redd.it/natty-or-not-giga-chad-v0-crlbyo0qmkha1.jpg?width=640&crop=smart&auto=webp&s=3a80a5404194134561994faab9ffc05bc356f17e"
+          alt="temp-img"
+        />
+      </div>
+      <div class="image-wrapper"></div>
+      <div class="image-wrapper"></div>
+      <div class="image-wrapper"></div>
+    </div>
+    <button class="prev-button"
+      ><img src="/icons/arrow_previous.svg" alt="Previous arrow" /></button
+    >
+    <button class="next-button"
+      ><img src="/icons/arrow_next.svg" alt="Next arrow" /></button
+    >
+    <div class="slider-controlls">
+      {
+        Array.from({ length: sliderLenght }).map((_, index) => (
+          <div
+            class={index === 0 ? "controll-dot dot-current" : "controll-dot"}
+            data-index={index}
+          />
+        ))
+      }
+    </div>
+  </div>
+  <div class="image-popup-overlay">
+    <div class="image-popup-content">
+      <img src="" alt="Pop-up image" class="popup-image" />
+      <button class="close-popup-button"
+        ><img src="/icons/close.svg" alt="close button" /></button
+      >
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: 0;
+  }
+  .slider-wrapper {
+    position: relative;
+    width: 100%;
+    background-color: var(--background-color);
+    overflow: hidden;
+    aspect-ratio: 16/9;
+    max-height: calc(100vh - var(--nav-height));
+    max-height: calc(100dvh - var(--nav-height));
+  }
+  .slider {
+    display: flex;
+    transition: 1s ease transform;
+  }
+  .image-wrapper {
+    min-width: 100%;
+    height: auto;
+  }
+  .image-wrapper:nth-child(2n) {
+    background-color: var(--card-background-color);
+  }
+  .image-wrapper > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center center;
+  }
+
+  .next-button,
+  .prev-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 100px;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    border: none;
+    transition: 0.2s ease background-color;
+    border-radius: 50%;
+  }
+  .prev-button {
+    right: unset;
+    left: 100px;
+  }
+  .next-button:hover,
+  .prev-button:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+  .slider-controlls {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.75rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10rem;
+  }
+  .controll-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--text-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition:
+      0.3s ease height,
+      0.3s ease width;
+  }
+  .dot-current {
+    cursor: default;
+    height: 18px;
+    width: 18px;
+    background-color: #ffffff;
+    border: 4px solid var(--primary-color);
+  }
+  .image-popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .image-popup-content {
+    position: relative;
+    max-width: 90%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .popup-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .close-popup-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 50%;
+    top: 20px;
+    right: 20px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s ease background-color;
+  }
+  .close-popup-button:hover {
+    background-color: rgba(0, 0, 0, 1);
+  }
+
+  html.no-scroll,
+  body.no-scroll {
+    overflow: hidden;
+  }
+</style>
+
+<script is:inline>
+  const slider = document.querySelector(".slider");
+  const imageWrappers = document.querySelectorAll(".image-wrapper");
+  const prevButton = document.querySelector(".prev-button");
+  const nextButton = document.querySelector(".next-button");
+  const imagePopupOverlay = document.querySelector(".image-popup-overlay");
+  const popupImage = document.querySelector(".popup-image");
+  const closePopupButton = document.querySelector(".close-popup-button");
+
+  let currentIndex = 0;
+
+  function showSlide(index) {
+    slider.style.transform = `translateX(${-index * 100}%)`;
+    const dots = document.querySelectorAll(".controll-dot");
+    dots.forEach((dot, i) => {
+      if (i === index) {
+        dot.classList.add("dot-current");
+      } else {
+        dot.classList.remove("dot-current");
+      }
+    });
+  }
+
+  function nextSlide() {
+    currentIndex = (currentIndex + 1) % imageWrappers.length;
+    showSlide(currentIndex);
+  }
+
+  function prevSlide() {
+    currentIndex =
+      (currentIndex - 1 + imageWrappers.length) % imageWrappers.length;
+    showSlide(currentIndex);
+  }
+
+  const controllDots = document.querySelectorAll(".controll-dot");
+  controllDots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      currentIndex = parseInt(dot.dataset.index);
+      showSlide(currentIndex);
+    });
+  });
+
+  imageWrappers.forEach((wrapper) => {
+    wrapper.addEventListener("click", (event) => {
+      const clickedImageSrc = event.target.src;
+      if (clickedImageSrc) {
+        popupImage.src = clickedImageSrc;
+        imagePopupOverlay.style.display = "flex";
+        document.body.classList.add("no-scroll");
+        document.documentElement.classList.add("no-scroll"); // Add to html element
+      }
+    });
+  });
+
+  closePopupButton.addEventListener("click", () => {
+    imagePopupOverlay.style.display = "none";
+    document.body.classList.remove("no-scroll");
+    document.documentElement.classList.remove("no-scroll"); // Remove from html element
+  });
+
+  imagePopupOverlay.addEventListener("click", (event) => {
+    if (event.target === imagePopupOverlay) {
+      imagePopupOverlay.style.display = "none";
+      document.body.classList.remove("no-scroll");
+      document.documentElement.classList.remove("no-scroll"); // Remove from html element
+    }
+  });
+
+  nextButton.addEventListener("click", nextSlide);
+  prevButton.addEventListener("click", prevSlide);
+
+  // Initialize slider
+  showSlide(currentIndex);
+</script>

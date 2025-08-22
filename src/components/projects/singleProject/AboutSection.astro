@@ -1,0 +1,67 @@
+---
+import Paragraphs from "../../Paragraphs.astro";
+
+const text = ["lorem lorem lorem", "lorem lorem lorem"];
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="image-wrapper desktop-only">
+      <img
+        src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+        alt="temp img"
+      />
+      <!-- <DynamicImage image={image} /> -->
+    </div>
+    <div class="text-wrapper">
+      <h3>Podstawowe informacje</h3>
+      <div class="image-wrapper mobile-only">
+        <img
+          src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+          alt="temp img"
+        />
+        <!-- <DynamicImage image={image}  /> -->
+      </div>
+      <Paragraphs paragraphs={text} />
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding-bottom: 0;
+  }
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    gap: 5rem;
+  }
+  .text-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 2rem;
+  }
+  .image-wrapper {
+    width: 50%;
+  }
+  .image-wrapper > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: var(--section-img-border-radius);
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media only screen and (max-width: 768px) {
+    .text-wrapper {
+      align-items: center;
+    }
+    .text-wrapper h3 {
+      text-align: center;
+    }
+  }
+</style>

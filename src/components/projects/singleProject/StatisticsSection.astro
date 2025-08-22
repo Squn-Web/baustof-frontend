@@ -1,0 +1,55 @@
+---
+
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="meta-wrapper">
+      <p>Cena</p>
+      <p>900 000 PLN</p>
+    </div>
+    <div class="meta-wrapper">
+      <p>Sigma</p>
+      <p>100m^2</p>
+    </div>
+    <div class="meta-wrapper">
+      <p>Skibidi</p>
+      <p>50Ha</p>
+    </div>
+    <div class="meta-wrapper">
+      <p>Rizzler</p>
+      <p>133769420</p>
+    </div>
+    <div class="meta-wrapper">
+      <p>Ohio</p>
+      <p>36 miesięcy</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .content-wrapper {
+    display: flex;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+  .meta-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 2rem;
+    padding: 2rem;
+    border-left: 1px solid var(--text-color);
+    text-align: center;
+    max-width: 300px;
+  }
+  .meta-wrapper:last-child {
+    border-right: 1px solid var(--text-color);
+  }
+  .meta-wrapper > p {
+    white-space: nowrap;
+  }
+  .meta-wrapper > p:last-child {
+    font-weight: bold;
+  }
+</style>

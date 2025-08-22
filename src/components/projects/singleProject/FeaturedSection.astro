@@ -1,0 +1,134 @@
+---
+
+---
+
+<section>
+  <div class="content-wrapper">
+    <div class="feature-wrapper">
+      <div class="feature-img">
+        <img
+          src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+          alt="temp img"
+        />
+      </div>
+      <div class="feature-text">
+        <h4>Innowacyjne dachowki</h4>
+        <p>sigma sa serio</p>
+      </div>
+    </div>
+    <div class="feature-wrapper">
+      <div class="feature-img">
+        <img
+          src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+          alt="temp img"
+        />
+      </div>
+      <div class="feature-text">
+        <h4>Innowacyjne dachowki</h4>
+        <p>sigma sa serio</p>
+      </div>
+    </div>
+    <div class="feature-wrapper">
+      <div class="feature-img">
+        <img
+          src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png"
+          alt="temp img"
+        />
+      </div>
+      <div class="feature-text">
+        <h4>Innowacyjne dachowki</h4>
+        <p>sigma sa serio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  section {
+    padding: calc(2 * var(--section-padding)) var(--section-spacing);
+    clip-path: polygon(0 8%, 100% 0, 100% 92%, 0% 100%);
+    background: var(--primary-color);
+    background: -webkit-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: -moz-linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+    background: linear-gradient(
+      25deg,
+      var(--primary-color-a) 0%,
+      var(--primary-color-light) 100%
+    );
+  }
+  h4 {
+    font-size: calc(1.5 * var(--font-size-h4));
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10rem;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+
+  .feature-wrapper {
+    display: flex;
+    gap: 3rem;
+  }
+  .feature-wrapper:nth-child(2n) {
+    flex-direction: row-reverse;
+  }
+
+  .feature-img,
+  .feature-text {
+    width: 50%;
+    -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
+  }
+  .feature-text {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    border-radius: var(--section-img-border-radius);
+    padding: 4rem;
+    gap: 2rem;
+  }
+  .feature-wrapper > .feature-img > img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border-radius: var(--section-img-border-radius);
+  }
+
+  @media only screen and (max-width: 1200px) {
+    section {
+      clip-path: polygon(0 4%, 100% 0, 100% 96%, 0% 100%) !important;
+    }
+    .content-wrapper {
+      gap: 5rem;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    section {
+      padding: calc(1 * var(--section-padding))
+        calc(0.5 * var(--section-spacing));
+
+      clip-path: polygon(0 2%, 100% 0, 100% 98%, 0% 100%) !important;
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    section {
+      padding: calc(0.75 * var(--section-padding))
+        calc(0.25 * var(--section-spacing));
+
+      margin-top: 1px;
+      margin-bottom: 2rem;
+    }
+  }
+</style>
