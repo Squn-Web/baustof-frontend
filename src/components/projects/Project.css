@@ -20,6 +20,7 @@
 }
 .project-title {
   margin-bottom: 0.5rem;
+  line-height: 130%;
   font-weight: bold;
 }
 
@@ -106,7 +107,7 @@
 
 @media only screen and (max-width: 768px) {
   .project-description {
-    padding-bottom: 1rem;
+    margin-bottom: 1rem;
   }
   .category-item {
     padding: 0.5rem;
@@ -128,6 +129,6 @@
     font-size: 0.9rem;
   }
   .project-title {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
 }

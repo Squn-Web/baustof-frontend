@@ -173,6 +173,10 @@ input::placeholder {
   }
 }
 @media only screen and (max-width: 485px) {
+  .filter-input,
+  .filter-select {
+    width: 100%;
+  }
   .date-inputs {
     flex-direction: column;
   }
