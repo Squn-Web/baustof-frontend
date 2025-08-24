@@ -34,16 +34,43 @@ const { projectDetails } = Astro.props;
     gap: 2rem;
     padding: 2rem;
     border-left: 1px solid var(--text-color);
+    border-right: 1px solid var(--text-color);
     text-align: center;
     max-width: 300px;
   }
-  .meta-wrapper:last-child {
-    border-right: 1px solid var(--text-color);
+  .meta-wrapper:not(:first-child) {
+    margin-left: -1px;
   }
   .meta-wrapper > p {
     white-space: nowrap;
   }
   .meta-wrapper > p:last-child {
     font-weight: bold;
+  }
+  @media only screen and (max-width: 1200px) {
+    .content-wrapper {
+      flex-wrap: wrap;
+      row-gap: 2rem;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .content-wrapper {
+      flex-direction: row !important;
+      align-items: center;
+      gap: 0 !important;
+      row-gap: 2rem !important;
+    }
+    .meta-wrapper {
+      gap: 1rem;
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    .content-wrapper {
+      row-gap: 1rem !important;
+    }
+    .meta-wrapper {
+      gap: 0.5rem;
+      padding: 0.5rem;
+    }
   }
 </style>

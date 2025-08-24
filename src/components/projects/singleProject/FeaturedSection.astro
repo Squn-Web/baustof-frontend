@@ -55,6 +55,7 @@ const { projectFeatures } = Astro.props;
   }
   h4 {
     font-size: calc(1.5 * var(--font-size-h4));
+    line-height: 120%;
   }
   .content-wrapper {
     display: flex;
@@ -87,12 +88,17 @@ const { projectFeatures } = Astro.props;
     padding: 4rem;
     gap: 2rem;
   }
+
+  .feature-img {
+    aspect-ratio: 16/9;
+    border-radius: var(--section-img-border-radius);
+    overflow: hidden;
+  }
+
   .feature-wrapper > .feature-img > img {
     width: 100%;
-    height: auto;
-    aspect-ratio: 16/9;
+    height: 100%;
     object-fit: cover;
-    border-radius: var(--section-img-border-radius);
   }
 
   @media only screen and (max-width: 1200px) {
@@ -102,6 +108,15 @@ const { projectFeatures } = Astro.props;
     .content-wrapper {
       gap: 5rem;
     }
+    .feature-wrapper {
+      min-height: 300px;
+    }
+    .feature-text {
+      padding: 2rem 3rem;
+    }
+    .feature-text h4 {
+      font-size: calc(1.1 * var(--font-size-h4));
+    }
   }
   @media only screen and (max-width: 768px) {
     section {
@@ -110,14 +125,42 @@ const { projectFeatures } = Astro.props;
 
       clip-path: polygon(0 2%, 100% 0, 100% 98%, 0% 100%) !important;
     }
+    .feature-wrapper {
+      min-height: 200px;
+    }
+    .feature-text {
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+    .feature-text h4 {
+      font-size: calc(0.8 * var(--font-size-h4));
+    }
   }
   @media only screen and (max-width: 485px) {
     section {
       padding: calc(0.75 * var(--section-padding))
         calc(0.25 * var(--section-spacing));
-
       margin-top: 1px;
       margin-bottom: 2rem;
+    }
+    .feature-wrapper {
+      flex-direction: column-reverse;
+      min-height: unset;
+      gap: 1rem;
+    }
+    .feature-wrapper:nth-child(2n) {
+      flex-direction: column-reverse;
+    }
+    .feature-text {
+      padding: 2rem 1.5rem;
+      gap: 1.5rem;
+    }
+    .feature-text h4 {
+      font-size: calc(0.8 * var(--font-size-h4));
+    }
+    .feature-img,
+    .feature-text {
+      width: 100%;
     }
   }
 </style>

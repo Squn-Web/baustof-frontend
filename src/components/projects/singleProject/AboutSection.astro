@@ -69,12 +69,22 @@ const { text, aboutProjectTitle, image } = Astro.props;
   .mobile-only {
     display: none;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
     .text-wrapper {
       align-items: center;
+      width: 100%;
+    }
+    .image-wrapper {
+      width: 100%;
     }
     .text-wrapper h3 {
       text-align: center;
+    }
+    .mobile-only {
+      display: flex;
+    }
+    .desktop-only {
+      display: none;
     }
   }
 </style>

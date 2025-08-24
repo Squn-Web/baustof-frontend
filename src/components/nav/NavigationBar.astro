@@ -220,7 +220,8 @@
   const openBtn = document.getElementById("open-sidebar-btn");
 
   let isMobile = false;
-  const isProjectPage = window.location.pathname.startsWith("/projects/");
+
+  const isProjectPage = /^\/projects\/[^/]+\/?$/.test(window.location.pathname);
 
   function handleScroll() {
     if (isProjectPage) {
