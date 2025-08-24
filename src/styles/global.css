@@ -1,11 +1,4 @@
 @font-face {
-  font-family: "Inter";
-  src: url(/Inter_18pt-Regular.ttf);
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
   font-family: "Poppins";
   src: url(/Poppins-Regular.ttf);
   font-weight: normal;
@@ -492,8 +485,7 @@ h5 {
   }
 
   section {
-    padding: calc(0.8 * var(--section-padding))
-      calc(0.5 * var(--section-spacing));
+    padding: calc(0.8 * var(--section-padding)) calc(0.5 * var(--section-spacing));
   }
 
   .logo {
@@ -575,8 +567,7 @@ h5 {
   }
 
   section {
-    padding: calc(0.5 * var(--section-padding))
-      calc(0.2 * var(--section-spacing));
+    padding: calc(0.5 * var(--section-padding)) calc(0.2 * var(--section-spacing));
   }
 
   .logo {
