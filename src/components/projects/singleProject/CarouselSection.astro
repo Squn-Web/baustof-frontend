@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import type { GetProjectBySlugQueryResult } from "../../../../sanity.types";
 import { urlForImage } from "../../../lib/urlForImage";
 import { getImageDimensions } from "../../../lib/getImageDimensions";
@@ -16,35 +15,53 @@ const sliderLenght = gallery?.length;
   <div class="slider-wrapper">
     <div class="slider">
       {
-        gallery?.map((image) => (
-          <div class="image-wrapper">
-            <Image
-              src={urlForImage(image.asset).url()}
-              width={getImageDimensions(image).width}
-              height={getImageDimensions(image).height}
-              alt={image.alt}
-            />
-          </div>
-        ))
+        gallery
+          ?.filter((img) => img?.asset?._ref)
+          .map((image) => (
+            <div class="image-wrapper">
+              <img
+                src={urlForImage(image.asset).url()}
+                width={getImageDimensions(image).width}
+                height={getImageDimensions(image).height}
+                alt={image.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          ))
       }
     </div>
-    <button class="prev-button"
-      ><img src="/icons/arrow_previous.svg" alt="Previous arrow" /></button
+    <button class="prev-button" aria-label="Poprzedni następny obrazek">
+      <img
+        src="/icons/arrow_previous.svg"
+        alt="Poprzedni następny obrazek"
+      /></button
     >
-    <button class="next-button"
-      ><img src="/icons/arrow_next.svg" alt="Next arrow" /></button
+    <button class="next-button" aria-label="Przycisk następny obrazek">
+      <img
+        src="/icons/arrow_next.svg"
+        alt="Przycisk następny obrazek"
+      /></button
     >
-    <div class="slider-controlls">
-      {
-        Array.from({ length: sliderLenght }).map((_, index) => (
-          <div
-            class={index === 0 ? "controll-dot dot-current" : "controll-dot"}
-            data-index={index}
-          />
-        ))
-      }
-    </div>
   </div>
+  <!-- Carousel Controlls -->
+  <div
+    class="slider-controlls"
+    role="group"
+    aria-label="Nawigacja dla przycisków karuzeli"
+  >
+    {
+      Array.from({ length: sliderLenght }).map((_, index) => (
+        <div
+          class={index === 0 ? "controll-dot dot-current" : "controll-dot"}
+          data-index={index}
+          role="button"
+          aria-label={`Przejdź do obrazka nr ${index + 1}`}
+        />
+      ))
+    }
+  </div>
+  <!-- Overlay for preview -->
   <div class="image-popup-overlay">
     <div class="image-popup-content">
       <img src="" alt="Pop-up image" class="popup-image" />
@@ -74,6 +91,7 @@ const sliderLenght = gallery?.length;
   .slider {
     display: flex;
     transition: 1s ease transform;
+    height: 100%;
   }
   .image-wrapper {
     min-width: 100%;
@@ -194,9 +212,99 @@ const sliderLenght = gallery?.length;
     background-color: rgba(0, 0, 0, 1);
   }
 
+  /* Disbale website scrolling on image preview */
   html.no-scroll,
   body.no-scroll {
     overflow: hidden;
+  }
+  @media only screen and (max-width: 1200px) {
+    .next-button {
+      right: 50px;
+    }
+    .prev-button {
+      left: 50px;
+    }
+    .slider-controlls {
+      bottom: 50px;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .next-button {
+      right: 25px;
+    }
+    .prev-button {
+      left: 25px;
+    }
+    .slider-controlls {
+      bottom: 25px;
+    }
+  }
+  @media only screen and (max-width: 485px) {
+    section {
+      position: relative;
+    }
+    .slider-wrapper {
+      overflow-x: scroll; /* Enable horizontal scrolling */
+      scroll-snap-type: x mandatory; /* Enable scroll snapping */
+      -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+      scrollbar-width: none; /* Hide scrollbar for Firefox */
+    }
+    .slider-wrapper::-webkit-scrollbar {
+      display: none; /* Hide scrollbar for Chrome, Safari, Opera */
+    }
+    .slider {
+      transition: none; /* Disable transition on transform for native scrolling */
+      transform: none !important; /* Disable transform for native scrolling */
+    }
+    .image-wrapper {
+      scroll-snap-align: start; /* Snap each image to the start */
+    }
+    .next-button,
+    .prev-button {
+      display: none; /*Hide buttons for touch navigation */
+      top: unset;
+      bottom: 16px;
+      transform: translateY(0);
+      height: 32px;
+      width: 32px;
+    }
+    /* .next-button > img,
+    .prev-button > img {
+      height: 24px;
+      width: 24px;
+    }
+    .next-button {
+      right: 16px;
+    }
+    .prev-button {
+      left: 16px;
+    } */
+    /* .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: flex;
+    } */
+    .slider-controlls {
+      padding: 0.25rem;
+      bottom: 24px;
+      z-index: 11;
+    }
+    .controll-dot {
+      height: 8px;
+      width: 8px;
+    }
+    .close-popup-button {
+      width: 40px;
+      height: 40px;
+
+      top: 10px;
+      right: 10px;
+    }
+    .close-popup-button > img {
+      width: 32px;
+      height: 32px;
+    }
   }
 </style>
 
@@ -205,6 +313,7 @@ const sliderLenght = gallery?.length;
   const imageWrappers = document.querySelectorAll(".image-wrapper");
   const prevButton = document.querySelector(".prev-button");
   const nextButton = document.querySelector(".next-button");
+  const sliderWrapper = document.querySelector(".slider-wrapper"); // Get slider-wrapper
   const imagePopupOverlay = document.querySelector(".image-popup-overlay");
   const popupImage = document.querySelector(".popup-image");
   const closePopupButton = document.querySelector(".close-popup-button");
@@ -212,7 +321,14 @@ const sliderLenght = gallery?.length;
   let currentIndex = 0;
 
   function showSlide(index) {
-    slider.style.transform = `translateX(${-index * 100}%)`;
+    const isMobile = window.innerWidth <= 485;
+    if (isMobile && sliderWrapper) {
+      // For mobile, use scrollLeft for native scrolling
+      sliderWrapper.scrollLeft = index * sliderWrapper.offsetWidth;
+    } else if (slider) {
+      // For larger screens, use transform as before
+      slider.style.transform = `translateX(${-index * 100}%)`;
+    }
     const dots = document.querySelectorAll(".controll-dot");
     dots.forEach((dot, i) => {
       if (i === index) {
@@ -268,8 +384,22 @@ const sliderLenght = gallery?.length;
     }
   });
 
-  nextButton.addEventListener("click", nextSlide);
-  prevButton.addEventListener("click", prevSlide);
+  // Conditionally remove event listeners for next/prev buttons
+  if (window.innerWidth <= 485) {
+    nextButton.removeEventListener("click", nextSlide);
+    prevButton.removeEventListener("click", prevSlide);
+    if (sliderWrapper) {
+      sliderWrapper.addEventListener("scrollend", () => {
+        currentIndex = Math.round(
+          sliderWrapper.scrollLeft / sliderWrapper.offsetWidth,
+        );
+        showSlide(currentIndex);
+      });
+    }
+  } else {
+    nextButton.addEventListener("click", nextSlide);
+    prevButton.addEventListener("click", prevSlide);
+  }
 
   // Initialize slider
   showSlide(currentIndex);
