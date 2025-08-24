@@ -1,0 +1,93 @@
+---
+import { fetchLatestThreeProjectsWithMatchingType } from "../../../api/projectsPage/fetchLatestThreeProjectsWithMatchingType/query";
+import IconText from "../../IconText.astro";
+import DynamicImage from "../../DynamicImage.astro";
+import TextButton from "../../TextButton.astro";
+import { formatDate } from "../../../lib/convertDate";
+
+interface Props {
+  projectTypeRef: string;
+  currentProjectSlug: string;
+}
+
+const { projectTypeRef, currentProjectSlug } = Astro.props;
+
+const latestProjects = await fetchLatestThreeProjectsWithMatchingType(
+  projectTypeRef,
+  currentProjectSlug,
+);
+---
+
+<section>
+  <div class="content-wrapper">
+    <h3>Zobacz więcej naszych projektów</h3>
+    <div class="projects-wrapper">
+      {
+        latestProjects.map((project) => {
+          return (
+            <div class="project-card">
+              <DynamicImage className="project-img" image={project.image} />
+
+              <div class="project-card-content">
+                <h4>{project.title}</h4>
+                <IconText path="/icons/calendar.svg">
+                  <p>{formatDate(project.startDate)}</p>
+                </IconText>
+                <IconText path="/icons/location.svg">
+                  <p>{project.city}</p>
+                </IconText>
+                <p style="margin-bottom: 1rem;">{project.text}</p>
+                <TextButton
+                  href={`/projects/${project.slug.current}`}
+                  text={project.actionButtonText}
+                  path="/icons/arrow_right.svg"
+                />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  h3 {
+    padding-bottom: 5rem;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+  }
+  .projects-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+  .projects-wrapper {
+    display: flex;
+    width: 100%;
+    gap: 2rem;
+  }
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: var(--card-background-color-light);
+    border-radius: var(--section-img-border-radius);
+    gap: 1rem;
+  }
+  .project-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 2rem;
+  }
+  @media only screen and (max-width: 485px) {
+    h3 {
+      padding-bottom: 2rem;
+      text-align: center;
+    }
+  }
+</style>

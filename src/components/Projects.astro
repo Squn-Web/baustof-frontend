@@ -3,15 +3,10 @@ interface Props {
   projects: GetLatestThreeProjectsQueryResult;
 }
 
-import { Image } from "astro:assets";
-import { urlForImage } from "../lib/urlForImage";
 import TextButton from "./TextButton.astro";
 import { formatDate } from "../lib/convertDate";
 import IconText from "./IconText.astro";
-import type {
-  GetLatestThreeProjectsQueryResult,
-  Project,
-} from "../../sanity.types";
+import type { GetLatestThreeProjectsQueryResult } from "../../sanity.types";
 import DynamicImage from "./DynamicImage.astro";
 
 const { projects } = Astro.props;
@@ -34,8 +29,8 @@ const { projects } = Astro.props;
             </IconText>
             <p style="margin-bottom: 1rem;">{project.text}</p>
             <TextButton
-              href={project.actionButton.href}
-              text={project.actionButton.text}
+              href={`/projects/${project.slug.current}`}
+              text={project.actionButtonText}
               path="/icons/arrow_right.svg"
             />
           </div>

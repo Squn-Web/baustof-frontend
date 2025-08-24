@@ -484,7 +484,7 @@ h5 {
   }
 
   h4 {
-    font-size: calc(0.75 * var(--font-size-h4));
+    font-size: calc(0.65 * var(--font-size-h4));
   }
 
   p {
@@ -568,7 +568,7 @@ h5 {
     font-size: calc(0.35 * var(--font-size-h3));
   }
   h4 {
-    font-size: calc(0.75 * var(--font-size-h4));
+    font-size: calc(0.65 * var(--font-size-h4));
   }
   p {
     font-size: calc(0.65 * var(--font-size-text));

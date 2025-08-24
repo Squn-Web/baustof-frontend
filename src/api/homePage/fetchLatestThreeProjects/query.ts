@@ -13,7 +13,8 @@ city,
 text,
 _createdAt,
 image,
-actionButton
+slug,
+actionButtonText
 }
 `);
 
