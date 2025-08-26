@@ -167,10 +167,7 @@ table {
   --button-padding: 1.25rem 3rem;
   --button-border-radius: 1rem;
   --button-font-size: 1.2rem;
-  --hero-height: 75vh;
-  --hero-width: 550px;
-  --hero-font-size: 1.2rem;
-  --hero-font-interline: 150%;
+  --hero-height: 95vh;
   --paragraph-gap: 2rem;
   --card-gap: 10rem;
   --card-width: 280px;
@@ -274,17 +271,16 @@ h5 {
   object-position: 100% 50%;
 }
 
-.logo {
+/* .logo {
   width: 256px;
   height: 256px;
   margin-top: var(--nav-height);
   margin-bottom: 2rem;
-}
+} */
 
 .project-img {
   width: 100%;
   height: auto;
-  margin: auto 0;
   border-radius: var(--section-img-border-radius);
   object-fit: cover;
   aspect-ratio: 1 / 1;
@@ -488,9 +484,9 @@ h5 {
     padding: calc(0.8 * var(--section-padding)) calc(0.5 * var(--section-spacing));
   }
 
-  .logo {
+  /* .logo {
     margin-top: calc(2rem + var(--nav-height));
-  }
+  } */
   .content-wrapper {
     gap: 3rem !important;
   }
@@ -570,11 +566,11 @@ h5 {
     padding: calc(0.5 * var(--section-padding)) calc(0.2 * var(--section-spacing));
   }
 
-  .logo {
+  /* .logo {
     width: 128px;
     height: 128px;
     margin-top: calc(4rem + var(--nav-height));
-  }
+  } */
 
   .hero-image {
     object-position: 100% 70%;

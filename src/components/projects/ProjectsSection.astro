@@ -8,14 +8,10 @@ import { fetchProjectType } from "../../api/projectsPage/fetchProjectType/query.
 
 const { filterTitle, sectionTitle } = Astro.props;
 
-const [projects, categories, projectTypes] = await Promise.all([
-  fetchProjects(),
-  fetchProjectsCategory(),
-  fetchProjectType(),
-]);
+const [projects, categories, projectTypes] = await Promise.all([fetchProjects(), fetchProjectsCategory(), fetchProjectType()]);
 ---
 
-<section>
+<section id="projects-section">
   <div class="content-wrapper">
     <Projects
       client:only="react"
@@ -29,6 +25,9 @@ const [projects, categories, projectTypes] = await Promise.all([
 </section>
 
 <style>
+  #projects-section {
+    scroll-margin-top: var(--nav-height);
+  }
   .content-wrapper {
     max-width: var(--section-max-width);
     display: flex;

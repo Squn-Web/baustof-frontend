@@ -44,10 +44,23 @@ const { text, actionButtons, image, title } = Astro.props;
   .image-wrapper {
     width: 50%;
   }
+  .desktop-only {
+    display: flex;
+  }
   .mobile-only {
     display: none;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1200px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: flex;
+    }
+    .text-wrapper,
+    .image-wrapper {
+      width: 100%;
+    }
     .text-wrapper {
       align-items: center;
     }
