@@ -138,6 +138,7 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
     try {
       const mapHtml = document.getElementById("google-map");
       let markerOpened = true;
+
       // The location of Baustof - Wrzosowa 4, Żelechów
       const position = { lat: 52.0186443051611, lng: 20.733704964418017 };
 
@@ -181,19 +182,35 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
         headerDisabled: true,
       });
 
-      infoWindow.open(map, marker);
+      // infoWindow.open(map, marker);
+      infoWindow.open({ map, anchor: marker });
 
-      // Add click listener to marker
       marker.addListener("click", () => {
-        infoWindow.open(map, marker);
-        markerOpened = !markerOpened;
-      });
-
-      mapHtml.addEventListener("click", () => {
-        if (markerOpened) {
-          infoWindow.close(map, marker);
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        } else {
+          infoWindow.open({ map, anchor: marker });
         }
       });
+
+      // Close InfoWindow when clicking elsewhere on the map
+      map.addListener("click", () => {
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        }
+      });
+
+      // Add click listener to marker
+      // marker.addListener("click", () => {
+      //   infoWindow.open(map, marker);
+      //   markerOpened = !markerOpened;
+      // });
+
+      // mapHtml.addEventListener("click", () => {
+      //   if (markerOpened) {
+      //     infoWindow.close(map, marker);
+      //   }
+      // });
 
       console.log("Google Map initialized successfully");
     } catch (error) {

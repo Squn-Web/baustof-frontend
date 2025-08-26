@@ -2,50 +2,49 @@
 type Props = HomeOffersSection;
 
 import type { HomeOffersSection } from "../../../sanity.types";
+import ActionButtons from "../ActionButtons.astro";
 import Cards from "../Cards.astro";
 
-const { cards } = Astro.props;
+const { cards, title, actionButtons } = Astro.props;
 ---
 
 <section>
+  <h3>{title}</h3>
   <Cards cards={cards} />
-</section>
+  <ActionButtons actionButtons={actionButtons} />
 
-<style>
-  section {
-    padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
-    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
-    background: var(--primary-color);
-    background: -webkit-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: -moz-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-  }
-  @media only screen and (max-width: 768px) {
+  <style>
     section {
-      padding: calc(1 * var(--section-padding))
-        calc(0.5 * var(--section-spacing));
-      clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5rem;
+      padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
+      clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+      background: var(--primary-color);
+      background: -webkit-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+      background: -moz-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+      background: linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
     }
-  }
-  @media only screen and (max-width: 485px) {
-    section {
-      padding: calc(0.75 * var(--section-padding))
-        calc(0.25 * var(--section-spacing));
-      clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%);
-      margin-top: 1px;
-      margin-bottom: 2rem;
+
+    h3 {
+      text-align: center;
+      color: var(--text-color-invert);
     }
-  }
-</style>
+
+    @media only screen and (max-width: 768px) {
+      section {
+        padding: calc(1 * var(--section-padding)) calc(0.5 * var(--section-spacing));
+        clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
+      }
+    }
+    @media only screen and (max-width: 485px) {
+      section {
+        padding: calc(0.75 * var(--section-padding)) calc(0.25 * var(--section-spacing));
+        clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%);
+        margin-top: 1px;
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</section>

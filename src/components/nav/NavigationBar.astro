@@ -1,7 +1,3 @@
----
-import DynamicImage from "../DynamicImage.astro";
----
-
 <a href="#main-content" class="skip-link">Pomiń i przejdź do treści głównej</a>
 
 <button id="open-sidebar-btn" onclick="openSidebar()" aria-label="open sidebar" aria-expanded="false" aria-controls="navbar">
@@ -21,6 +17,10 @@ import DynamicImage from "../DynamicImage.astro";
           class="nav-logo-img"
           src="https://cdn.sanity.io/images/goiccr2j/production/bcb67dde6660b8b3e99667c3fe8b3219ee8d309b-128x128.svg"
           alt="Logo Baustof"
+          width="32px"
+          height="32px"
+          loading="lazy"
+          decoding="async"
         />
       </a>
     </li>

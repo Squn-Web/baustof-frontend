@@ -14,7 +14,7 @@ const { cards } = Astro.props;
     {
       cards.map((card) => {
         return (
-          <a href="#">
+          <a href={card.href} target="_blank">
             <div class="card">
               <Image class="contact-section-icon" src={urlForImage(card.icon.asset).url()} width={128} height={128} alt={card.icon.alt} />
               <h4>{card.title}</h4>
