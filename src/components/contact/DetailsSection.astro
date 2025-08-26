@@ -6,26 +6,21 @@ import { Image } from "astro:assets";
 import { urlForImage } from "../../lib/urlForImage";
 import Paragraphs from "../Paragraphs.astro";
 
-const { cards, title } = Astro.props;
+const { cards } = Astro.props;
 ---
 
 <section>
-  <!-- <h3>{title}</h3> -->
   <div class="content-wrapper">
     {
       cards.map((card) => {
         return (
-          <div class="card">
-            <Image
-              class="contact-section-icon"
-              src={urlForImage(card.icon.asset).url()}
-              width={128}
-              height={128}
-              alt={card.icon.alt}
-            />
-            <h4>{card.title}</h4>
-            <Paragraphs className="scaleFont" paragraphs={card.text} />
-          </div>
+          <a href={card.href} target="_blank">
+            <div class="card">
+              <Image class="contact-section-icon" src={urlForImage(card.icon.asset).url()} width={128} height={128} alt={card.icon.alt} />
+              <h4>{card.title}</h4>
+              <Paragraphs className="scaleFont" paragraphs={card.text} />
+            </div>
+          </a>
         );
       })
     }
@@ -39,6 +34,9 @@ const { cards, title } = Astro.props;
   }
   h4 {
     font-size: calc(1.8 * var(--font-size-h4));
+  }
+  a:hover {
+    background-color: rgb(240, 240, 240);
   }
   .content-wrapper {
     display: flex;

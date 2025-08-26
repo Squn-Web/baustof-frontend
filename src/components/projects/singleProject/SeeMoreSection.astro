@@ -1,9 +1,10 @@
 ---
 import { fetchLatestThreeProjectsWithMatchingType } from "../../../api/projectsPage/fetchLatestThreeProjectsWithMatchingType/query";
-import IconText from "../../IconText.astro";
-import DynamicImage from "../../DynamicImage.astro";
-import TextButton from "../../TextButton.astro";
-import { formatDate } from "../../../lib/convertDate";
+// import IconText from "../../IconText.astro";
+// import DynamicImage from "../../DynamicImage.astro";
+// import TextButton from "../../TextButton.astro";
+// import { formatDate } from "../../../lib/convertDate";
+import Projects from "../../Projects.astro";
 
 interface Props {
   projectTypeRef: string;
@@ -12,16 +13,25 @@ interface Props {
 
 const { projectTypeRef, currentProjectSlug } = Astro.props;
 
-const latestProjects = await fetchLatestThreeProjectsWithMatchingType(
-  projectTypeRef,
-  currentProjectSlug,
-);
+const latestProjects = await fetchLatestThreeProjectsWithMatchingType(projectTypeRef, currentProjectSlug);
 ---
 
 <section>
   <div class="content-wrapper">
     <h3>Zobacz więcej naszych projektów</h3>
-    <div class="projects-wrapper">
+
+    {
+      latestProjects.length === 0 ? (
+        <div class="no-results">
+          <img src="/no-result.png" width={380} height={380} alt="Brak wyników" />
+          <p>Nie znaleziono żadnego podobnego projektu</p>
+        </div>
+      ) : (
+        <Projects projects={latestProjects} />
+      )
+    }
+
+    <!-- <div class="projects-wrapper">
       {
         latestProjects.map((project) => {
           return (
@@ -47,7 +57,7 @@ const latestProjects = await fetchLatestThreeProjectsWithMatchingType(
           );
         })
       }
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -61,6 +71,7 @@ const latestProjects = await fetchLatestThreeProjectsWithMatchingType(
     max-width: var(--section-max-width);
     margin: 0 auto;
   }
+
   .projects-wrapper {
     display: flex;
     gap: 2rem;
@@ -83,6 +94,32 @@ const latestProjects = await fetchLatestThreeProjectsWithMatchingType(
     flex-direction: column;
     gap: 1.25rem;
     padding: 2rem;
+  }
+  .no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .no-results p {
+    font-size: calc(1.5 * var(--font-size-text));
+    color: #515151;
+    text-align: center;
+    line-height: 150%;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .no-results {
+      gap: 2rem;
+    }
+    .no-results img {
+      width: 128px;
+      height: 128px;
+    }
+    .no-results p {
+      font-size: calc(1 * var(--font-size-text));
+    }
   }
   @media only screen and (max-width: 485px) {
     h3 {

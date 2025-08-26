@@ -31,25 +31,15 @@ const sliderLenght = gallery?.length;
           ))
       }
     </div>
-    <button class="prev-button" aria-label="Poprzedni następny obrazek">
-      <img
-        src="/icons/arrow_previous.svg"
-        alt="Poprzedni następny obrazek"
-      /></button
-    >
-    <button class="next-button" aria-label="Przycisk następny obrazek">
-      <img
-        src="/icons/arrow_next.svg"
-        alt="Przycisk następny obrazek"
-      /></button
-    >
+    <button id="prev-btn" class="prev-button" aria-label="Poprzedni następny obrazek">
+      <img src="/icons/arrow_previous.svg" alt="Poprzedni następny obrazek" />
+    </button>
+    <button id="next-btn" class="next-button" aria-label="Przycisk następny obrazek">
+      <img src="/icons/arrow_next.svg" alt="Przycisk następny obrazek" />
+    </button>
   </div>
   <!-- Carousel Controlls -->
-  <div
-    class="slider-controlls"
-    role="group"
-    aria-label="Nawigacja dla przycisków karuzeli"
-  >
+  <div class="slider-controlls" role="group" aria-label="Nawigacja dla przycisków karuzeli">
     {
       Array.from({ length: sliderLenght }).map((_, index) => (
         <div
@@ -65,9 +55,16 @@ const sliderLenght = gallery?.length;
   <div class="image-popup-overlay">
     <div class="image-popup-content">
       <img src="" alt="Pop-up image" class="popup-image" />
-      <button class="close-popup-button"
-        ><img src="/icons/close.svg" alt="close button" /></button
-      >
+    </div>
+    <button class="close-popup-button"><img src="/icons/close.svg" alt="close button" /></button>
+    <button id="prev-btn-overlay" class="prev-button" aria-label="Poprzedni następny obrazek">
+      <img src="/icons/arrow_previous.svg" alt="Poprzedni następny obrazek" />
+    </button>
+    <button id="next-btn-overlay" class="next-button" aria-label="Przycisk następny obrazek">
+      <img src="/icons/arrow_next.svg" alt="Przycisk następny obrazek" />
+    </button>
+    <div id="slide-tracker">
+      <p>1 / {gallery?.length || 0}</p>
     </div>
   </div>
 </section>
@@ -86,8 +83,8 @@ const sliderLenght = gallery?.length;
     background-color: var(--background-color);
     overflow: hidden;
     aspect-ratio: 16/9;
-    max-height: calc(100vh - var(--nav-height));
-    max-height: calc(100dvh - var(--nav-height));
+    max-height: calc(100vh - var(--nav-height) - 10vh);
+    max-height: calc(100dvh - var(--nav-height) - 10vh);
   }
   .slider {
     display: flex;
@@ -179,10 +176,10 @@ const sliderLenght = gallery?.length;
 
   .image-popup-content {
     position: relative;
-    max-width: 90%;
     height: auto;
-    max-height: 100vh;
-    max-height: 100dvh;
+    max-width: 70%; /* Carousel IMAGE popup width */
+    max-height: 80vh; /* Carousel IMAGE popup height */
+    max-height: 80dvh; /* Carousel IMAGE popup height */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,7 +198,7 @@ const sliderLenght = gallery?.length;
     justify-content: center;
     width: 60px;
     height: 60px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(255, 255, 255, 0.7);
     border-radius: 50%;
     top: 20px;
     right: 20px;
@@ -209,8 +206,34 @@ const sliderLenght = gallery?.length;
     cursor: pointer;
     transition: 0.2s ease background-color;
   }
+  .close-popup-button > img,
+  .image-popup-overlay > .next-button > img,
+  .image-popup-overlay > .prev-button > img {
+    filter: brightness(0) saturate(100%) invert(6%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+  }
   .close-popup-button:hover {
-    background-color: rgba(0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  #prev-btn-overlay,
+  #next-btn-overlay {
+    z-index: 101;
+  }
+
+  #slide-tracker {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    bottom: 48px;
+  }
+  #slide-tracker > p {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 1rem;
+    border-radius: 10rem;
+    color: var(--text-color);
+    text-align: center;
+    min-width: 76px;
   }
 
   /* Disbale website scrolling on image preview */
@@ -230,6 +253,17 @@ const sliderLenght = gallery?.length;
     }
   }
   @media only screen and (max-width: 768px) {
+    #prev-btn-overlay,
+    #next-btn-overlay {
+      transform: none;
+      top: unset;
+      bottom: 48px;
+      right: 48px;
+    }
+    #prev-btn-overlay {
+      right: unset;
+      left: 48px;
+    }
     .next-button {
       right: 25px;
     }
@@ -260,8 +294,8 @@ const sliderLenght = gallery?.length;
     .image-wrapper {
       scroll-snap-align: start; /* Snap each image to the start */
     }
-    .next-button,
-    .prev-button {
+    #prev-btn,
+    #next-btn {
       display: none; /*Hide buttons for touch navigation */
       top: unset;
       bottom: 16px;
@@ -269,23 +303,6 @@ const sliderLenght = gallery?.length;
       height: 32px;
       width: 32px;
     }
-    /* .next-button > img,
-    .prev-button > img {
-      height: 24px;
-      width: 24px;
-    }
-    .next-button {
-      right: 16px;
-    }
-    .prev-button {
-      left: 16px;
-    } */
-    /* .desktop-only {
-      display: none;
-    }
-    .mobile-only {
-      display: flex;
-    } */
     .slider-controlls {
       padding: 0.25rem;
       bottom: 24px;
@@ -299,8 +316,8 @@ const sliderLenght = gallery?.length;
       width: 40px;
       height: 40px;
 
-      top: 10px;
-      right: 10px;
+      top: 16px;
+      right: 16px;
     }
     .close-popup-button > img {
       width: 32px;
@@ -312,12 +329,17 @@ const sliderLenght = gallery?.length;
 <script is:inline>
   const slider = document.querySelector(".slider");
   const imageWrappers = document.querySelectorAll(".image-wrapper");
-  const prevButton = document.querySelector(".prev-button");
-  const nextButton = document.querySelector(".next-button");
+  const prevButton = document.getElementById("prev-btn");
+  const nextButton = document.getElementById("next-btn");
   const sliderWrapper = document.querySelector(".slider-wrapper"); // Get slider-wrapper
   const imagePopupOverlay = document.querySelector(".image-popup-overlay");
   const popupImage = document.querySelector(".popup-image");
   const closePopupButton = document.querySelector(".close-popup-button");
+  const prevButtonOverlay = document.getElementById("prev-btn-overlay");
+  const nextButtonOverlay = document.getElementById("next-btn-overlay");
+  let currentPopupIndex = 0; // Index of image currently shown in popup
+  const slideTracker = document.getElementById("slide-tracker");
+  const totalSlides = imageWrappers.length;
 
   let currentIndex = 0;
 
@@ -338,6 +360,7 @@ const sliderLenght = gallery?.length;
         dot.classList.remove("dot-current");
       }
     });
+    updateSlideTracker(index); // 🔸 Add this line
   }
 
   function nextSlide() {
@@ -346,8 +369,7 @@ const sliderLenght = gallery?.length;
   }
 
   function prevSlide() {
-    currentIndex =
-      (currentIndex - 1 + imageWrappers.length) % imageWrappers.length;
+    currentIndex = (currentIndex - 1 + imageWrappers.length) % imageWrappers.length;
     showSlide(currentIndex);
   }
 
@@ -359,14 +381,27 @@ const sliderLenght = gallery?.length;
     });
   });
 
-  imageWrappers.forEach((wrapper) => {
+  // imageWrappers.forEach((wrapper) => {
+  //   wrapper.addEventListener("click", (event) => {
+  //     const clickedImageSrc = event.target.src;
+  //     if (clickedImageSrc) {
+  //       popupImage.src = clickedImageSrc;
+  //       imagePopupOverlay.style.display = "flex";
+  //       document.body.classList.add("no-scroll");
+  //       document.documentElement.classList.add("no-scroll"); // Add to html element
+  //     }
+  //   });
+  // });
+
+  imageWrappers.forEach((wrapper, index) => {
     wrapper.addEventListener("click", (event) => {
       const clickedImageSrc = event.target.src;
       if (clickedImageSrc) {
+        currentPopupIndex = index;
         popupImage.src = clickedImageSrc;
         imagePopupOverlay.style.display = "flex";
         document.body.classList.add("no-scroll");
-        document.documentElement.classList.add("no-scroll"); // Add to html element
+        document.documentElement.classList.add("no-scroll");
       }
     });
   });
@@ -391,15 +426,41 @@ const sliderLenght = gallery?.length;
     prevButton.removeEventListener("click", prevSlide);
     if (sliderWrapper) {
       sliderWrapper.addEventListener("scrollend", () => {
-        currentIndex = Math.round(
-          sliderWrapper.scrollLeft / sliderWrapper.offsetWidth,
-        );
+        currentIndex = Math.round(sliderWrapper.scrollLeft / sliderWrapper.offsetWidth);
         showSlide(currentIndex);
       });
     }
   } else {
     nextButton.addEventListener("click", nextSlide);
     prevButton.addEventListener("click", prevSlide);
+  }
+
+  // Popup img preview
+  function showPopupImage(index) {
+    const newImage = imageWrappers[index].querySelector("img");
+    if (newImage) {
+      popupImage.src = newImage.src;
+    }
+    updateSlideTracker(index);
+  }
+
+  function nextPopupImage() {
+    currentPopupIndex = (currentPopupIndex + 1) % imageWrappers.length;
+    showPopupImage(currentPopupIndex);
+  }
+
+  function prevPopupImage() {
+    currentPopupIndex = (currentPopupIndex - 1 + imageWrappers.length) % imageWrappers.length;
+    showPopupImage(currentPopupIndex);
+  }
+
+  nextButtonOverlay.addEventListener("click", nextPopupImage);
+  prevButtonOverlay.addEventListener("click", prevPopupImage);
+
+  function updateSlideTracker(current) {
+    if (slideTracker) {
+      slideTracker.querySelector("p").textContent = `${current + 1} / ${totalSlides}`;
+    }
   }
 
   // Initialize slider

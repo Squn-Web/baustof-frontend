@@ -14,12 +14,13 @@ text,
 _createdAt,
 image,
 slug,
-actionButtonText
+actionButtonText,
+...,
+projectType->,
+categories[]->
 }
 `);
 
 export async function fetchLatestThreeProjects(): Promise<GetLatestThreeProjectsQueryResult> {
-  return fetchSanity<GetLatestThreeProjectsQueryResult>(
-    getLatestThreeProjectsQuery,
-  );
+  return fetchSanity<GetLatestThreeProjectsQueryResult>(getLatestThreeProjectsQuery);
 }

@@ -1,28 +1,28 @@
 <a href="#main-content" class="skip-link">Pomiń i przejdź do treści głównej</a>
 
-<button
-  id="open-sidebar-btn"
-  onclick="openSidebar()"
-  aria-label="open sidebar"
-  aria-expanded="false"
-  aria-controls="navbar"
->
+<button id="open-sidebar-btn" onclick="openSidebar()" aria-label="open sidebar" aria-expanded="false" aria-controls="navbar">
   <img src="/icons/hamburger_menu.svg" alt="Menu" />
 </button>
 
 <nav id="navbar">
   <ul>
     <li>
-      <button
-        id="close-sidebar-btn"
-        onclick="closeSidebar()"
-        aria-label="close sidebar"
-      >
+      <button id="close-sidebar-btn" onclick="closeSidebar()" aria-label="close sidebar">
         <img src="/icons/close.svg" alt="Close" />
       </button>
     </li>
     <li id="nav-logo">
-      <a class="active-link" aria-current="page" href="/">Home</a>
+      <a class="active-link" aria-current="page" href="/">
+        <img
+          class="nav-logo-img"
+          src="https://cdn.sanity.io/images/goiccr2j/production/bcb67dde6660b8b3e99667c3fe8b3219ee8d309b-128x128.svg"
+          alt="Logo Baustof"
+          width="32px"
+          height="32px"
+          loading="lazy"
+          decoding="async"
+        />
+      </a>
     </li>
     <li><a href="/about">O nas</a></li>
     <li><a href="/contact">Kontakt</a></li>
@@ -72,6 +72,11 @@
     color: var(--text-color-invert);
     padding: 2rem 2rem;
     height: 100%;
+    max-height: calc(var(--nav-height) + 2px);
+    width: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   nav ul li a:hover {
     color: rgba(255, 255, 255, 0.8) !important;
@@ -81,6 +86,17 @@
     color: var(--primary-color) !important;
   }
 
+  #nav-logo a {
+    margin-top: 1px;
+    padding: 0;
+    width: 100px;
+  }
+  .nav-logo-img {
+    width: 64px;
+    height: 64px;
+    transition: 0.2s ease filter;
+  }
+
   nav.scrolled {
     background-color: var(--nav-background-color);
     backdrop-filter: blur(6px);
@@ -88,6 +104,9 @@
   }
   nav.scrolled ul li a {
     color: var(--text-color);
+  }
+  nav.scrolled ul #nav-logo a .nav-logo-img {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
   }
   .active-link {
     transition: border 0.2s ease;
@@ -104,12 +123,10 @@
     cursor: pointer;
   }
   #close-sidebar-btn img {
-    filter: brightness(0) saturate(100%) invert(6%) sepia(0%) saturate(0%)
-      hue-rotate(0deg) brightness(100%) contrast(100%);
+    filter: brightness(0) saturate(100%) invert(6%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
   }
   #open-sidebar-btn img {
-    filter: brightness(0) saturate(100%) invert(86%) sepia(11%) saturate(100%)
-      hue-rotate(359deg) brightness(103%) contrast(87%);
+    filter: brightness(0) saturate(100%) invert(86%) sepia(11%) saturate(100%) hue-rotate(359deg) brightness(103%) contrast(87%);
   }
 
   #open-sidebar-btn img,
@@ -162,6 +179,7 @@
     background: rgba(0, 0, 0, 0.5) !important;
   }
 
+  /* MOBILE */
   /* Medium screens (768px and below) */
   @media only screen and (max-width: 768px) {
     button {
@@ -185,7 +203,12 @@
     nav ul li a {
       color: var(--text-color);
     }
-
+    #nav-logo > a {
+      width: 100%;
+    }
+    .nav-logo-img {
+      filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(100%) contrast(100%);
+    }
     nav.showed {
       right: 0;
       background-color: var(--nav-background-color);

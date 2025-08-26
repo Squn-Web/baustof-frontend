@@ -24,23 +24,11 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
 <style>
   section {
     padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
-    clip-path: polygon(0 10%, 100% 0, 100% 90%, 0% 100%);
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
     background: var(--primary-color);
-    background: -webkit-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: -moz-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
+    background: -webkit-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+    background: -moz-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+    background: linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
   }
   h3 {
     color: var(--text-color-invert);
@@ -83,8 +71,7 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
   }
   @media only screen and (max-width: 768px) {
     section {
-      padding: calc(1 * var(--section-padding))
-        calc(0.5 * var(--section-spacing));
+      padding: calc(1 * var(--section-padding)) calc(0.5 * var(--section-spacing));
       clip-path: polygon(0 5%, 100% 0, 100% 95%, 0% 100%);
     }
 
@@ -95,8 +82,7 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
   }
   @media only screen and (max-width: 485px) {
     section {
-      padding: calc(0.75 * var(--section-padding))
-        calc(0.25 * var(--section-spacing));
+      padding: calc(0.75 * var(--section-padding)) calc(0.25 * var(--section-spacing));
       clip-path: polygon(0 3%, 100% 0, 100% 97%, 0% 100%);
       margin-top: 1px;
       margin-bottom: 2rem;
@@ -140,9 +126,7 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
           a.nonce = m.querySelector("script[nonce]")?.nonce || "";
           m.head.append(a);
         }));
-    d[l]
-      ? console.warn(p + " only loads once. Ignoring:", g)
-      : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+    d[l] ? console.warn(p + " only loads once. Ignoring:", g) : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
   })({ key: API_KEY, v: "weekly" });
 </script>
 
@@ -154,13 +138,13 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
     try {
       const mapHtml = document.getElementById("google-map");
       let markerOpened = true;
+
       // The location of Baustof - Wrzosowa 4, Żelechów
       const position = { lat: 52.0186443051611, lng: 20.733704964418017 };
 
       // Request needed libraries
       const { Map } = await google.maps.importLibrary("maps");
-      const { AdvancedMarkerElement } =
-        await google.maps.importLibrary("marker");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
 
       // The map, centered at Baustof location
       map = new Map(document.getElementById("google-map"), {
@@ -198,19 +182,35 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
         headerDisabled: true,
       });
 
-      infoWindow.open(map, marker);
+      // infoWindow.open(map, marker);
+      infoWindow.open({ map, anchor: marker });
 
-      // Add click listener to marker
       marker.addListener("click", () => {
-        infoWindow.open(map, marker);
-        markerOpened = !markerOpened;
-      });
-
-      mapHtml.addEventListener("click", () => {
-        if (markerOpened) {
-          infoWindow.close(map, marker);
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        } else {
+          infoWindow.open({ map, anchor: marker });
         }
       });
+
+      // Close InfoWindow when clicking elsewhere on the map
+      map.addListener("click", () => {
+        if (infoWindow.getMap()) {
+          infoWindow.close();
+        }
+      });
+
+      // Add click listener to marker
+      // marker.addListener("click", () => {
+      //   infoWindow.open(map, marker);
+      //   markerOpened = !markerOpened;
+      // });
+
+      // mapHtml.addEventListener("click", () => {
+      //   if (markerOpened) {
+      //     infoWindow.close(map, marker);
+      //   }
+      // });
 
       console.log("Google Map initialized successfully");
     } catch (error) {
@@ -221,20 +221,12 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
   // Initialize map when DOM is ready
   document.addEventListener("DOMContentLoaded", () => {
     // Check if Google Maps API is loaded
-    if (
-      typeof google !== "undefined" &&
-      google.maps &&
-      google.maps.importLibrary
-    ) {
+    if (typeof google !== "undefined" && google.maps && google.maps.importLibrary) {
       initMap();
     } else {
       // Wait for Google Maps API to load
       const checkGoogleMaps = setInterval(() => {
-        if (
-          typeof google !== "undefined" &&
-          google.maps &&
-          google.maps.importLibrary
-        ) {
+        if (typeof google !== "undefined" && google.maps && google.maps.importLibrary) {
           clearInterval(checkGoogleMaps);
           initMap();
         }

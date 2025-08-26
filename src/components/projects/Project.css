@@ -74,6 +74,7 @@
   line-height: 150%;
   overflow: hidden;
   padding-right: 1rem;
+  margin-bottom: 1rem;
 }
 
 .project-link {
@@ -106,29 +107,32 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .project-description {
-    margin-bottom: 1rem;
-  }
   .category-item {
     padding: 0.5rem;
   }
-}
-
-@media only screen and (max-width: 485px) {
+  .project-card {
+    flex-direction: column !important;
+  }
+  .project-image {
+    width: 100%;
+    aspect-ratio: 16/9;
+  }
   .project-card {
     gap: 1rem;
   }
   .project-content {
     padding: 1rem 2rem;
   }
-  .project-image {
-    width: 100%;
-    aspect-ratio: 1/1;
-  }
   .project-link p {
     font-size: 0.9rem;
   }
   .project-title {
     font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 485px) {
+  .project-image {
+    aspect-ratio: 1/1;
   }
 }
