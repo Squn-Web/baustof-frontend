@@ -1315,6 +1315,13 @@
           "name": "seo"
         },
         "optional": true
+      },
+      "main": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "boolean"
+        },
+        "optional": true
       }
     }
   },
@@ -2846,6 +2853,13 @@
           },
           "optional": false
         },
+        "href": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "text": {
           "type": "objectAttribute",
           "value": {
@@ -3816,6 +3830,13 @@
             "value": "homeOffersSection"
           }
         },
+        "title": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": false
+        },
         "cards": {
           "type": "objectAttribute",
           "value": {
@@ -3833,6 +3854,28 @@
               "rest": {
                 "type": "inline",
                 "name": "homeOfferCard"
+              }
+            }
+          },
+          "optional": false
+        },
+        "actionButtons": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rest": {
+                "type": "inline",
+                "name": "actionButton"
               }
             }
           },
