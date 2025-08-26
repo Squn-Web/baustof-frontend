@@ -41,11 +41,11 @@ const ProjectComponent = ({ project }: ProjectProps) => {
 
         <div className="project-meta">
           <div className="icon-wrapper">
-            <img className="icon" src="/icons/calendar.svg" aria-hidden="true" />
+            <img className="icon" src="/icons/calendar.svg" alt="" aria-hidden="true" />
             <p className="meta-item">{formatDate(project.startDate)}</p>
           </div>
           <div className="icon-wrapper">
-            <img className="icon" src="/icons/location.svg" aria-hidden="true" />
+            <img className="icon" src="/icons/location.svg" alt="" aria-hidden="true" />
 
             <p className="meta-item">{project.city}</p>
           </div>
@@ -55,7 +55,7 @@ const ProjectComponent = ({ project }: ProjectProps) => {
 
         <a className="project-link" href={`/projects/${project.slug.current}`}>
           <p>{project.actionButtonText}</p>
-          <img className="icon" src="/icons/arrow_right.svg" aria-hidden="true" />
+          <img className="icon" src="/icons/arrow_right.svg" alt="" aria-hidden="true" />
         </a>
       </div>
     </div>

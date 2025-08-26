@@ -20,7 +20,7 @@ const { projects } = Astro.props;
 
           <div class="project-card-content">
             <h4 class="project-title">{project.title}</h4>
-            <p class="project-type">zelbeton</p>
+            <p class="project-type">{project.projectType.name}</p>
 
             <div class="categories-wrapper">
               {project.categories?.map((category) => (
