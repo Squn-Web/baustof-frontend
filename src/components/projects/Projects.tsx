@@ -1,8 +1,4 @@
-import type {
-  GetProjectCategoryQueryResult,
-  GetProjectsQueryResult,
-  GetProjectTypeQueryResult,
-} from "../../../sanity.types";
+import type { GetProjectCategoryQueryResult, GetProjectsQueryResult, GetProjectTypeQueryResult } from "../../../sanity.types";
 import "./Projects.css";
 import ProjectComponent from "./Project.tsx";
 import { Pagination } from "./Pagination";
@@ -17,13 +13,7 @@ interface Props {
   projects: GetProjectsQueryResult;
 }
 
-const Projects = ({
-  filterTitle,
-  projects,
-  sectionTitle,
-  categories,
-  projectTypes,
-}: Props) => {
+const Projects = ({ filterTitle, projects, sectionTitle, categories, projectTypes }: Props) => {
   // Get initial values from URL or use defaults
   const getInitialStateFromURL = () => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -32,9 +22,7 @@ const Projects = ({
       selectedProjectType: urlParams.get("projectType") || "",
       selectedCategory: urlParams.get("category") || "",
       dateFrom: urlParams.get("dateFrom") || "",
-      dateTo:
-        urlParams.get("dateTo") ||
-        new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Warsaw" }),
+      dateTo: urlParams.get("dateTo") || new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Warsaw" }),
       currentPage: parseInt(urlParams.get("page") || "1"),
     };
   };
@@ -42,12 +30,8 @@ const Projects = ({
   const initialState = getInitialStateFromURL();
 
   const [searchTerm, setSearchTerm] = useState(initialState.searchTerm);
-  const [selectedProjectType, setSelectedProjectType] = useState(
-    initialState.selectedProjectType,
-  );
-  const [selectedCategory, setSelectedCategory] = useState(
-    initialState.selectedCategory,
-  );
+  const [selectedProjectType, setSelectedProjectType] = useState(initialState.selectedProjectType);
+  const [selectedCategory, setSelectedCategory] = useState(initialState.selectedCategory);
   const [dateFrom, setDateFrom] = useState(initialState.dateFrom);
   const [dateTo, setDateTo] = useState(initialState.dateTo);
   const [currentPage, setCurrentPage] = useState(initialState.currentPage);
@@ -65,24 +49,20 @@ const Projects = ({
     if (filters.searchTerm) searchParams.set("search", filters.searchTerm);
     else searchParams.delete("search");
 
-    if (filters.selectedProjectType)
-      searchParams.set("projectType", filters.selectedProjectType);
+    if (filters.selectedProjectType) searchParams.set("projectType", filters.selectedProjectType);
     else searchParams.delete("projectType");
 
-    if (filters.selectedCategory)
-      searchParams.set("category", filters.selectedCategory);
+    if (filters.selectedCategory) searchParams.set("category", filters.selectedCategory);
     else searchParams.delete("category");
 
     if (filters.dateFrom) searchParams.set("dateFrom", filters.dateFrom);
     else searchParams.delete("dateFrom");
 
     // Only include dateTo if it's different from default
-    if (filters.dateTo && filters.dateTo !== defaultDateTo)
-      searchParams.set("dateTo", filters.dateTo);
+    if (filters.dateTo && filters.dateTo !== defaultDateTo) searchParams.set("dateTo", filters.dateTo);
     else searchParams.delete("dateTo");
 
-    if (filters.currentPage > 1)
-      searchParams.set("page", filters.currentPage.toString());
+    if (filters.currentPage > 1) searchParams.set("page", filters.currentPage.toString());
     else searchParams.delete("page");
 
     // Update URL without page reload
@@ -92,21 +72,13 @@ const Projects = ({
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       // Search term filter
-      const matchesSearch =
-        !searchTerm.trim() ||
-        project.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = !searchTerm.trim() || project.title?.toLowerCase().includes(searchTerm.toLowerCase());
 
       // Project type filter
-      const matchesProjectType =
-        !selectedProjectType ||
-        project.projectType?.slug.current === selectedProjectType;
+      const matchesProjectType = !selectedProjectType || project.projectType?.slug.current === selectedProjectType;
 
       // Category filter
-      const matchesCategory =
-        !selectedCategory ||
-        project.categories?.some(
-          (category) => category.slug.current === selectedCategory,
-        );
+      const matchesCategory = !selectedCategory || project.categories?.some((category) => category.slug.current === selectedCategory);
 
       // Date range filter
       let matchesDate = true;
@@ -123,27 +95,15 @@ const Projects = ({
         }
       }
 
-      return (
-        matchesSearch && matchesProjectType && matchesCategory && matchesDate
-      );
+      return matchesSearch && matchesProjectType && matchesCategory && matchesDate;
     });
-  }, [
-    projects,
-    searchTerm,
-    selectedProjectType,
-    selectedCategory,
-    dateFrom,
-    dateTo,
-  ]);
+  }, [projects, searchTerm, selectedProjectType, selectedCategory, dateFrom, dateTo]);
 
   // Pagination logic
   const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = filteredProjects.slice(
-    indexOfFirstProject,
-    indexOfLastProject,
-  );
+  const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -161,6 +121,12 @@ const Projects = ({
 
   // Handle browser back/forward navigation
   useEffect(() => {
+    const el = document.getElementById("projects-section");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
     const handlePopState = () => {
       const newState = getInitialStateFromURL();
       setSearchTerm(newState.searchTerm);
@@ -173,7 +139,7 @@ const Projects = ({
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+  }, [currentPage]);
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
@@ -245,9 +211,7 @@ const Projects = ({
     setSelectedProjectType("");
     setSelectedCategory("");
     setDateFrom("");
-    setDateTo(
-      new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Warsaw" }),
-    );
+    setDateTo(new Date().toLocaleDateString("en-CA", { timeZone: "Europe/Warsaw" }));
     setCurrentPage(1);
     updateURL({
       searchTerm: "",
@@ -283,26 +247,10 @@ const Projects = ({
       />
 
       <div className="projects-wrapper">
-        {/* Pagination */}
-        {totalPages > 1 && (
-          <div className="pagination-container">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
-          </div>
-        )}
-
         {/* Rendering projects */}
         {currentProjects.length === 0 ? (
           <div className="no-results">
-            <img
-              src="/no-result.png"
-              width={380}
-              height={380}
-              alt="Brak wyników"
-            />
+            <img src="/no-result.png" width={380} height={380} alt="Brak wyników" />
             <p>Nie znaleziono podanych kryteriów wyszukiwania.</p>
           </div>
         ) : (
@@ -314,11 +262,7 @@ const Projects = ({
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination-container">
-            <Pagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPageChange={handlePageChange}
-            />
+            <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
           </div>
         )}
       </div>

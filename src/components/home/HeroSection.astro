@@ -8,47 +8,50 @@ import type { HomeHeroSection } from "../../../sanity.types";
 import DynamicImage from "../DynamicImage.astro";
 import { getImageDimensions } from "../../lib/getImageDimensions";
 
-const { text, logo, actionButtons, image } = Astro.props;
+const { text, actionButtons, image } = Astro.props;
 ---
 
 <section>
   <DynamicImage className="hero-image" image={image} />
-  <div class="content-align">
-    <div class="content-wrapper">
-      <DynamicImage className="logo" image={logo} />
-      <p>{text}</p>
-      <ActionButtons actionButtons={actionButtons} />
-    </div>
+
+  <div class="content-wrapper">
+    <!-- <DynamicImage className="logo" image={logo} /> -->
+    <p>{text}</p>
+    <ActionButtons actionButtons={actionButtons} />
   </div>
 </section>
 
 <style>
   section {
-    padding-top: 0;
+    padding-top: var(--nav-height);
     position: relative;
     min-height: var(--hero-height);
   }
   p {
     color: var(--text-color-invert);
-    font-size: var(--hero-font-size);
-    line-height: var(--hero-font-interline);
-    margin-bottom: 3rem;
+    font-size: 2.5rem;
+    line-height: 200%;
+    margin-bottom: 2rem;
   }
 
   .content-wrapper {
-    /* position: absolute; */
-    z-index: 2;
-    max-width: var(--hero-width);
-    left: calc(var(--hero-width) / 4);
-  }
-  .content-align {
     max-width: var(--section-max-width);
     margin: 0 auto;
+    padding-top: 10rem;
+  }
+  @media only screen and (max-width: 1200px) {
+    p {
+      font-size: calc(1.5 * var(--font-size-text));
+    }
   }
 
   @media only screen and (max-width: 485px) {
+    section {
+      min-height: 60vh;
+      min-height: 60dvh;
+    }
     p {
-      font-size: calc(0.7 * var(--hero-font-size));
+      font-size: calc(0.7 * var(--font-size-text));
     }
   }
 </style>
