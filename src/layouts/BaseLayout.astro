@@ -37,25 +37,11 @@ if (siteSettings) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    {
-      seoConfig && siteSettings ? (
-        <SEO seoConfig={seoConfig} siteName={siteSettings.title} />
-      ) : (
-        <title>Baustof</title>
-      )
-    }
+    {seoConfig && siteSettings ? <SEO seoConfig={seoConfig} siteName={siteSettings.title} /> : <title>Baustof</title>}
 
-    {
-      structuredData && (
-        <script
-          type="application/ld+json"
-          set:html={JSON.stringify(structuredData)}
-        />
-      )
-    }
+    {structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
   </head>
   <body>
-    <h1>BAUSTOF</h1>
     <NavigationBar />
     <main id="main-content">
       <slot />

@@ -2,16 +2,29 @@
 type Props = HomeOffersSection;
 
 import type { HomeOffersSection } from "../../../sanity.types";
-import ActionButtons from "../ActionButtons.astro";
+import { fetchMainOffers } from "../../api/homePage/fetchMainOffers/query";
 import Cards from "../Cards.astro";
 
-const { cards, title, actionButtons } = Astro.props;
+const { title, actionButtons } = Astro.props;
+
+const offers = await fetchMainOffers();
 ---
 
 <section>
   <h3>{title}</h3>
-  <Cards cards={cards} />
-  <ActionButtons actionButtons={actionButtons} />
+  <Cards cards={offers} />
+  <div class="action-buttons-wrapper">
+    {
+      actionButtons.map((button) => {
+        const btn = button;
+        return (
+          <a class=" button-elevated button-elevated-inverted" href={btn.href}>
+            {btn.text}
+          </a>
+        );
+      })
+    }
+  </div>
 
   <style>
     section {
@@ -30,6 +43,16 @@ const { cards, title, actionButtons } = Astro.props;
     h3 {
       text-align: center;
       color: var(--text-color-invert);
+    }
+
+    .button-elevated-inverted {
+      background-color: var(--background-color);
+      color: var(--text-color);
+      font-weight: bold;
+      transition: 0.2s ease transform;
+    }
+    .button-elevated-inverted:hover {
+      transform: translateY(-4px);
     }
 
     @media only screen and (max-width: 768px) {

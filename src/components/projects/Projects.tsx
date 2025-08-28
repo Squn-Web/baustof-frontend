@@ -115,18 +115,28 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
       dateTo,
       currentPage: page,
     });
+
+    // Handle browser back/forward navigation
+    const el = document.getElementById("scroll-to");
+
+    if (el) {
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      console.log(isMobile);
+      const offset = isMobile ? 32 : 116;
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset; // 20px below the top
+      window.scrollTo({
+        top: topOffset,
+        behavior: "smooth",
+      });
+    } else {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
   };
 
-  // (removed) We now reset the page explicitly in each handler to keep URL in sync.
-
-  // Handle browser back/forward navigation
   useEffect(() => {
-    const el = document.getElementById("projects-section");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
     const handlePopState = () => {
       const newState = getInitialStateFromURL();
       setSearchTerm(newState.searchTerm);
@@ -246,7 +256,7 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
         onResetFilters={handleResetFilters}
       />
 
-      <div className="projects-wrapper">
+      <div id="scroll-to" className="projects-wrapper">
         {/* Rendering projects */}
         {currentProjects.length === 0 ? (
           <div className="no-results">
