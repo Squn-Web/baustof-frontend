@@ -10,13 +10,7 @@ const footer = await fetchFooter();
 <footer>
   <div class="content-wrapper">
     <div class="contact-wrapper">
-      <Image
-        class="contact-icon"
-        src={urlForImage(footer.headerIcon.asset).url()}
-        width={48}
-        height={48}
-        alt={footer.headerIcon.alt}
-      />
+      <Image class="contact-icon" src={urlForImage(footer.headerIcon.asset).url()} width={48} height={48} alt={footer.headerIcon.alt} />
       <div class="contact-content">
         <h4>{footer.headerTitle}</h4>
         <p>{footer.headerSubTitle}</p>
@@ -26,12 +20,7 @@ const footer = await fetchFooter();
 
     <div class="informations-wrapper">
       <div class="logo-wrapper">
-        <Image
-          src={urlForImage(footer.logo.asset).url()}
-          width={64}
-          height={64}
-          alt={footer.logo.alt}
-        />
+        <Image src={urlForImage(footer.logo.asset).url()} width={64} height={64} alt={footer.logo.alt} />
         <p>{footer.description}</p>
       </div>
 
@@ -209,7 +198,7 @@ const footer = await fetchFooter();
       gap: 1rem;
     }
     .credits-wrapper {
-      line-height: 70%;
+      line-height: 60%;
     }
     .credits-wrapper > p {
       font-size: calc(0.35 * var(--font-size-text));

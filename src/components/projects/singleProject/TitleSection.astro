@@ -1,16 +1,20 @@
 ---
+import type { GetProjectBySlugQueryResult } from "../../../../sanity.types";
+
 interface Props {
   title: string;
   projectType: string;
   startDate: string;
   city: string;
+  categories: GetProjectBySlugQueryResult[number]["categories"];
 }
-const { title, projectType, startDate, city } = Astro.props;
+const { title, projectType, startDate, city, categories } = Astro.props;
 ---
 
 <section>
   <div class="content-wrapper">
     <h2>{title}</h2>
+    <p class="meta-type">{projectType}</p>
     <div class="meta-info">
       <div class="info-date">
         <img src="/icons/calendar.svg" alt="" aria-hidden="true" />
@@ -21,7 +25,10 @@ const { title, projectType, startDate, city } = Astro.props;
         <p>{city}</p>
       </div>
     </div>
-    <p class="meta-type">{projectType}</p>
+
+    <div class="categories-wrapper">
+      {categories?.map((category) => <p class="category-item">{category.slug.current}</p>)}
+    </div>
   </div>
 </section>
 
@@ -32,7 +39,7 @@ const { title, projectType, startDate, city } = Astro.props;
   }
   h2 {
     font-weight: bold;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     line-height: 130%;
   }
   .content-wrapper {
@@ -60,8 +67,26 @@ const { title, projectType, startDate, city } = Astro.props;
   .meta-info > div > img {
     width: 36px;
     height: 36px;
-    filter: invert(24%) sepia(8%) saturate(100%) hue-rotate(185deg)
-      brightness(97%) contrast(85%);
+    filter: invert(24%) sepia(8%) saturate(100%) hue-rotate(185deg) brightness(97%) contrast(85%);
+  }
+
+  .meta-type {
+    font-size: calc(0.8 * var(--font-size-text));
+    color: #515151;
+    padding-bottom: 1rem;
+  }
+  .categories-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .category-item {
+    border: 2px solid var(--card-background-color);
+    padding: 0.75rem;
+    border-radius: 10rem;
+    font-size: calc(0.7 * var(--font-size-text));
   }
   /* Large screens (485px and below) */
   @media only screen and (max-width: 485px) {

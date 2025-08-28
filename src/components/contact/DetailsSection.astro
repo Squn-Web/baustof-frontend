@@ -12,17 +12,19 @@ const { cards } = Astro.props;
 <section>
   <div class="content-wrapper">
     {
-      cards.map((card) => {
-        return (
-          <a href={card.href} target="_blank">
+      cards.map((card, index) => (
+        <>
+          <a href={card.href} target="_blank" rel="noopener noreferrer">
             <div class="card">
               <Image class="contact-section-icon" src={urlForImage(card.icon.asset).url()} width={128} height={128} alt={card.icon.alt} />
               <h4>{card.title}</h4>
               <Paragraphs className="scaleFont" paragraphs={card.text} />
             </div>
           </a>
-        );
-      })
+
+          {index < cards.length - 1 && <div class="divider" />}
+        </>
+      ))
     }
   </div>
 </section>
@@ -35,14 +37,11 @@ const { cards } = Astro.props;
   h4 {
     font-size: calc(1.8 * var(--font-size-h4));
   }
-  a:hover {
-    background-color: rgb(240, 240, 240);
-  }
+
   .content-wrapper {
     display: flex;
     justify-content: space-between;
     max-width: var(--section-max-width);
-    gap: 5rem;
     margin: 0 auto;
   }
 
@@ -51,6 +50,12 @@ const { cards } = Astro.props;
     align-items: center;
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .divider {
+    align-self: stretch;
+    width: 0;
+    border-right: 2px solid var(--card-background-color);
   }
 
   @media only screen and (max-width: 1200px) {

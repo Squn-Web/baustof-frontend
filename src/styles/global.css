@@ -5,6 +5,13 @@
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: "Poppins-bolded";
+  src: url(/Poppins-Bold.ttf);
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 /* CSS RESET */
 * {
   margin: 0;
@@ -221,14 +228,6 @@ p {
   font-size: var(--font-size-text);
 }
 
-h1 {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  user-select: none;
-  z-index: -1;
-}
 h2 {
   font-size: var(--font-size-h2);
 }
@@ -382,7 +381,7 @@ h5 {
 .form-input::placeholder {
   font-family: "Poppins";
   font-size: var(--font-size-text);
-  color: rbg(193, 193, 193);
+  color: rgb(193, 193, 193);
 }
 
 .form-label {
@@ -484,14 +483,9 @@ h5 {
     padding: calc(0.8 * var(--section-padding)) calc(0.5 * var(--section-spacing));
   }
 
-  /* .logo {
-    margin-top: calc(2rem + var(--nav-height));
-  } */
   .content-wrapper {
     gap: 3rem !important;
   }
-
-  /* praise wrapper -> PraiseSection.astro  */
 
   .cards-wrapper {
     flex-direction: column;

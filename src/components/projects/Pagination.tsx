@@ -73,16 +73,28 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   });
 
   const scrollToProjectsSection = () => {
-    const el = document.getElementById("projects-section");
+    const el = document.getElementById("scroll-to");
+
     if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const offset = isMobile ? 32 : 116;
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({
+        top: topOffset,
+        behavior: "smooth",
+      });
     } else {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
     }
   };
 
   const goToPage = (page: number) => {
-    onPageChange(page);
+    if (page !== currentPage) {
+      onPageChange(page);
+    }
     scrollToProjectsSection();
   };
 
@@ -125,7 +137,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
                   onClick={() => goToPage(page as number)}
                   aria-current={page === currentPage ? "page" : undefined}
                   aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
-                  disabled={page === currentPage}
+                  // disabled={page === currentPage}
                 >
                   {page}
                 </button>
@@ -187,7 +199,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
                 onClick={() => goToPage(page as number)}
                 aria-current={page === currentPage ? "page" : undefined}
                 aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
-                disabled={page === currentPage}
+                // disabled={page === currentPage}
               >
                 {page}
               </button>

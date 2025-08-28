@@ -31,11 +31,11 @@ const sliderLenght = gallery?.length;
           ))
       }
     </div>
-    <button id="prev-btn" class="prev-button" aria-label="Poprzedni następny obrazek">
-      <img src="/icons/arrow_previous.svg" alt="Poprzedni następny obrazek" />
+    <button id="prev-btn" class="prev-button" aria-label="Poprzedni obrazek">
+      <img src="/icons/arrow_previous.svg" alt="Poprzedni obrazek" />
     </button>
-    <button id="next-btn" class="next-button" aria-label="Przycisk następny obrazek">
-      <img src="/icons/arrow_next.svg" alt="Przycisk następny obrazek" />
+    <button id="next-btn" class="next-button" aria-label="Następny obrazek">
+      <img src="/icons/arrow_next.svg" alt="Następny obrazek" />
     </button>
   </div>
   <!-- Carousel Controlls -->
@@ -46,6 +46,7 @@ const sliderLenght = gallery?.length;
           class={index === 0 ? "controll-dot dot-current" : "controll-dot"}
           data-index={index}
           role="button"
+          tabindex="0"
           aria-label={`Przejdź do obrazka nr ${index + 1}`}
         />
       ))
@@ -57,11 +58,11 @@ const sliderLenght = gallery?.length;
       <img src="" alt="Pop-up image" class="popup-image" />
     </div>
     <button class="close-popup-button"><img src="/icons/close.svg" alt="close button" /></button>
-    <button id="prev-btn-overlay" class="prev-button" aria-label="Poprzedni następny obrazek">
-      <img src="/icons/arrow_previous.svg" alt="Poprzedni następny obrazek" />
+    <button id="prev-btn-overlay" class="prev-button" aria-label="Poprzedni obrazek">
+      <img src="/icons/arrow_previous.svg" alt="Poprzedni obrazek" />
     </button>
-    <button id="next-btn-overlay" class="next-button" aria-label="Przycisk następny obrazek">
-      <img src="/icons/arrow_next.svg" alt="Przycisk następny obrazek" />
+    <button id="next-btn-overlay" class="next-button" aria-label="Następny obrazek">
+      <img src="/icons/arrow_next.svg" alt="Następny obrazek" />
     </button>
     <div id="slide-tracker">
       <p>1 / {gallery?.length || 0}</p>
@@ -85,6 +86,7 @@ const sliderLenght = gallery?.length;
     aspect-ratio: 16/9;
     max-height: calc(100vh - var(--nav-height) - 10vh);
     max-height: calc(100dvh - var(--nav-height) - 10vh);
+    cursor: pointer;
   }
   .slider {
     display: flex;
@@ -344,6 +346,7 @@ const sliderLenght = gallery?.length;
   let currentIndex = 0;
 
   function showSlide(index) {
+    if (totalSlides === 0) return;
     const isMobile = window.innerWidth <= 485;
     if (isMobile && sliderWrapper) {
       // For mobile, use scrollLeft for native scrolling
@@ -364,20 +367,30 @@ const sliderLenght = gallery?.length;
   }
 
   function nextSlide() {
+    if (imageWrappers.length === 0) return;
     currentIndex = (currentIndex + 1) % imageWrappers.length;
     showSlide(currentIndex);
   }
 
   function prevSlide() {
+    if (imageWrappers.length === 0) return;
     currentIndex = (currentIndex - 1 + imageWrappers.length) % imageWrappers.length;
     showSlide(currentIndex);
   }
 
   const controllDots = document.querySelectorAll(".controll-dot");
+
   controllDots.forEach((dot) => {
-    dot.addEventListener("click", () => {
+    const go = () => {
       currentIndex = parseInt(dot.dataset.index);
       showSlide(currentIndex);
+    };
+    dot.addEventListener("click", go);
+    dot.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        go();
+      }
     });
   });
 
@@ -425,10 +438,27 @@ const sliderLenght = gallery?.length;
     nextButton.removeEventListener("click", nextSlide);
     prevButton.removeEventListener("click", prevSlide);
     if (sliderWrapper) {
-      sliderWrapper.addEventListener("scrollend", () => {
+      // sliderWrapper.addEventListener("scrollend", () => {
+      //   currentIndex = Math.round(sliderWrapper.scrollLeft / sliderWrapper.offsetWidth);
+      //   showSlide(currentIndex);
+      // });
+      const onScrollEnd = () => {
         currentIndex = Math.round(sliderWrapper.scrollLeft / sliderWrapper.offsetWidth);
         showSlide(currentIndex);
-      });
+      };
+      if ("onscrollend" in window) {
+        sliderWrapper.addEventListener("scrollend", onScrollEnd);
+      } else {
+        let t;
+        sliderWrapper.addEventListener(
+          "scroll",
+          () => {
+            clearTimeout(t);
+            t = setTimeout(onScrollEnd, 120);
+          },
+          { passive: true },
+        );
+      }
     }
   } else {
     nextButton.addEventListener("click", nextSlide);
@@ -459,7 +489,8 @@ const sliderLenght = gallery?.length;
 
   function updateSlideTracker(current) {
     if (slideTracker) {
-      slideTracker.querySelector("p").textContent = `${current + 1} / ${totalSlides}`;
+      const visibleIndex = totalSlides > 0 && current >= 0 ? current + 1 : 0;
+      slideTracker.querySelector("p").textContent = `${visibleIndex} / ${totalSlides}`;
     }
   }
 

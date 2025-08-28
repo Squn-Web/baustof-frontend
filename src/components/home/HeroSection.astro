@@ -1,47 +1,169 @@
 ---
 type Props = HomeHeroSection;
 
-import { Image } from "astro:assets";
-import { urlForImage } from "../../lib/urlForImage";
-import ActionButtons from "../ActionButtons.astro";
 import type { HomeHeroSection } from "../../../sanity.types";
-import DynamicImage from "../DynamicImage.astro";
+import { urlForImage } from "../../lib/urlForImage";
 import { getImageDimensions } from "../../lib/getImageDimensions";
+import { Image } from "astro:assets";
 
-const { text, actionButtons, image } = Astro.props;
+const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
 ---
 
 <section>
-  <DynamicImage className="hero-image" image={image} />
+  <Image
+    class="hero-image"
+    src={urlForImage(image.asset).url()}
+    width={getImageDimensions(image).width}
+    height={getImageDimensions(image).height}
+    alt={image.alt}
+  />
 
   <div class="content-wrapper">
-    <!-- <DynamicImage className="logo" image={logo} /> -->
-    <p>{text}</p>
-    <ActionButtons actionButtons={actionButtons} />
+    <h1>Baustof</h1>
+    <div class="description">
+      <p>{textDescription}&nbsp;</p>
+      <p class="highlighted">{textHighlighted}</p>
+    </div>
+
+    <div class="action-buttons-wrapper">
+      {
+        actionButtons.map((button) => {
+          const btn = button;
+          return (
+            <a href={btn.href}>
+              <div class="glass-card">{btn.text}</div>
+            </a>
+          );
+        })
+      }
+    </div>
   </div>
 </section>
 
 <style>
   section {
+    display: flex;
     padding-top: var(--nav-height);
     position: relative;
     min-height: var(--hero-height);
   }
+  h1 {
+    font-family: "Poppins-bolded";
+    color: var(--text-color-invert);
+    font-size: 12rem;
+  }
   p {
     color: var(--text-color-invert);
     font-size: 2.5rem;
-    line-height: 200%;
-    margin-bottom: 2rem;
+    font-weight: bold;
+  }
+  a {
+    color: var(--text-color-invert);
+    font-size: 2rem;
+  }
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: var(--section-max-width);
+  }
+  .description {
+    display: flex;
+    margin-top: -19px;
+    margin-left: 9px;
+  }
+  .highlighted {
+    font-family: "Poppins-bolded";
+    font-size: 6rem;
   }
 
-  .content-wrapper {
-    max-width: var(--section-max-width);
-    margin: 0 auto;
-    padding-top: 10rem;
+  .glass-card {
+    padding: 1rem 3rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 0px 0px rgba(255, 255, 255, 0);
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s ease background-color;
   }
+
+  a:hover .glass-card {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .glass-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+
+  .glass-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
+  }
+
   @media only screen and (max-width: 1200px) {
+    h1 {
+      font-size: 6rem;
+    }
     p {
-      font-size: calc(1.5 * var(--font-size-text));
+      font-size: 1.25rem;
+    }
+    .highlighted {
+      font-size: 3rem;
+    }
+    a {
+      font-size: 1rem;
+    }
+    .description {
+      margin-left: 5px;
+      margin-top: -12px;
+      margin-bottom: 1rem;
+    }
+    .glass-card {
+      border-radius: 0.75rem;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    .content-wrapper {
+      gap: 0 !important;
+    }
+    h1 {
+      font-size: 4rem;
+    }
+    p {
+      font-size: 1.2rem;
+    }
+    .highlighted {
+      font-size: 1.75rem;
+    }
+    a {
+      font-size: 1rem;
+    }
+    .description {
+      margin-left: 4px;
+      margin-top: -4px;
+      margin-bottom: 1rem;
+    }
+    .glass-card {
+      border-radius: 0.75rem;
+      padding: 0.75rem 1.5rem;
     }
   }
 
@@ -50,8 +172,17 @@ const { text, actionButtons, image } = Astro.props;
       min-height: 60vh;
       min-height: 60dvh;
     }
+    h1 {
+      font-size: 3rem;
+    }
+    .highlighted {
+      font-size: 1.5rem;
+    }
     p {
-      font-size: calc(0.7 * var(--font-size-text));
+      font-size: 0.75rem;
+    }
+    a {
+      font-size: 0.9rem;
     }
   }
 </style>
