@@ -381,7 +381,7 @@ h5 {
 .form-input::placeholder {
   font-family: "Poppins";
   font-size: var(--font-size-text);
-  color: rbg(193, 193, 193);
+  color: rgb(193, 193, 193);
 }
 
 .form-label {

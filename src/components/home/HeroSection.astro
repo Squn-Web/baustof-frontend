@@ -4,19 +4,18 @@ type Props = HomeHeroSection;
 import type { HomeHeroSection } from "../../../sanity.types";
 import { urlForImage } from "../../lib/urlForImage";
 import { getImageDimensions } from "../../lib/getImageDimensions";
+import { Image } from "astro:assets";
 
 const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
 ---
 
 <section>
-  <img
+  <Image
     class="hero-image"
     src={urlForImage(image.asset).url()}
     width={getImageDimensions(image).width}
     height={getImageDimensions(image).height}
     alt={image.alt}
-    loading="lazy"
-    decoding="async"
   />
 
   <div class="content-wrapper">
