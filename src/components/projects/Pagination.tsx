@@ -73,20 +73,12 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
   });
 
   const scrollToProjectsSection = () => {
-    // const el = document.getElementById("projects-section");
-    // if (el) {
-    //   el.scrollIntoView({ behavior: "smooth", block: "start" });
-    // } else {
-    //   window.scrollTo({ top: 0, behavior: "smooth" });
-    // }
-    // Handle browser back/forward navigation
     const el = document.getElementById("scroll-to");
 
     if (el) {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      console.log(isMobile);
       const offset = isMobile ? 32 : 116;
-      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset; // 20px below the top
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({
         top: topOffset,
         behavior: "smooth",

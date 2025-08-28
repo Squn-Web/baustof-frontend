@@ -38,7 +38,7 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
   const projectsPerPage = 3;
 
   // Update URL when filters change
-  const updateURL = (filters: any) => {
+  const updateURL = (filters: any, mode: "replace" | "push" = "replace") => {
     const url = new URL(window.location.href);
     const searchParams = url.searchParams;
     const defaultDateTo = new Date().toLocaleDateString("en-CA", {
@@ -66,13 +66,15 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
     else searchParams.delete("page");
 
     // Update URL without page reload
-    window.history.replaceState({}, "", url.toString());
+    if (mode === "push") window.history.pushState({}, "", url.toString());
+    else window.history.replaceState({}, "", url.toString());
   };
 
   const filteredProjects = useMemo(() => {
     return projects.filter((project) => {
       // Search term filter
-      const matchesSearch = !searchTerm.trim() || project.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      // const matchesSearch = !searchTerm.trim() || project.title?.toLowerCase().includes(searchTerm.toLowerCase());
+      const matchesSearch = !searchTerm.trim() || (project.title ?? "").toLowerCase().includes(searchTerm.toLowerCase());
 
       // Project type filter
       const matchesProjectType = !selectedProjectType || project.projectType?.slug.current === selectedProjectType;
@@ -107,14 +109,17 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
-    updateURL({
-      searchTerm,
-      selectedProjectType,
-      selectedCategory,
-      dateFrom,
-      dateTo,
-      currentPage: page,
-    });
+    updateURL(
+      {
+        searchTerm,
+        selectedProjectType,
+        selectedCategory,
+        dateFrom,
+        dateTo,
+        currentPage: page,
+      },
+      "push",
+    );
 
     // Handle browser back/forward navigation
     const el = document.getElementById("scroll-to");
@@ -149,7 +154,7 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
 
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
-  }, [currentPage]);
+  }, []);
 
   const handleSearchChange = (value: string) => {
     setSearchTerm(value);
