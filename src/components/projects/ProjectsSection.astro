@@ -11,7 +11,7 @@ const { filterTitle, sectionTitle } = Astro.props;
 const [projects, categories, projectTypes] = await Promise.all([fetchProjects(), fetchProjectsCategory(), fetchProjectType()]);
 ---
 
-<section id="projects-section">
+<section>
   <div class="content-wrapper">
     <Projects
       client:only="react"

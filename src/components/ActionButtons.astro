@@ -1,5 +1,5 @@
 ---
-import type { ActionButton } from '../../sanity.types';
+import type { ActionButton } from "../../sanity.types";
 
 interface Props {
   actionButtons: ActionButton[];
@@ -20,3 +20,12 @@ const { actionButtons } = Astro.props;
     })
   }
 </div>
+
+<style>
+  a {
+    transition: 0.2s ease transform;
+  }
+  a:hover {
+    transform: translateY(-4px);
+  }
+</style>

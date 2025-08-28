@@ -1,12 +1,11 @@
 ---
 interface Props {
-  cards: HomeOfferCard[];
+  cards: GetMainOffersQueryResult;
 }
 
 import { Image } from "astro:assets";
 import { urlForImage } from "../lib/urlForImage";
-import type { HomeOfferCard } from "../../sanity.types";
-
+import type { GetMainOffersQueryResult } from "../../sanity.types";
 
 const { cards } = Astro.props;
 ---
@@ -16,14 +15,9 @@ const { cards } = Astro.props;
     cards.map((card) => {
       return (
         <div class="card">
-          <Image
-            src={urlForImage(card.icon.asset).url()}
-            width={64}
-            height={64}
-            alt={card.icon.alt}
-          />
-          <h4>{card.title}</h4>
-          <p>{card.subTitle}</p>
+          <Image src={urlForImage(card.icon.asset).url()} width={64} height={64} alt={card.icon.alt} />
+          <h4>{card.name}</h4>
+          <p>{card.shortDescription}</p>
         </div>
       );
     })
@@ -38,7 +32,7 @@ const { cards } = Astro.props;
     width: var(--card-width);
     text-align: center;
     gap: 2rem;
-    background-color: var(--card-background-color);
+    background-color: var(--background-color);
     padding: 5rem 2rem;
     -webkit-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
