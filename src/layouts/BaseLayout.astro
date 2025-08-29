@@ -86,23 +86,13 @@ if (siteSettings) {
           }
 
           this.activeRequests.add(url);
-          console.log('🚀 Prefetching:', url);
 
           try {
             // Use link prefetch
             const link = document.createElement("link");
             link.rel = "prefetch";
             link.href = url;
-            
-            // Add load event listener for debugging
-            link.addEventListener('load', () => {
-              console.log('✅ Prefetch completed:', url);
-            });
-            
-            link.addEventListener('error', (e) => {
-              console.warn('❌ Prefetch failed:', url, e);
-            });
-            
+
             document.head.appendChild(link);
             this.cache.add(url);
           } catch (error) {
