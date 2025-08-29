@@ -6,7 +6,8 @@
       "WebSearch",
       "WebFetch(domain:docs.netlify.com)",
       "Bash(npm run generate-sanity-types:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []

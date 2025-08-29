@@ -13,7 +13,7 @@ const { actionButtons } = Astro.props;
     actionButtons.map((button) => {
       const btn = button;
       return (
-        <a class="button-elevated" href={btn.href}>
+        <a class="button-elevated" href={btn.href} data-prefetch="low">
           {btn.text}
         </a>
       );

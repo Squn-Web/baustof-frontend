@@ -8,7 +8,7 @@ interface Props {
 const { text, href, path } = Astro.props;
 ---
 
-<a href={href}>
+<a href={href} data-prefetch="visible">
   <p>{text}</p>
   <img class="icon" src={path} alt="Icon" />
 </a>

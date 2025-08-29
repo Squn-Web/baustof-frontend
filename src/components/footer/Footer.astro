@@ -15,7 +15,7 @@ const footer = await fetchFooter();
         <h4>{footer.headerTitle}</h4>
         <p>{footer.headerSubTitle}</p>
       </div>
-      <a class="button-elevated" href="/contact">{footer.headerButtonText}</a>
+      <a class="button-elevated" href="/contact" data-prefetch="high">{footer.headerButtonText}</a>
     </div>
 
     <div class="informations-wrapper">
@@ -25,11 +25,11 @@ const footer = await fetchFooter();
       </div>
 
       <div class="navigation-wrapper">
-        <p><a href="/">Strona główna</a></p>
-        <p><a href="/about">O nas</a></p>
-        <p><a href="/contact">Kontakt</a></p>
-        <p><a href="/offer">Oferty</a></p>
-        <p><a href="/projects">Projekty</a></p>
+        <p><a href="/" data-prefetch="high">Strona główna</a></p>
+        <p><a href="/about" data-prefetch="high">O nas</a></p>
+        <p><a href="/contact" data-prefetch="high">Kontakt</a></p>
+        <p><a href="/offer" data-prefetch="high">Oferty</a></p>
+        <p><a href="/projects" data-prefetch="high">Projekty</a></p>
       </div>
 
       <div class="information-wrapper">

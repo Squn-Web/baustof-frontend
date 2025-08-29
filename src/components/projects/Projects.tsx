@@ -275,7 +275,7 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
           </div>
         ) : (
           currentProjects.map((project) => {
-            return <ProjectComponent project={project} key={project._id} />;
+            return <ProjectComponent project={project} key={project.slug.current} />;
           })
         )}
 
