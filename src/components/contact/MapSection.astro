@@ -170,8 +170,8 @@ const API_KEY = import.meta.env.PUBLIC_GOOGLE_MAPS_API_KEY;
       // Info window for the marker
       const infoWindow = new google.maps.InfoWindow({
         content: `
-        <div style="padding: 12px; font-family: inherit;">
-          <h3 style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Baustof</h3>
+        <div style="padding: 12px; font-family: inherit;" role="dialog" aria-labelledby="baustof-title" tabindex="-1">
+          <h3 id="baustof-title" style="margin: 0 0 8px 0; color: #333; font-size: 16px;">Baustof</h3>
           <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.4;">
             Wrzosowa 4<br>
             96-321 Żelechów, Polska
