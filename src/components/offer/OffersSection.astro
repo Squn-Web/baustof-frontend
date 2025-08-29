@@ -18,13 +18,9 @@ const offers = await fetchOffers();
               <div class="offer-card">
                 <div class="offer-card-header">
                   <DynamicImage image={offer.icon} />
-                  <img
-                    class="icon-offer"
-                    src="/icons/arrow_offer.svg"
-                    alt="Icon"
-                  />
+                  <img class="icon-offer" src="/icons/arrow_offer.svg" alt="Icon" />
                 </div>
-                <h4>{offer.name}</h4>
+                <p class="offer-title">{offer.name}</p>
                 <p>{offer.shortDescription}</p>
               </div>
             </a>
@@ -40,21 +36,9 @@ const offers = await fetchOffers();
     padding: calc(1.25 * var(--section-padding)) var(--section-spacing);
     clip-path: polygon(0 0%, 100% 0, 100% 90%, 0% 100%);
     background: var(--primary-color);
-    background: -webkit-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: -moz-linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
-    background: linear-gradient(
-      25deg,
-      var(--primary-color-a) 0%,
-      var(--primary-color-light) 100%
-    );
+    background: -webkit-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+    background: -moz-linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
+    background: linear-gradient(25deg, var(--primary-color-a) 0%, var(--primary-color-light) 100%);
   }
 
   .content-wrapper {
@@ -91,6 +75,9 @@ const offers = await fetchOffers();
   .icon-offer {
     width: 40px;
     height: 40px;
+  }
+  .offer-title {
+    font-weight: bold;
   }
   @media only screen and (max-width: 768px) {
     section {
