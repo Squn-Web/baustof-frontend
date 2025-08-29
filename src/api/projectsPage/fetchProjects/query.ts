@@ -4,9 +4,23 @@ import type { GetProjectsQueryResult } from "../../../../sanity.types";
 
 const getProjectsQuery = defineQuery(`
 *[_type == "project"] | order(coalesce(date, _createdAt) desc) {
-  ...,
-  projectType->,
-  categories[]->
+  title,
+  startDate,
+  city,
+  text,
+  actionButtonText,
+  slug,
+  image{
+    asset,
+    alt
+  },
+  projectType->{
+    slug
+  },
+  categories[]->{
+    _id,
+    slug
+  }
 }
 `);
 

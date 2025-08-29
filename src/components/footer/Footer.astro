@@ -10,7 +10,7 @@ const footer = await fetchFooter();
 <footer>
   <div class="content-wrapper">
     <div class="contact-wrapper">
-      <Image class="contact-icon" src={urlForImage(footer.headerIcon.asset).url()} width={48} height={48} alt={footer.headerIcon.alt} />
+      {footer.headerIcon.asset && <Image class="contact-icon" src={urlForImage(footer.headerIcon.asset).url()} width={48} height={48} alt={footer.headerIcon.alt} />}
       <div class="contact-content">
         <h4>{footer.headerTitle}</h4>
         <p>{footer.headerSubTitle}</p>
@@ -20,7 +20,7 @@ const footer = await fetchFooter();
 
     <div class="informations-wrapper">
       <div class="logo-wrapper">
-        <Image src={urlForImage(footer.logo.asset).url()} width={64} height={64} alt={footer.logo.alt} />
+        {footer.logo.asset && <Image src={urlForImage(footer.logo.asset).url()} width={64} height={64} alt={footer.logo.alt} />}
         <p>{footer.description}</p>
       </div>
 
@@ -33,16 +33,16 @@ const footer = await fetchFooter();
       </div>
 
       <div class="information-wrapper">
-        <ImageText image={footer.addressLine.icon}>
+        <ImageText image={footer.addressLine.icon} reversed={false}>
           <p>{footer.addressLine.text}</p>
         </ImageText>
-        <ImageText image={footer.contactPhone.icon}>
+        <ImageText image={footer.contactPhone.icon} reversed={false}>
           <p>{footer.contactPhone.text}</p>
         </ImageText>
-        <ImageText image={footer.contactEmail.icon}>
+        <ImageText image={footer.contactEmail.icon} reversed={false}>
           <p>{footer.contactEmail.text}</p>
         </ImageText>
-        <ImageText image={footer.workingHours.icon}>
+        <ImageText image={footer.workingHours.icon} reversed={false}>
           <p>{footer.workingHours.text}</p>
         </ImageText>
       </div>
