@@ -394,18 +394,6 @@ const sliderLenght = gallery?.length;
     });
   });
 
-  // imageWrappers.forEach((wrapper) => {
-  //   wrapper.addEventListener("click", (event) => {
-  //     const clickedImageSrc = event.target.src;
-  //     if (clickedImageSrc) {
-  //       popupImage.src = clickedImageSrc;
-  //       imagePopupOverlay.style.display = "flex";
-  //       document.body.classList.add("no-scroll");
-  //       document.documentElement.classList.add("no-scroll"); // Add to html element
-  //     }
-  //   });
-  // });
-
   imageWrappers.forEach((wrapper, index) => {
     wrapper.addEventListener("click", (event) => {
       const clickedImageSrc = event.target.src;
@@ -438,10 +426,6 @@ const sliderLenght = gallery?.length;
     nextButton.removeEventListener("click", nextSlide);
     prevButton.removeEventListener("click", prevSlide);
     if (sliderWrapper) {
-      // sliderWrapper.addEventListener("scrollend", () => {
-      //   currentIndex = Math.round(sliderWrapper.scrollLeft / sliderWrapper.offsetWidth);
-      //   showSlide(currentIndex);
-      // });
       const onScrollEnd = () => {
         currentIndex = Math.round(sliderWrapper.scrollLeft / sliderWrapper.offsetWidth);
         showSlide(currentIndex);
