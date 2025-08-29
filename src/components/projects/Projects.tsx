@@ -142,8 +142,6 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
         "push",
       );
     }
-
-    scrollToProjectsSection();
   };
 
   useEffect(() => {

@@ -8,10 +8,11 @@
 @font-face {
   font-family: "Poppins-bolded";
   src: url(/Poppins-Bold.woff2) format("woff2");
-  font-weight: normal;
-  font-style: normal;
+  font-weight: 700;
   font-display: swap;
+  unicode-range: U+0032-0037, U+0042, U+0061-0075;
 }
+
 /* CSS RESET */
 * {
   margin: 0;

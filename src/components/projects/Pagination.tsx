@@ -96,9 +96,9 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
       onPageChange(page);
     }
 
-    requestAnimationFrame(() => {
-      scrollToProjectsSection();
-    });
+    if (page !== currentPage) {
+      requestAnimationFrame(scrollToProjectsSection);
+    }
   };
 
   return (
