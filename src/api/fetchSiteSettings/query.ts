@@ -1,12 +1,19 @@
 import { defineQuery } from "groq";
 import { fetchSanity } from "../../lib/api";
 import type {
-  GetFooterQueryResult,
   GetSiteSettingsQueryResult,
 } from "../../../sanity.types";
 
 const getSiteSettingsQuery = defineQuery(`
-*[_type == "siteSettings"]
+*[_type == "siteSettings"]{
+  title,
+  siteUrl,
+  description,
+  keywords,
+  defaultOgImage,
+  organization,
+  socialMedia
+}
 `);
 
 export async function fetchSiteSettings(): Promise<

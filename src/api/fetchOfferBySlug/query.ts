@@ -3,7 +3,17 @@ import type { GetOfferBySlugQueryResult } from "../../../sanity.types";
 import { fetchSanity } from "../../lib/api";
 
 const getOfferBySlugQuery = defineQuery(`
-*[_type == "offer" && slug.current == $slug]
+*[_type == "offer" && slug.current == $slug]{
+  seo,
+  name,
+  heroImage,
+  icon,
+  description,
+  usageActionButtons,
+  usageSubTitle,
+  usageTitle,
+  slug
+}
 `);
 
 export async function fetchOfferBySlug(

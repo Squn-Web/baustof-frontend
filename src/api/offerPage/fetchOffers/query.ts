@@ -3,7 +3,12 @@ import { defineQuery } from "groq";
 import type { GetOffersQueryResult } from "../../../../sanity.types";
 
 const getOffersQuery = defineQuery(`
-*[_type == "offer"]
+*[_type == "offer"]{
+  slug,
+  icon,
+  name,
+  shortDescription
+}
 `);
 
 export async function fetchOffers(): Promise<GetOffersQueryResult> {

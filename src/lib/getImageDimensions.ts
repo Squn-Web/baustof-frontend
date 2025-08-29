@@ -1,6 +1,17 @@
 import type { CustomImage } from "../../sanity.types";
 
-export function getImageDimensions(image: CustomImage): {
+// Union type to handle both CustomImage and project image types
+type ImageWithAsset = CustomImage | {
+  asset: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [key: string]: any;
+  } | null;
+  alt?: string;
+};
+
+export function getImageDimensions(image: ImageWithAsset): {
   width: number;
   height: number;
   aspectRatio: number;

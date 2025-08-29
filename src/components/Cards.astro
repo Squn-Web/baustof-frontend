@@ -15,7 +15,7 @@ const { cards } = Astro.props;
     cards.map((card) => {
       return (
         <div class="card">
-          <Image src={urlForImage(card.icon.asset).url()} width={64} height={64} alt={card.icon.alt} />
+          {card.icon.asset && <Image src={urlForImage(card.icon.asset).url()} width={64} height={64} alt={card.icon.alt} />}
           <h4>{card.name}</h4>
           <p>{card.shortDescription}</p>
         </div>
