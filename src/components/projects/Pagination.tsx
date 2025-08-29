@@ -95,18 +95,21 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
     if (page !== currentPage) {
       onPageChange(page);
     }
-    scrollToProjectsSection();
+
+    if (page !== currentPage) {
+      requestAnimationFrame(scrollToProjectsSection);
+    }
   };
 
   return (
     <>
-      {/* Desktop / Tablet */}
+      {/* Desktop */}
       <nav className="pagination-nav pagination-nav--desktop" aria-label="Pagination">
         <ul className="pagination">
           {/* First */}
           <li className={`page-item ${isFirstDisabled ? "disabled" : ""}`}>
-            <button className="page-link" type="button" onClick={() => goToPage(1)} disabled={isFirstDisabled} aria-label="Pierwsza strona">
-              <img src="/icons/chevron_double_left.svg" width="32" height="32" alt="" style={iconStyle(isFirstDisabled)} aria-hidden="true" />
+            <button className="page-link" type="button" onClick={() => goToPage(1)} aria-label="Pierwsza strona" disabled={isFirstDisabled}>
+              <img src="/icons/chevron_double_left.svg" width="32" height="32" alt="" aria-hidden="true" style={iconStyle(isFirstDisabled)} />
             </button>
           </li>
 
@@ -137,7 +140,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
                   onClick={() => goToPage(page as number)}
                   aria-current={page === currentPage ? "page" : undefined}
                   aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
-                  // disabled={page === currentPage}
+                  disabled={page === currentPage}
                 >
                   {page}
                 </button>
@@ -160,19 +163,20 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
 
           {/* Last */}
           <li className={`page-item ${isLastDisabled ? "disabled" : ""}`}>
-            <button className="page-link" type="button" onClick={() => goToPage(totalPages)} disabled={isLastDisabled} aria-label="Ostatnia strona">
+            <button className="page-link" type="button" onClick={() => goToPage(totalPages)} aria-label="Ostatnia strona" disabled={isLastDisabled}>
               <img src="/icons/chevron_double_right.svg" width="32" height="32" alt="" style={iconStyle(isLastDisabled)} aria-hidden="true" />
             </button>
           </li>
         </ul>
       </nav>
 
-      {/* Mobile */}
+      {/* -----------------------------Mobile------------------------------ */}
+
       <nav className="pagination-nav pagination-nav--mobile" aria-label="Pagination">
         <ul className="pagination">
           {/* First */}
           <li className={`page-item ${isFirstDisabled ? "disabled" : ""}`}>
-            <button className="page-link" type="button" onClick={() => goToPage(1)} disabled={isFirstDisabled} aria-label="Pierwsza strona">
+            <button className="page-link" type="button" onClick={() => goToPage(1)} aria-label="Pierwsza strona" disabled={isFirstDisabled}>
               <img src="/icons/chevron_double_left.svg" width="32" height="32" alt="" style={iconStyle(isFirstDisabled)} aria-hidden="true" />
             </button>
           </li>
@@ -199,7 +203,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
                 onClick={() => goToPage(page as number)}
                 aria-current={page === currentPage ? "page" : undefined}
                 aria-label={`Page ${page}${page === currentPage ? ", bieżąca strona" : ""}`}
-                // disabled={page === currentPage}
+                disabled={page === currentPage}
               >
                 {page}
               </button>
@@ -221,7 +225,7 @@ export function Pagination({ currentPage, totalPages, onPageChange }: Pagination
 
           {/* Last */}
           <li className={`page-item ${isLastDisabled ? "disabled" : ""}`}>
-            <button className="page-link" type="button" onClick={() => goToPage(totalPages)} disabled={isLastDisabled} aria-label="Ostatnia strona">
+            <button className="page-link" type="button" onClick={() => goToPage(totalPages)} aria-label="Ostatnia strona" disabled={isLastDisabled}>
               <img src="/icons/chevron_double_right.svg" width="32" height="32" alt="" style={iconStyle(isLastDisabled)} aria-hidden="true" />
             </button>
           </li>
