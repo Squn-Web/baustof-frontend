@@ -21,7 +21,7 @@ const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
   <div class="content-wrapper">
     <h1>Baustof</h1>
     <div class="description">
-      <p>{textDescription}&nbsp;</p>
+      <h2>{textDescription}&nbsp;</h2>
       <p class="highlighted">{textHighlighted}</p>
     </div>
 
@@ -52,10 +52,13 @@ const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
     color: var(--text-color-invert);
     font-size: 12rem;
   }
-  p {
+  h2 {
     color: var(--text-color-invert);
     font-size: 2.5rem;
     font-weight: bold;
+  }
+  p {
+    color: var(--text-color-invert);
   }
   a {
     color: var(--text-color-invert);
@@ -122,7 +125,7 @@ const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
     h1 {
       font-size: 6rem;
     }
-    p {
+    h2 {
       font-size: 1.25rem;
     }
     .highlighted {
@@ -147,7 +150,7 @@ const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
     h1 {
       font-size: 4rem;
     }
-    p {
+    h2 {
       font-size: 1.2rem;
     }
     .highlighted {
@@ -178,7 +181,7 @@ const { textDescription, textHighlighted, actionButtons, image } = Astro.props;
     .highlighted {
       font-size: 1.5rem;
     }
-    p {
+    h2 {
       font-size: 0.75rem;
     }
     a {
