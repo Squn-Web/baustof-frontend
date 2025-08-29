@@ -4,10 +4,27 @@ import { fetchSanity } from "../../lib/api";
 
 const getProjectBySlugQuery = defineQuery(`
 *[_type == "project" && slug.current == $slug]{
-  ...,
-  projectType->,
-  categories[]->
+  seo,
+  title,
+  city,
+  startDate,
+  gallery,
+  text,
+  image,
+  aboutProjectTitle,
+  projectDetails,
+  projectFeatures,
+  slug,
+  projectType->{
+    _id,
+    name
+  },
+  categories[]->{
+    _id,
+    slug,
+    name
   }
+}
 `);
 
 export async function fetchProjectBySlug(

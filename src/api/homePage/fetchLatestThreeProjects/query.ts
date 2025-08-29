@@ -15,7 +15,6 @@ _createdAt,
 image,
 slug,
 actionButtonText,
-...,
 projectType->,
 categories[]->
 }

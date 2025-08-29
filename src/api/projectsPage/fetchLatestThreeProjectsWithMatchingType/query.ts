@@ -1,6 +1,6 @@
 import { defineQuery } from "groq";
 import { fetchSanity } from "../../../lib/api";
-import type { GetProjectsQueryResult } from "../../../../sanity.types";
+import type { GetLatestThreeProjectsWithMatchingTypeQueryResult } from "../../../../sanity.types";
 
 const getLatestThreeProjectsWithMatchingTypeQuery = defineQuery(`
 *[_type == "project" && projectType._ref == $projectTypeRef && slug.current != $currentProjectSlug]
@@ -15,18 +15,16 @@ _createdAt,
 image,
 slug,
 actionButtonText,
-  ...,
-  projectType->,
-  categories[]->
+projectType->,
+categories[]->
 }
-
 `);
 
 export async function fetchLatestThreeProjectsWithMatchingType(
   projectTypeRef: string,
   currentProjectSlug: string,
-): Promise<GetProjectsQueryResult> {
-  return fetchSanity<GetProjectsQueryResult>(
+): Promise<GetLatestThreeProjectsWithMatchingTypeQueryResult> {
+  return fetchSanity<GetLatestThreeProjectsWithMatchingTypeQueryResult>(
     getLatestThreeProjectsWithMatchingTypeQuery,
     { projectTypeRef, currentProjectSlug },
   );

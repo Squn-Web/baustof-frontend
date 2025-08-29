@@ -53,7 +53,7 @@ const ProjectComponent = ({ project }: ProjectProps) => {
 
         <p className="project-description">{project.text}</p>
 
-        <a className="project-link" href={`/projects/${project.slug.current}`}>
+        <a className="project-link" href={`/projects/${project.slug.current}`} data-prefetch="visible">
           <p>{project.actionButtonText}</p>
           <img className="icon" src="/icons/arrow_right.svg" alt="" aria-hidden="true" />
         </a>

@@ -48,5 +48,160 @@ if (siteSettings) {
       <Footer />
     </main>
     <CookieConsentBanner />
+    <script is:inline>
+      // Simple Prefetch Manager
+      class PrefetchManager {
+        constructor() {
+          this.cache = new Set();
+          this.activeRequests = new Set();
+          this.maxConcurrentRequests = 3;
+          this.hoverDelay = 300;
+          this.hoverTimeouts = new Map();
+          this.init();
+        }
+
+        shouldPrefetch() {
+          // Respect data saver mode
+          const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+          if (connection && connection.saveData) {
+            return false;
+          }
+
+          // Respect reduced data preference
+          if (window.matchMedia && window.matchMedia("(prefers-reduced-data: reduce)").matches) {
+            return false;
+          }
+
+          return true;
+        }
+
+        async prefetchUrl(url) {
+          if (
+            this.cache.has(url) ||
+            this.activeRequests.has(url) ||
+            this.activeRequests.size >= this.maxConcurrentRequests ||
+            !this.shouldPrefetch()
+          ) {
+            return;
+          }
+
+          this.activeRequests.add(url);
+          console.log('🚀 Prefetching:', url);
+
+          try {
+            // Use link prefetch
+            const link = document.createElement("link");
+            link.rel = "prefetch";
+            link.href = url;
+            
+            // Add load event listener for debugging
+            link.addEventListener('load', () => {
+              console.log('✅ Prefetch completed:', url);
+            });
+            
+            link.addEventListener('error', (e) => {
+              console.warn('❌ Prefetch failed:', url, e);
+            });
+            
+            document.head.appendChild(link);
+            this.cache.add(url);
+          } catch (error) {
+            console.warn("Prefetch failed:", url, error);
+          } finally {
+            this.activeRequests.delete(url);
+          }
+        }
+
+        setupHover(element) {
+          const href = element.getAttribute("href");
+          if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || href.startsWith("http")) {
+            return;
+          }
+
+          const url = new URL(href, window.location.origin).href;
+
+          const handleMouseEnter = () => {
+            const existingTimeout = this.hoverTimeouts.get(url);
+            if (existingTimeout) {
+              clearTimeout(existingTimeout);
+            }
+
+            const timeoutId = setTimeout(() => {
+              this.prefetchUrl(url);
+              this.hoverTimeouts.delete(url);
+            }, this.hoverDelay);
+
+            this.hoverTimeouts.set(url, timeoutId);
+          };
+
+          const handleMouseLeave = () => {
+            const timeoutId = this.hoverTimeouts.get(url);
+            if (timeoutId) {
+              clearTimeout(timeoutId);
+              this.hoverTimeouts.delete(url);
+            }
+          };
+
+          element.addEventListener("mouseenter", handleMouseEnter);
+          element.addEventListener("mouseleave", handleMouseLeave);
+        }
+
+        setupIntersection(elements) {
+          if (!("IntersectionObserver" in window)) return;
+
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const href = entry.target.getAttribute("href");
+                  if (href && !href.startsWith("#") && !href.startsWith("mailto:") && !href.startsWith("tel:") && !href.startsWith("http")) {
+                    const url = new URL(href, window.location.origin).href;
+                    this.prefetchUrl(url);
+                  }
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { rootMargin: "100px" },
+          );
+
+          elements.forEach((el) => observer.observe(el));
+        }
+
+        init() {
+          const setup = () => {
+            // High priority links (navigation)
+            const highPriorityLinks = document.querySelectorAll('[data-prefetch="high"]');
+            highPriorityLinks.forEach((link) => this.setupHover(link));
+
+            // Standard links
+            const standardLinks = document.querySelectorAll(
+              '[data-prefetch="low"], [data-prefetch]:not([data-prefetch="high"]):not([data-prefetch="visible"])',
+            );
+            standardLinks.forEach((link) => this.setupHover(link));
+
+            // Visible links (intersection observer)
+            const visibleLinks = document.querySelectorAll('[data-prefetch="visible"]');
+            if (visibleLinks.length > 0) {
+              this.setupIntersection(visibleLinks);
+            }
+
+            console.log(`Prefetch initialized for ${highPriorityLinks.length + standardLinks.length + visibleLinks.length} links`);
+          };
+
+          if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", setup);
+          } else {
+            setup();
+          }
+
+          // Re-initialize on page navigation
+          document.addEventListener("astro:page-load", setup);
+        }
+      }
+
+      // Initialize
+      new PrefetchManager();
+    </script>
   </body>
 </html>
