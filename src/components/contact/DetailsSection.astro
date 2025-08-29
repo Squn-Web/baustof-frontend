@@ -17,7 +17,7 @@ const { cards } = Astro.props;
           <a href={card.href} target="_blank" rel="noopener noreferrer">
             <div class="card">
               <Image class="contact-section-icon" src={urlForImage(card.icon.asset).url()} width={128} height={128} alt={card.icon.alt} />
-              <h4>{card.title}</h4>
+              <h3>{card.title}</h3>
               <Paragraphs className="scaleFont" paragraphs={card.text} />
             </div>
           </a>
@@ -31,11 +31,7 @@ const { cards } = Astro.props;
 
 <style>
   h3 {
-    text-align: center;
-    margin-bottom: 5rem;
-  }
-  h4 {
-    font-size: calc(1.8 * var(--font-size-h4));
+    font-size: calc(1.7 * var(--font-size-h4));
   }
 
   .content-wrapper {
@@ -59,16 +55,12 @@ const { cards } = Astro.props;
   }
 
   @media only screen and (max-width: 1200px) {
-    h4 {
+    h3 {
       font-size: calc(0.9 * var(--font-size-h4));
     }
   }
   @media only screen and (max-width: 768px) {
     h3 {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    h4 {
       font-size: calc(0.8 * var(--font-size-h4));
     }
   }
