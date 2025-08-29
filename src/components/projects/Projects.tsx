@@ -107,28 +107,14 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
   const currentProjects = filteredProjects.slice(indexOfFirstProject, indexOfLastProject);
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    updateURL(
-      {
-        searchTerm,
-        selectedProjectType,
-        selectedCategory,
-        dateFrom,
-        dateTo,
-        currentPage: page,
-      },
-      "push",
-    );
-
-    // Handle browser back/forward navigation
+  const scrollToProjectsSection = () => {
     const el = document.getElementById("scroll-to");
 
     if (el) {
       const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      console.log(isMobile);
       const offset = isMobile ? 32 : 116;
-      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset; // 20px below the top
+      const topOffset = el.getBoundingClientRect().top + window.pageYOffset - offset;
+
       window.scrollTo({
         top: topOffset,
         behavior: "smooth",
@@ -139,6 +125,25 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
         behavior: "smooth",
       });
     }
+  };
+
+  const handlePageChange = (page: number) => {
+    if (page !== currentPage) {
+      setCurrentPage(page);
+      updateURL(
+        {
+          searchTerm,
+          selectedProjectType,
+          selectedCategory,
+          dateFrom,
+          dateTo,
+          currentPage: page,
+        },
+        "push",
+      );
+    }
+
+    scrollToProjectsSection();
   };
 
   useEffect(() => {
@@ -277,6 +282,7 @@ const Projects = ({ filterTitle, projects, sectionTitle, categories, projectType
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="pagination-container">
+            {/* <Pagination currentPage={currentPage} totalPages={totalPages} /> */}
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
           </div>
         )}
